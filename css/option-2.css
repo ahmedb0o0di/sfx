@@ -1,0 +1,1485 @@
+/* ==========================================================================
+   STRUCTURFLEX MIDDLE EAST (SFXMEC) - OPTION 2 DESIGN SYSTEM
+   Modern Architectural Aesthetic inspired by PDF Design Reference
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap');
+
+:root {
+  /* Color Palette matching PDF */
+  --opt2-bg-main: #FFFFFF;
+  --opt2-bg-light: #F8FAFC;
+  --opt2-bg-warm: #FFF7F2;
+  --opt2-bg-dark: #0B1626;
+  --opt2-bg-darker: #060E1A;
+  --opt2-bg-banner: #486A7B;
+  --opt2-bg-banner-hover: #3E5C6C;
+  
+  --opt2-coral: #E75B3D;
+  --opt2-coral-hover: #D44B2E;
+  --opt2-coral-light: rgba(231, 91, 61, 0.08);
+  --opt2-coral-border: rgba(231, 91, 61, 0.25);
+  
+  --opt2-text-dark: #0F172A;
+  --opt2-text-body: #475569;
+  --opt2-text-muted: #64748B;
+  --opt2-text-light: #F1F5F9;
+  --opt2-text-white: #FFFFFF;
+  
+  --opt2-border: #E2E8F0;
+  --opt2-border-light: #F1F5F9;
+  --opt2-border-dark: rgba(255, 255, 255, 0.12);
+  
+  --opt2-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --opt2-font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  
+  --opt2-radius-sm: 8px;
+  --opt2-radius-md: 14px;
+  --opt2-radius-lg: 20px;
+  --opt2-radius-xl: 28px;
+  --opt2-radius-pill: 999px;
+  
+  --opt2-shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --opt2-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --opt2-shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.09);
+  
+  --opt2-transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body.option-2-body {
+  font-family: var(--opt2-font);
+  background-color: var(--opt2-bg-main);
+  color: var(--opt2-text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--opt2-transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.opt2-container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.opt2-container-wide {
+  max-width: 1360px;
+}
+
+/* Typography Helpers */
+.opt2-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  color: var(--opt2-coral);
+  margin-bottom: 0.85rem;
+}
+
+.opt2-heading-lg {
+  font-family: var(--opt2-font-heading);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 800;
+  color: var(--opt2-text-dark);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.opt2-heading-md {
+  font-family: var(--opt2-font-heading);
+  font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  line-height: 1.25;
+}
+
+.opt2-subtitle {
+  font-size: 1.05rem;
+  color: var(--opt2-text-muted);
+  max-width: 640px;
+  line-height: 1.6;
+  margin-top: 0.65rem;
+}
+
+/* Buttons */
+.opt2-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--opt2-font);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.75rem 1.65rem;
+  border-radius: var(--opt2-radius-pill);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--opt2-transition);
+  text-decoration: none;
+}
+
+.opt2-btn-coral {
+  background-color: var(--opt2-coral);
+  color: var(--opt2-text-white);
+  box-shadow: 0 4px 14px rgba(231, 91, 61, 0.28);
+}
+
+.opt2-btn-coral:hover {
+  background-color: var(--opt2-coral-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 91, 61, 0.38);
+}
+
+.opt2-btn-outline {
+  background-color: transparent;
+  color: var(--opt2-text-dark);
+  border-color: var(--opt2-border);
+}
+
+.opt2-btn-outline:hover {
+  border-color: var(--opt2-coral);
+  color: var(--opt2-coral);
+  background-color: var(--opt2-coral-light);
+  transform: translateY(-1px);
+}
+
+.opt2-btn-white {
+  background-color: var(--opt2-text-white);
+  color: var(--opt2-text-dark);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.opt2-btn-white:hover {
+  background-color: #F8FAFC;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* ==========================================================================
+   FLOATING NAVBAR (Option 2 style)
+   ========================================================================== */
+.opt2-header {
+  position: absolute;
+  top: 1.25rem;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.opt2-header.sticky-scrolled {
+  position: fixed;
+  top: 0.75rem;
+  animation: slideDownNav 0.35s ease forwards;
+}
+
+@keyframes slideDownNav {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.opt2-nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1.25rem;
+  background: rgba(11, 22, 38, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--opt2-radius-pill);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.opt2-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.opt2-brand img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.opt2-brand-name {
+  font-family: var(--opt2-font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.opt2-brand-name span {
+  color: var(--opt2-coral);
+}
+
+.opt2-nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 0.5rem;
+}
+
+.opt2-nav-link {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  padding: 0.45rem 1.05rem;
+  border-radius: var(--opt2-radius-pill);
+  transition: var(--opt2-transition);
+}
+
+.opt2-nav-link:hover,
+.opt2-nav-link.active {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.opt2-nav-cta-btn {
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 0.55rem 1.35rem;
+  background-color: var(--opt2-coral);
+  color: #FFFFFF;
+  border-radius: var(--opt2-radius-pill);
+  transition: var(--opt2-transition);
+}
+
+.opt2-nav-cta-btn:hover {
+  background-color: var(--opt2-coral-hover);
+  transform: translateY(-1px);
+}
+
+.opt2-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+/* ==========================================================================
+   HERO SECTION (Matching PDF Hero)
+   ========================================================================== */
+.opt2-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8.5rem 1.5rem 6.5rem;
+  background-color: var(--opt2-bg-dark);
+  background-image: 
+    linear-gradient(180deg, rgba(11, 22, 38, 0.72) 0%, rgba(11, 22, 38, 0.82) 65%, #0B1626 100%),
+    url('../assets/images/hero.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  overflow: hidden;
+}
+
+.opt2-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.opt2-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 0.4rem 1.15rem;
+  border-radius: var(--opt2-radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #F1F5F9;
+  margin-bottom: 1.5rem;
+}
+
+.opt2-hero-pill-star {
+  color: #FFB703;
+}
+
+.opt2-hero-title {
+  font-family: var(--opt2-font-heading);
+  font-size: clamp(2.5rem, 5.2vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin-bottom: 1.4rem;
+}
+
+.opt2-hero-subtitle {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.65;
+  max-width: 680px;
+  margin: 0 auto 2.25rem;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   CLIENT & PARTNER LOGOS BAR (Matching PDF ticker)
+   ========================================================================== */
+.opt2-partners-bar {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--opt2-border);
+  padding: 2.25rem 0;
+}
+
+.opt2-partners-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.opt2-partner-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #64748B;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  opacity: 0.75;
+  transition: var(--opt2-transition);
+}
+
+.opt2-partner-item:hover {
+  opacity: 1;
+  color: var(--opt2-text-dark);
+}
+
+.opt2-partner-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   ABOUT / STATS SECTION (Matching PDF)
+   ========================================================================== */
+.opt2-section-about {
+  padding: 6.5rem 0;
+  background-color: var(--opt2-bg-main);
+}
+
+.opt2-about-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 4.5rem;
+}
+
+.opt2-about-text {
+  max-width: 760px;
+}
+
+.opt2-about-headline {
+  font-family: var(--opt2-font-heading);
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  font-weight: 800;
+  color: var(--opt2-text-dark);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin-top: 0.5rem;
+}
+
+.opt2-about-headline .highlight {
+  color: var(--opt2-coral);
+  position: relative;
+  display: inline-block;
+}
+
+.opt2-about-btn-wrap {
+  flex-shrink: 0;
+  padding-top: 1.5rem;
+}
+
+.opt2-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--opt2-border);
+}
+
+.opt2-stat-item {
+  text-align: left;
+}
+
+.opt2-stat-number {
+  font-family: var(--opt2-font-heading);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 800;
+  color: var(--opt2-text-dark);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4rem;
+}
+
+.opt2-stat-label {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--opt2-text-muted);
+}
+
+/* ==========================================================================
+   SERVICES GRID (Matching PDF: Number + Title + Text + Bottom Image)
+   ========================================================================== */
+.opt2-section-services {
+  padding: 6.5rem 0;
+  background-color: var(--opt2-bg-light);
+}
+
+.opt2-section-heading-centered {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 4rem;
+}
+
+.opt2-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.opt2-service-card {
+  background-color: #FFFFFF;
+  border-radius: var(--opt2-radius-lg);
+  border: 1px solid var(--opt2-border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--opt2-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.opt2-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--opt2-shadow-lg);
+  border-color: rgba(231, 91, 61, 0.35);
+}
+
+.opt2-service-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.opt2-service-num {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--opt2-coral);
+  margin-bottom: 0.65rem;
+}
+
+.opt2-service-title {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  line-height: 1.3;
+  margin-bottom: 0.65rem;
+}
+
+.opt2-service-desc {
+  font-size: 0.92rem;
+  color: var(--opt2-text-body);
+  line-height: 1.55;
+}
+
+.opt2-service-img-wrap {
+  width: 100%;
+  height: 200px;
+  border-radius: var(--opt2-radius-md);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.opt2-service-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.opt2-service-card:hover .opt2-service-img-wrap img {
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   WHY STRUCTURFLEX / VALUE PROPOSITION (Matching PDF)
+   ========================================================================== */
+.opt2-section-why {
+  padding: 6.5rem 0;
+  background-color: var(--opt2-bg-main);
+}
+
+.opt2-why-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 4.5rem;
+  align-items: flex-start;
+}
+
+.opt2-why-left {
+  position: sticky;
+  top: 6rem;
+}
+
+.opt2-why-title {
+  font-family: var(--opt2-font-heading);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: var(--opt2-text-dark);
+  line-height: 1.15;
+  margin-bottom: 2rem;
+}
+
+.opt2-why-lead {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--opt2-text-dark);
+  line-height: 1.55;
+  margin-bottom: 3rem;
+}
+
+.opt2-why-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.25rem;
+}
+
+.opt2-pillar-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.opt2-pillar-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--opt2-radius-sm);
+  background-color: var(--opt2-coral-light);
+  color: var(--opt2-coral);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.1rem;
+}
+
+.opt2-pillar-title {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.opt2-pillar-desc {
+  font-size: 0.92rem;
+  color: var(--opt2-text-muted);
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   FEATURED PROJECTS (Dark Navy Section matching PDF)
+   ========================================================================== */
+.opt2-section-projects {
+  padding: 6.5rem 0;
+  background-color: var(--opt2-bg-dark);
+  color: #FFFFFF;
+}
+
+.opt2-projects-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3.5rem;
+}
+
+.opt2-projects-header .opt2-heading-lg {
+  color: #FFFFFF;
+}
+
+.opt2-projects-header .opt2-subtitle {
+  color: #94A3B8;
+  max-width: 460px;
+  text-align: right;
+}
+
+.opt2-showcase-container {
+  position: relative;
+  background: #0F1F35;
+  border-radius: var(--opt2-radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.opt2-showcase-inner {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  min-height: 520px;
+}
+
+.opt2-showcase-media {
+  position: relative;
+  overflow: hidden;
+  background-color: #060E1A;
+}
+
+.opt2-showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+
+.opt2-showcase-info {
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #0F1F35 0%, #0A1627 100%);
+  position: relative;
+}
+
+.opt2-showcase-cat {
+  display: inline-block;
+  padding: 0.35rem 0.95rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--opt2-radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #CBD5E1;
+  margin-bottom: 1.25rem;
+}
+
+.opt2-showcase-title {
+  font-family: var(--opt2-font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.opt2-showcase-desc {
+  font-size: 0.98rem;
+  color: #94A3B8;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.opt2-showcase-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+}
+
+.opt2-meta-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: #64748B;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.opt2-meta-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #F8FAFC;
+}
+
+.opt2-showcase-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.opt2-nav-counter {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #64748B;
+}
+
+.opt2-nav-counter span {
+  color: #FFFFFF;
+}
+
+.opt2-slider-arrows {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.opt2-arrow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--opt2-radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--opt2-transition);
+}
+
+.opt2-arrow-btn:hover {
+  background: var(--opt2-coral);
+  border-color: var(--opt2-coral);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   OUR WORK PROCESS (Matching PDF)
+   ========================================================================== */
+.opt2-section-process {
+  padding: 6.5rem 0;
+  background-color: var(--opt2-bg-main);
+}
+
+.opt2-process-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 4.5rem;
+  align-items: flex-start;
+}
+
+.opt2-process-sticky {
+  position: sticky;
+  top: 6rem;
+}
+
+.opt2-process-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.opt2-process-step {
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid var(--opt2-border);
+  transition: var(--opt2-transition);
+}
+
+.opt2-process-step:last-child {
+  border-bottom: none;
+}
+
+.opt2-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.opt2-step-num {
+  font-family: var(--opt2-font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--opt2-coral);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.opt2-step-title {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  margin-bottom: 0.65rem;
+}
+
+.opt2-step-desc {
+  font-size: 0.98rem;
+  color: var(--opt2-text-body);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   TESTIMONIALS (Matching PDF Peach/Warm Cards)
+   ========================================================================== */
+.opt2-section-testimonials {
+  padding: 6.5rem 0;
+  background-color: var(--opt2-bg-light);
+}
+
+.opt2-testimonials-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3.5rem;
+}
+
+.opt2-testimonial-arrows {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.opt2-t-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--opt2-radius-pill);
+  border: 1px solid var(--opt2-border);
+  background-color: #FFFFFF;
+  color: var(--opt2-text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--opt2-transition);
+}
+
+.opt2-t-arrow:hover {
+  border-color: var(--opt2-coral);
+  color: var(--opt2-coral);
+  background-color: var(--opt2-coral-light);
+}
+
+.opt2-testimonials-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.opt2-testimonial-card {
+  background-color: var(--opt2-bg-warm);
+  border-radius: var(--opt2-radius-lg);
+  padding: 3rem 2.5rem;
+  border: 1px solid rgba(231, 91, 61, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--opt2-transition);
+}
+
+.opt2-testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(231, 91, 61, 0.08);
+}
+
+.opt2-quote-icon {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--opt2-coral);
+  font-family: Georgia, serif;
+  margin-bottom: 1rem;
+}
+
+.opt2-quote-text {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  line-height: 1.45;
+  margin-bottom: 1.75rem;
+}
+
+.opt2-quote-body {
+  font-size: 0.95rem;
+  color: var(--opt2-text-body);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.opt2-author-info {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  border-top: 1px solid rgba(231, 91, 61, 0.15);
+  padding-top: 1.5rem;
+}
+
+.opt2-author-name {
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  font-size: 0.98rem;
+}
+
+.opt2-author-role {
+  color: var(--opt2-text-muted);
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   TRANSPARENT PRICING / ENGAGEMENT (Matching PDF)
+   ========================================================================== */
+.opt2-section-pricing {
+  padding: 6.5rem 0;
+  background-color: var(--opt2-bg-main);
+}
+
+.opt2-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.opt2-pricing-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--opt2-border);
+  border-radius: var(--opt2-radius-lg);
+  padding: 2.5rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--opt2-transition);
+  position: relative;
+}
+
+.opt2-pricing-card.featured {
+  border-color: var(--opt2-coral);
+  box-shadow: 0 16px 40px rgba(231, 91, 61, 0.12);
+  transform: scale(1.02);
+}
+
+.opt2-pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--opt2-shadow-lg);
+}
+
+.opt2-pricing-card.featured:hover {
+  transform: scale(1.02) translateY(-5px);
+}
+
+.opt2-plan-title {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.opt2-plan-tagline {
+  font-size: 0.82rem;
+  color: var(--opt2-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.opt2-plan-price {
+  font-family: var(--opt2-font-heading);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--opt2-text-dark);
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+
+.opt2-plan-price span {
+  font-size: 1rem;
+  color: var(--opt2-text-muted);
+  font-weight: 500;
+}
+
+.opt2-plan-cta-btn {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: var(--opt2-radius-pill);
+  font-weight: 700;
+  font-size: 0.92rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--opt2-transition);
+  text-align: center;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.opt2-btn-soft-coral {
+  background-color: var(--opt2-bg-warm);
+  color: var(--opt2-coral);
+  border: 1px solid rgba(231, 91, 61, 0.25);
+}
+
+.opt2-btn-soft-coral:hover {
+  background-color: var(--opt2-coral);
+  color: #FFFFFF;
+}
+
+.opt2-features-list-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  margin-bottom: 1rem;
+}
+
+.opt2-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.opt2-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  color: var(--opt2-text-body);
+}
+
+.opt2-check-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--opt2-coral);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   INSIGHTS & UPDATES (Matching PDF Asymmetric Blog Grid)
+   ========================================================================== */
+.opt2-section-insights {
+  padding: 6.5rem 0;
+  background-color: var(--opt2-bg-light);
+}
+
+.opt2-insights-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.25rem;
+}
+
+.opt2-insight-card-featured {
+  background-color: #FFFFFF;
+  border-radius: var(--opt2-radius-lg);
+  border: 1px solid var(--opt2-border);
+  overflow: hidden;
+  transition: var(--opt2-transition);
+}
+
+.opt2-insight-card-featured:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--opt2-shadow-lg);
+}
+
+.opt2-featured-img-wrap {
+  width: 100%;
+  height: 290px;
+  overflow: hidden;
+}
+
+.opt2-featured-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.opt2-insight-card-featured:hover .opt2-featured-img-wrap img {
+  transform: scale(1.04);
+}
+
+.opt2-featured-body {
+  padding: 2.25rem;
+}
+
+.opt2-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.82rem;
+  color: var(--opt2-text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.opt2-post-badge {
+  color: var(--opt2-coral);
+  font-weight: 700;
+  background-color: var(--opt2-coral-light);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--opt2-radius-pill);
+}
+
+.opt2-post-title-lg {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+}
+
+.opt2-post-author {
+  font-size: 0.85rem;
+  color: var(--opt2-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.opt2-insights-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.opt2-insight-card-row {
+  background-color: #FFFFFF;
+  border-radius: var(--opt2-radius-lg);
+  border: 1px solid var(--opt2-border);
+  padding: 2rem;
+  transition: var(--opt2-transition);
+}
+
+.opt2-insight-card-row:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--opt2-shadow-md);
+  border-color: rgba(231, 91, 61, 0.35);
+}
+
+.opt2-post-title-md {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--opt2-text-dark);
+  line-height: 1.35;
+  margin: 0.65rem 0 1rem;
+}
+
+/* ==========================================================================
+   READY TO BUILD SOMETHING REMARKABLE (Slate-Teal Banner matching PDF)
+   ========================================================================== */
+.opt2-section-banner-cta {
+  background-color: var(--opt2-bg-banner);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 7rem 1.5rem;
+  position: relative;
+}
+
+.opt2-banner-title {
+  font-family: var(--opt2-font-heading);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  max-width: 780px;
+  margin: 0 auto 2.5rem;
+}
+
+/* ==========================================================================
+   FOOTER (Matching PDF Dark Footer)
+   ========================================================================== */
+.opt2-footer {
+  background-color: var(--opt2-bg-darker);
+  color: #94A3B8;
+  padding: 5.5rem 0 2rem;
+  font-size: 0.92rem;
+}
+
+.opt2-footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr;
+  gap: 3.5rem;
+  margin-bottom: 4.5rem;
+}
+
+.opt2-footer-brand-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.opt2-footer-brand-name {
+  font-family: var(--opt2-font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.opt2-footer-brand-name span {
+  color: var(--opt2-coral);
+}
+
+.opt2-newsletter-title {
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.opt2-newsletter-desc {
+  font-size: 0.85rem;
+  color: #64748B;
+  margin-bottom: 1rem;
+}
+
+.opt2-newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 360px;
+}
+
+.opt2-newsletter-input {
+  flex: 1;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--opt2-radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.opt2-newsletter-input:focus {
+  border-color: var(--opt2-coral);
+}
+
+.opt2-newsletter-submit {
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--opt2-radius-pill);
+  background-color: var(--opt2-coral);
+  color: #FFFFFF;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--opt2-transition);
+}
+
+.opt2-newsletter-submit:hover {
+  background-color: var(--opt2-coral-hover);
+}
+
+.opt2-footer-col-title {
+  color: #FFFFFF;
+  font-family: var(--opt2-font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.opt2-footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.opt2-footer-links a {
+  color: #94A3B8;
+  font-size: 0.9rem;
+}
+
+.opt2-footer-links a:hover {
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+.opt2-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  color: #64748B;
+}
+
+.opt2-footer-bottom-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.opt2-footer-bottom-links a:hover {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   FLOATING DESIGN SWITCHER (Switch between Option 1 and Option 2)
+   ========================================================================== */
+.sfx-design-switcher {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  background: #0B1626;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--opt2-radius-pill);
+  padding: 0.35rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  font-family: var(--opt2-font);
+}
+
+.sfx-switcher-btn {
+  padding: 0.45rem 1rem;
+  border-radius: var(--opt2-radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #94A3B8;
+  text-decoration: none;
+  transition: var(--opt2-transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sfx-switcher-btn.active {
+  background-color: var(--opt2-coral);
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px rgba(231, 91, 61, 0.35);
+}
+
+.sfx-switcher-btn:not(.active):hover {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .opt2-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .opt2-why-grid,
+  .opt2-process-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .opt2-why-left,
+  .opt2-process-sticky {
+    position: static;
+  }
+  
+  .opt2-showcase-inner {
+    grid-template-columns: 1fr;
+  }
+  
+  .opt2-showcase-media {
+    min-height: 340px;
+  }
+  
+  .opt2-pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .opt2-pricing-card.featured {
+    transform: none;
+  }
+  
+  .opt2-pricing-card.featured:hover {
+    transform: translateY(-5px);
+  }
+  
+  .opt2-insights-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .opt2-footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .opt2-nav-menu {
+    display: none;
+  }
+  
+  .opt2-mobile-toggle {
+    display: block;
+  }
+  
+  .opt2-about-header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .opt2-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 1.5rem;
+  }
+  
+  .opt2-services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .opt2-why-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .opt2-projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .opt2-projects-header .opt2-subtitle {
+    text-align: left;
+  }
+  
+  .opt2-testimonials-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .opt2-footer-top {
+    grid-template-columns: 1fr;
+  }
+  
+  .opt2-footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}

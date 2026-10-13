@@ -56,43 +56,16 @@ function initNavbar() {
   let pageFilename = currentPath.substring(currentPath.lastIndexOf('/') + 1);
   if (!pageFilename || pageFilename === '/') pageFilename = 'index.html';
 
-  let hasMatchedPage = false;
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
-    if (href === pageFilename || (pageFilename === 'index.html' && (href === '/' || href === 'index.html'))) {
+    if (!href) return;
+    const hrefPage = href.split('#')[0].split('?')[0];
+    if (hrefPage === pageFilename || (pageFilename === 'index.html' && (hrefPage === '' || hrefPage === 'index.html'))) {
       link.classList.add('active');
-      hasMatchedPage = true;
     } else {
       link.classList.remove('active');
     }
   });
-
-  // In-page scroll spy only if on index.html with section anchors
-  if (pageFilename === 'index.html') {
-    const sections = document.querySelectorAll('section[id]');
-    if (sections.length > 0) {
-      window.addEventListener('scroll', () => {
-        let current = '';
-        const scrollPos = window.scrollY + 120;
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.offsetHeight;
-          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
-          }
-        });
-
-        if (current) {
-          navLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${current}`) {
-              navLinks.forEach(l => l.classList.remove('active'));
-              link.classList.add('active');
-            }
-          });
-        }
-      });
-    }
-  }
 }
 
 /* ==========================================================================
@@ -323,7 +296,7 @@ function initMaterialTabs() {
    ========================================================================== */
 function initPortfolioFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
+  const projectCards = document.querySelectorAll('.project-card, .project-showcase-card');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -363,108 +336,168 @@ function initPortfolioFilters() {
    5. PROJECT CASE STUDY MODALS (FEATURING ORIGINAL SFXMEC EXECUTED PROJECTS)
    ========================================================================== */
 const projectData = {
-  1: {
-    title: 'Arched Truss — School Courtyard & Hypar Canopy',
-    category: 'Courtyards & Shades',
-    location: 'Dubai & Sharjah, UAE',
-    area: '5,800 m²',
-    material: 'Heavy-Duty Architectural PVC/PVDF (Grade IV)',
-    year: '2023',
-    client: 'Ministry of Education & Private Academies',
-    span: '38m Clear Tubular Arch Span',
-    image: 'assets/images/courtyard.jpg',
-    description: 'Specialized arched structural steel truss and hyperbolic paraboloid (Hypar) tensile membrane canopy engineered specifically for regional school courtyards. Returns 75-85% of intense solar heat externally while providing soft, natural, glare-free daylighting (9-18% transmission) for students and outdoor campus activities.'
-  },
-  2: {
-    title: 'Car Shades & Conical Umbrellas',
-    category: 'Canopies & Car Shades',
-    location: 'Dubai & Abu Dhabi, UAE',
-    area: '14,200 m²',
-    material: 'High-Tensile PVC/PVDF & Stainless Fittings',
-    year: '2024',
-    client: 'Commercial Centers & Luxury Developments',
-    span: 'Cantilever & Center-Post Conicals',
-    image: 'assets/images/hero.jpg',
-    description: 'Precision engineered cantilever parking canopies and architectural conical umbrellas designed for maximum clearance and thermal solar protection. Engineered to withstand desert gust loadings without ponding, featuring concealed rainwater downpipes and anti-wicking lacquered membrane fabrics.'
-  },
-  3: {
-    title: 'PVC Roof — Golden Gate Mirdif',
-    category: 'Commercial & Atriums',
-    location: 'Mirdif, Dubai, UAE',
-    area: '8,600 m²',
-    material: 'Precontraint High-Performance PVC Membrane',
+  'al-jamea': {
+    title: 'Al Jamea Tus Saifiyah ETFE Roof Structure',
+    category: 'architectural',
+    categoryLabel: 'Architectural Structures',
+    location: 'Nairobi, Kenya (Eastern Africa)',
+    area: '4,800 m²',
+    material: 'Single Skin ETFE Tensile Membrane',
     year: '2022',
-    client: 'Golden Gate Commercial Center',
-    span: '48m Barrel Vault Continuous Truss',
-    image: 'assets/images/atrium.jpg',
-    description: 'Turnkey architectural roofing for Golden Gate Mirdif featuring custom barrel vault tensioned membrane modules. Designed to replace conventional heavy concrete roofing with lightweight, elegant curvature that illuminates retail thoroughfares with balanced diffused natural light.'
+    client: 'Al Jamea Tus Saifiyah',
+    span: '34m Unsupported Curved Extrusion',
+    image: 'assets/images/projects/al-jamea-etfe.png',
+    description: 'Transforming architectural concepts into reality at the heart of Nairobi, Kenya. Structurflex Middle East Contracting LLC engineered and installed an innovative Single Skin ETFE tensile membrane roofing structure that marries cultural heritage with modern engineering precision. The translucent membrane delivers exceptional daylighting while maintaining thermal comfort and weather durability.'
   },
-  4: {
-    title: 'Flying Mast — Luxury Private Villa',
-    category: 'Canopies & Car Shades',
+  'al-janah': {
+    title: 'The Al Janah Landmark Pavilion',
+    category: 'architectural',
+    categoryLabel: 'Architectural Structures',
+    location: 'Dubai, United Arab Emirates',
+    area: '6,200 m²',
+    material: 'Architectural PTFE & Custom Steel Truss',
+    year: '2021',
+    client: 'Landmark Expo Pavilion Authority',
+    span: '42m Cantilevered Wing Architecture',
+    image: 'assets/images/projects/al-janah-pavilion.png',
+    description: 'Structurflex Middle East Contracting LLC played a crucial role in bringing this breathtaking design concept into reality. Featuring sculptural tensile geometry with dual curvature, this pavilion stands as a symbol of architectural elegance and engineering excellence.'
+  },
+  'ethiopia': {
+    title: 'Ethiopia Pavilion — Unity Park',
+    category: 'architectural',
+    categoryLabel: 'Architectural Structures',
+    location: 'Addis Ababa, Ethiopia',
+    area: '3,900 m²',
+    material: 'High-Tensile PVC/PVDF Architectural Membrane',
+    year: '2019',
+    client: 'Oromia Regional Government',
+    span: '30m Multi-Cone Sculptural Shade',
+    image: 'assets/images/projects/ethiopia-unity-park.jpg',
+    description: 'A breathtaking pavilion seamlessly integrated into the historic Unity Park in Addis Ababa. Structurflex Middle East executed the full engineering, fabrication, and on-site installation, delivering solar protection and an iconic civic landmark.'
+  },
+  'abu-dhabi-shooting': {
+    title: 'Abu Dhabi Shooting Club Tensile Roof',
+    category: 'sports',
+    categoryLabel: 'Sports & Recreation',
     location: 'Abu Dhabi, UAE',
-    area: '3,400 m²',
-    material: 'Architectural PTFE & 316 Stainless Cables',
-    year: '2023',
-    client: 'Private Client',
-    span: 'Cable-Suspended Flying Center Mast',
-    image: 'assets/images/hero.jpg',
-    description: 'An architectural sculpture featuring a floating central steel mast tensioned solely by high-grade stainless steel boundary cables and PTFE membrane. The structure creates dramatic shaded outdoor garden living spaces without heavy foundation obstructions in the central pool terrace.'
+    area: '7,500 m²',
+    material: 'Heavy-Duty Architectural Tensile Membrane',
+    year: '2018',
+    client: 'Abu Dhabi Shooting Club Authority',
+    span: '52m Integrated Cable-Tension Truss',
+    image: 'assets/images/projects/abu-dhabi-shooting-club.jpg',
+    description: 'The challenge was to improve an existing design concept to create a more practical, wind-stable, and aesthetically distinctive roof for Abu Dhabi\'s first premier shooting club. Structurflex ME optimized cable pre-stressing and thermal deflection for extreme desert conditions.'
   },
-  5: {
-    title: 'PTFE Roof — Ladies Club & Restaurant Abu Dhabi',
-    category: 'Stadia & Leisure',
-    location: 'Corniche, Abu Dhabi, UAE',
-    area: '16,500 m²',
-    material: 'PTFE Woven Fiberglass (DIN 4102 A2 Non-Combustible)',
-    year: '2023',
-    client: 'Abu Dhabi Ladies Club / Leisure Authority',
-    span: '72m Radial Tension Net',
-    image: 'assets/images/stadium.jpg',
-    description: 'Permanent architectural tensile membrane roof spanning recreational grandstands, swimming pavilions, and waterfront restaurants. Offers complete resistance to extreme coastal saline humidity and UV radiation with an estimated 35-year design lifespan.'
-  },
-  6: {
-    title: 'Tensile Membrane Roof & Glass Facade Integration',
-    category: 'Facades & Envelopes',
-    location: 'Business Bay, Dubai, UAE',
-    area: '11,200 m²',
-    material: 'PTFE Architectural Mesh & Insulated Structural Glass',
-    year: '2024',
-    client: 'Commercial Towers Authority',
-    span: 'Custom Cable-Net Curtain Wall Truss',
-    image: 'assets/images/facade.jpg',
-    description: 'The perfect combination of tensile membrane roofing and exterior architectural glass facades. Provides dual performance: aerodynamic roof protection paired with high-efficiency solar shading mesh that cuts interior cooling energy costs by up to 45%.'
-  },
-  7: {
-    title: 'Al Wasl Grand Sports Arena & Stadium Roof',
-    category: 'Stadia & Leisure',
+  'dubai-outlet-mall': {
+    title: 'Dubai Outlet Mall Fast-Track Desert Roof',
+    category: 'architectural',
+    categoryLabel: 'Commercial & Retail',
     location: 'Dubai, UAE',
-    area: '42,500 m²',
-    material: 'PTFE Architectural Fiberglass (Type IV)',
-    year: '2023',
-    client: 'Sports City Authority',
-    span: '145m Unsupported Arch Span',
-    image: 'assets/images/stadium.jpg',
-    description: 'Monumental 145m clear-span PTFE tensile membrane grandstand roof protecting 45,000 spectators with 100% UV filtration and dynamic non-linear FEA wind load engineering compliant with ASCE 7-16 and regional hurricane codes.'
+    area: '12,400 m²',
+    material: 'Precontraint High-Performance Membrane',
+    year: '2016',
+    client: 'Dubai Outlet Mall Developers',
+    span: 'Continuous High-Frequency Seamed Modules',
+    image: 'assets/images/projects/dubai-outlet-mall.jpg',
+    description: 'The challenge was to develop a desert-proof roof design at extremely short notice. Structurflex engineered an accelerated design-build programme, installing high-reflectance tensile membranes that withstand intense solar heat and seasonal sandstorms.'
   },
-  8: {
-    title: 'Terminal 1 Arrivals Concourse & Transit Shading',
-    category: 'Transport & Public Shades',
-    location: 'Abu Dhabi International Airport, UAE',
-    area: '24,000 m²',
-    material: 'PTFE Coated Fiberglass High-Tensile',
-    year: '2023',
-    client: 'Airports Authority',
-    span: '110m Undulating Wave Concourse',
-    image: 'assets/images/transport.jpg',
-    description: 'Undulating aerodynamic canopy spanning 6 lanes of passenger drop-off transit. Features self-cleaning photocatalytic TiO2 surface chemistry that dissolves dust particles under Middle Eastern sunlight, staying pristine white across decades.'
+  'westlake-girls': {
+    title: 'Westlake Girls Sports Facility Canopy',
+    category: 'sports',
+    categoryLabel: 'Sports & Recreation',
+    location: 'Auckland / International Facility',
+    area: '8,200 m²',
+    material: 'Translucent High-Tensile PVC/PVDF',
+    year: '2019',
+    client: 'Educational & Sports Authority',
+    span: 'Continuous Multi-Court Canopy',
+    image: 'assets/images/projects/westlake-girls-sports.jpg',
+    description: 'An iconic sporting venue that proves a winner for netball and tennis courts. Structurflex created a continuous clear-span canopy that eliminates interior columns, shielding athletes from rain and UV while illuminating courts with natural diffused daylight.'
+  },
+  'asati-dome': {
+    title: 'ASATI Air-Supported Multisport Dome',
+    category: 'air-supported',
+    categoryLabel: 'Air-Supported Structures',
+    location: 'Dubai & Northern Emirates, UAE',
+    area: '14,000 m²',
+    material: 'Double-Skin Thermal Insulated Air Dome Membrane',
+    year: '2024',
+    client: 'Sports & Logistics Development Authority',
+    span: '120m Unsupported Air Pressure Clear Span',
+    image: 'assets/images/solutions/air-supported-asati.jpg',
+    description: 'Delivered in strategic partnership with ASATI (Air Structures American Technologies, Inc.). Features 100% clear-span capability up to 150m+, advanced automated HVAC pressure management, rapid seasonal installation, and superior energy efficiency for regional sports, exhibitions, and industrial warehousing.'
+  },
+  'vmf-market': {
+    title: 'Vegetable, Meat & Fruit (VMF) Market',
+    category: 'infrastructure',
+    categoryLabel: 'Transport & Infrastructure',
+    location: 'Al Ain, UAE',
+    area: '18,600 m²',
+    material: 'Architectural Tensile Membrane & Sand-Proof Seals',
+    year: '2017',
+    client: 'Al Ain Municipality',
+    span: 'Conical High-Peak Traditional Shade Network',
+    image: 'assets/images/projects/fruit-vegetable-market.jpg',
+    description: 'A sophisticated outdoor market with a traditional Emirati architectural look and feel. The challenge was mitigating desert heat and dust while preserving an open, inviting bazaar atmosphere. Delivered under turnkey contract with Al Ain Municipality.'
+  },
+  'rio-tinto': {
+    title: 'Rio Tinto MLS Stadium Canopy',
+    category: 'sports',
+    categoryLabel: 'Sports & Recreation',
+    location: 'Sandy, Utah / Major League Soccer',
+    area: '19,500 m²',
+    material: 'High-Tensile PTFE Architectural Fiberglass',
+    year: '2015',
+    client: 'Major League Soccer Franchise',
+    span: 'Aerodynamic Cantilevered Grandstand Truss',
+    image: 'assets/images/projects/rio-tinto-stadium.jpg',
+    description: 'A unique tensile canopy that gives this soccer stadium an unmistakable aesthetic point of difference. Engineered to handle seismic criteria, high snow loads, and aerodynamic uplift while giving every spectator an unobstructed view.'
+  },
+  'denver-station': {
+    title: 'Denver Union Station Landmark Canopy',
+    category: 'infrastructure',
+    categoryLabel: 'Transport & Infrastructure',
+    location: 'Denver, Colorado',
+    area: '9,800 m²',
+    material: 'PTFE Coated Woven Fiberglass Net',
+    year: '2014',
+    client: 'Regional Transit Authority',
+    span: 'Arch-Supported Tension Wave Concourse',
+    image: 'assets/images/projects/denver-union-station.jpg',
+    description: 'A landmark design-build project for a historic railway station. Complex multi-stakeholder design-engineer-build execution resulting in a soaring PTFE canopy that shelters commuter platforms and celebrates architectural heritage.'
+  },
+  'rta-marine': {
+    title: 'RTA Marine Floating Transit Stations',
+    category: 'infrastructure',
+    categoryLabel: 'Transport & Infrastructure',
+    location: 'Dubai Canal & Creek, UAE',
+    area: '4,200 m²',
+    material: 'ETFE & PTFE Domes & Inverted Cones',
+    year: '2019',
+    client: 'Roads & Transport Authority (RTA Dubai)',
+    span: 'Floating Marine Pontoon Canopies',
+    image: 'assets/images/projects/denver-union-station.jpg',
+    description: 'High-performance ETFE domes and inverted tensile cones custom engineered for Dubai Roads & Transport Authority (RTA) marine transit stations. Built to endure high humidity, marine salinity, and coastal wind loading.'
+  },
+  'arena-corinthians': {
+    title: 'Arena Corinthians 2014 FIFA World Cup Stadium',
+    category: 'sports',
+    categoryLabel: 'Sports & Recreation',
+    location: 'São Paulo, Brazil',
+    area: '28,000 m²',
+    material: 'Smooth Acoustic & Reflective Tensile Membrane',
+    year: '2014',
+    client: 'World Cup Organizing Committee',
+    span: 'Full Underside Grandstand Ceiling',
+    image: 'assets/images/projects/arena-corinthians.jpg',
+    description: 'Smooth membrane ceiling for FIFA World Cup opening match stadium. Fast-track installation from the underside of the massive cantilevered roof steelwork, delivering clean aesthetics, integrated lighting concealment, and stadium acoustics.'
   }
 };
 
 function initProjectModals() {
   const modalOverlay = document.getElementById('projectModal');
   const closeBtn = document.querySelector('.modal-close-btn');
-  const projectCards = document.querySelectorAll('.project-card');
+  const projectCards = document.querySelectorAll('.project-card, .project-showcase-card');
 
   if (!modalOverlay) return;
 

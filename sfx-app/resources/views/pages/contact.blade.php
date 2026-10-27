@@ -173,4 +173,49 @@
     </div>
   </div>
 </section>
+
+<!-- ==========================================================================
+     INTERACTIVE GOOGLE MAPS LOCATION
+     ========================================================================== -->
+@php
+  $mapVisible = \App\Models\Setting::get('contact_map_visible', true);
+  $mapIframe = \App\Models\Setting::get('contact_map_iframe', '<iframe src="https://maps.google.com/maps?q=Structurflex%20Middle%20East%20Contracting%20LLC%20Dubai&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>');
+  $mapTitle = \App\Models\Setting::get('contact_map_title', 'Regional Headquarters Location');
+  $mapSubtitle = \App\Models\Setting::get('contact_map_subtitle', 'Visit our engineering facility in Al Khawaneej 2, Dubai, United Arab Emirates.');
+@endphp
+
+@if($mapVisible && !empty($mapIframe))
+<section class="section section-map" style="background-color: #ffffff; padding: 0 0 5.5rem;">
+  <div class="container">
+    <div style="margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="section-tag" style="background: #edf4fd; color: #0B5ED7; border: 1px solid rgba(11, 94, 215, 0.25); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">
+          Find Us
+        </span>
+        <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy-primary); margin: 0.5rem 0 0.25rem;">
+          {{ $mapTitle }}
+        </h2>
+        <p style="color: #64748b; font-size: 0.95rem; margin: 0;">
+          {{ $mapSubtitle }}
+        </p>
+      </div>
+      <div>
+        <a href="https://maps.google.com/?q=Structurflex+Middle+East+Contracting+LLC+Dubai" target="_blank" rel="noopener noreferrer" class="btn btn-hero-white" style="border: 1px solid #cbd5e1; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span>📍 Open in Google Maps</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <div style="border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 12px 32px rgba(8, 28, 56, 0.08); background: #f8fafc; height: 460px; position: relative;" class="responsive-map-container">
+      @if(str_contains($mapIframe, '<iframe'))
+        {!! preg_replace('/width="\d+"/', 'width="100%"', preg_replace('/height="\d+"/', 'height="100%"', $mapIframe)) !!}
+      @else
+        <iframe src="{{ $mapIframe }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      @endif
+    </div>
+  </div>
+</section>
+@endif
 @endsection
+

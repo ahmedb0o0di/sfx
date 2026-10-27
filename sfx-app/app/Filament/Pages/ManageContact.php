@@ -8,6 +8,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -58,6 +59,12 @@ class ManageContact extends Page implements HasForms
             'whatsapp_number' => Setting::get('whatsapp_number', '971502959942'),
             'whatsapp_title' => Setting::get('whatsapp_title', 'Need Urgent Feasibility Assessment?'),
             'whatsapp_text' => Setting::get('whatsapp_text', 'Chat directly with our Dubai duty engineering team on WhatsApp.'),
+
+            // Google Maps
+            'contact_map_visible' => (bool) Setting::get('contact_map_visible', true),
+            'contact_map_title' => Setting::get('contact_map_title', 'Regional Headquarters Location'),
+            'contact_map_subtitle' => Setting::get('contact_map_subtitle', 'Visit our engineering facility in Al Khawaneej 2, Dubai, United Arab Emirates.'),
+            'contact_map_iframe' => Setting::get('contact_map_iframe', '<iframe src="https://maps.google.com/maps?q=Structurflex%20Middle%20East%20Contracting%20LLC%20Dubai&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'),
         ]);
     }
 
@@ -188,6 +195,38 @@ class ManageContact extends Page implements HasForms
                             Textarea::make('whatsapp_text')
                                 ->label('WhatsApp Box Helper Text')
                                 ->rows(2)
+                                ->required()
+                                ->columnSpan(12),
+                        ]),
+                    ]),
+
+                // GOOGLE MAPS EMBED
+                Section::make('Interactive Google Maps Location')
+                    ->description('Embed an interactive Google Map for your headquarters or factory location.')
+                    ->icon('heroicon-o-map-pin')
+                    ->collapsible()
+                    ->schema([
+                        Grid::make(12)->schema([
+                            Toggle::make('contact_map_visible')
+                                ->label('Show Google Map Section')
+                                ->helperText('Toggle to display or hide the map on the Contact page')
+                                ->default(true)
+                                ->columnSpan(12),
+
+                            TextInput::make('contact_map_title')
+                                ->label('Section Title')
+                                ->required()
+                                ->columnSpan(6),
+
+                            TextInput::make('contact_map_subtitle')
+                                ->label('Section Subtitle')
+                                ->required()
+                                ->columnSpan(6),
+
+                            Textarea::make('contact_map_iframe')
+                                ->label('Google Maps Embed Code (<iframe>) or Embed URL')
+                                ->helperText('Paste the full <iframe>...</iframe> HTML from Google Maps ("Share" → "Embed a map") or a direct map embed URL.')
+                                ->rows(4)
                                 ->required()
                                 ->columnSpan(12),
                         ]),

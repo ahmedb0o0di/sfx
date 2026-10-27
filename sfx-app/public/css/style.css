@@ -5867,3 +5867,20 @@ button, input, select, textarea {
     text-align: center;
   }
 }
+
+/* ==========================================================================
+   RESPONSIVE GOOGLE MAP CONTAINER
+   ========================================================================== */
+.responsive-map-container iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .responsive-map-container {
+    height: 350px !important;
+  }
+}
+

@@ -3150,9 +3150,14 @@ button, input, select, textarea {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .modal-overlay {
     display: none !important;
+    pointer-events: none !important;
+  }
+
+  body {
+    overflow-y: auto !important;
   }
   
   .modal-card {

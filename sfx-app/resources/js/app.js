@@ -699,13 +699,31 @@ function initProjectModals() {
   const modalImg = document.getElementById('modalImage');
   const modalBackdrop = document.getElementById('modalImageBackdrop');
   const modalExpand = document.getElementById('modalImageExpand');
-  const projectCards = document.querySelectorAll('.project-card, .project-showcase-card, .solution-hub-card');
+  const projectCards = document.querySelectorAll('.project-card, .project-showcase-card');
   const projectIds = Object.keys(projectData);
   let currentIndex = 0;
 
-  const openModal = (id) => {
+  const isSmallScreen = () => {
+    return window.innerWidth <= 992 || (window.matchMedia && window.matchMedia('(max-width: 992px)').matches);
+  };
+
+  const openModal = (id, targetUrl) => {
+    // If on small screens (mobile / tablet <= 992px), never open modal and never freeze scroll
+    if (isSmallScreen()) {
+      const dest = targetUrl || (id ? `/projects/${id}` : null);
+      if (dest) {
+        window.location.href = dest;
+      }
+      return;
+    }
+
     const data = projectData[id];
-    if (!data) return;
+    if (!data) {
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+      return;
+    }
 
     currentIndex = projectIds.indexOf(id);
     if (currentIndex === -1) currentIndex = 0;
@@ -823,24 +841,26 @@ function initProjectModals() {
 
   projectCards.forEach(card => {
     card.addEventListener('click', (e) => {
-      // If user clicked a direct link or interactive anchor, allow normal navigation
-      if (e.target.closest('a, .solution-card-link')) return;
       const id = card.getAttribute('data-id');
       const targetUrl = card.getAttribute('data-url') || (id ? `/projects/${id}` : null);
 
       if (!id && !targetUrl) return;
 
-      // On small screens (<= 768px), navigate directly to the separate project details page
-      if (window.innerWidth <= 768) {
-        if (targetUrl) {
-          window.location.href = targetUrl;
+      // On small screens (<= 992px), navigate directly to the separate project details page
+      if (isSmallScreen()) {
+        const dest = targetUrl || (id ? `/projects/${id}` : null);
+        if (dest) {
+          window.location.href = dest;
         }
         return;
       }
 
-      // On desktop screens (> 768px), open the pop-up modal if data exists
+      // If user clicked a direct link or interactive anchor on desktop, allow normal navigation
+      if (e.target.closest('a, button, input, select, textarea')) return;
+
+      // On desktop screens (> 992px), open the pop-up modal if data exists
       if (id && projectData[id]) {
-        openModal(id);
+        openModal(id, targetUrl);
       } else if (targetUrl) {
         window.location.href = targetUrl;
       }

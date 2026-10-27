@@ -478,7 +478,12 @@
     <!-- 4-Column Projects Showcase Grid -->
     <div class="projects-showcase-grid">
       @forelse($allProjects as $project)
-      <article class="project-showcase-card" data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}" data-id="{{ $project->slug }}" data-url="{{ route('projects.show', $project->slug) }}">
+      <article class="project-showcase-card"
+        data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}"
+        data-id="{{ $project->slug }}"
+        data-url="{{ route('projects.show', $project->slug) }}"
+        style="cursor: pointer;"
+        onclick="if (window.innerWidth <= 992) { window.location.href = '{{ route('projects.show', $project->slug) }}'; }">
         <div class="project-showcase-img">
           <img src="{{ asset($project->thumbnail_image) }}" alt="{{ $project->title }}" loading="lazy">
           <span class="project-location-badge">{{ $project->location }}</span>
@@ -498,7 +503,12 @@
       </article>
       @empty
       <!-- Fallback project cards from Option-1 -->
-      <article class="project-showcase-card" data-category="architectural" data-id="al-jamea" data-url="{{ route('projects.show', 'al-jamea') }}">
+      <article class="project-showcase-card"
+        data-category="architectural"
+        data-id="al-jamea"
+        data-url="{{ route('projects.show', 'al-jamea') }}"
+        style="cursor: pointer;"
+        onclick="if (window.innerWidth <= 992) { window.location.href = '{{ route('projects.show', 'al-jamea') }}'; }">
         <div class="project-showcase-img">
           <img src="{{ asset('assets/images/projects/al-jamea-etfe.png') }}" alt="Al Jamea Tus Saifiyah Single Skin ETFE Membrane" loading="lazy">
           <span class="project-location-badge">Nairobi, Kenya</span>

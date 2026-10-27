@@ -38,7 +38,12 @@
     <!-- Projects Grid -->
     <div class="projects-showcase-grid">
       @forelse($projects as $project)
-      <article class="project-showcase-card" data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}" data-id="{{ $project->slug }}" style="cursor: pointer;">
+      <article class="project-showcase-card"
+        data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}"
+        data-id="{{ $project->slug }}"
+        data-url="{{ route('projects.show', $project->slug) }}"
+        style="cursor: pointer;"
+        onclick="if (window.innerWidth <= 992) { window.location.href = '{{ route('projects.show', $project->slug) }}'; }">
         <div class="project-showcase-img">
           <img src="{{ asset($project->thumbnail_image) }}" alt="{{ $project->title }}" loading="lazy">
           <span class="project-location-badge">{{ $project->location }}</span>

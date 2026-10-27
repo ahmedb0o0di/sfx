@@ -614,107 +614,129 @@
   </div>
 </section>
 
+@php
+  $partnersSectionVisible = (bool) \App\Models\Setting::get('partners_section_visible', true);
+  $partnersTag = \App\Models\Setting::get('partners_section_tag', 'Trust & Alliances');
+  $partnersTitle = \App\Models\Setting::get('partners_section_title', 'TRUSTED BY LEADING CLIENTS & PARTNERS');
+  $partnersSubtitle = \App\Models\Setting::get('partners_section_subtitle', 'Collaborating with government ministries, master developers, and international engineering leaders.');
+
+  $partnersRaw = \App\Models\Setting::get('partners_items');
+  if ($partnersRaw) {
+      $partnerItems = json_decode($partnersRaw, true);
+  } else {
+      $partnerItems = [
+          ['name' => 'ASATI', 'subtitle' => 'Air Structures American Technologies', 'link_url' => '', 'is_visible' => true],
+          ['name' => 'Ministry of Public Works', 'subtitle' => 'Strategic Partner (14 Projects)', 'link_url' => '', 'is_visible' => true],
+          ['name' => 'RTA Dubai', 'subtitle' => 'Roads & Transport Authority', 'link_url' => '', 'is_visible' => true],
+          ['name' => 'Oromia Regional Govt', 'subtitle' => 'Unity Park Project', 'link_url' => '', 'is_visible' => true],
+          ['name' => 'Nakheel & Emaar', 'subtitle' => 'Master Developers', 'link_url' => '', 'is_visible' => true],
+          ['name' => 'Al Ain Municipality', 'subtitle' => 'Civic Architectural Projects', 'link_url' => '', 'is_visible' => true],
+      ];
+  }
+  $visiblePartners = array_filter($partnerItems ?? [], fn($p) => !isset($p['is_visible']) || $p['is_visible']);
+
+  $certsVisible = (bool) \App\Models\Setting::get('certifications_section_visible', true);
+  $certsRaw = \App\Models\Setting::get('certifications_items');
+  if ($certsRaw) {
+      $certItems = json_decode($certsRaw, true);
+  } else {
+      $certItems = [
+          ['title' => 'ISO 9001:2015', 'description' => 'Quality Management System Certification across design, fabrication & erection.', 'icon' => 'shield', 'accent_border' => false, 'is_visible' => true],
+          ['title' => 'ISO 14001:2015', 'description' => 'Environmental Management System ensuring sustainable lifecycle practices.', 'icon' => 'globe', 'accent_border' => false, 'is_visible' => true],
+          ['title' => 'ISO 45001:2018', 'description' => 'Occupational Health & Safety certified for high-altitude tension rigging.', 'icon' => 'heart', 'accent_border' => false, 'is_visible' => true],
+          ['title' => 'Ministry Award', 'description' => 'Special Strategic Partner Award from UAE Ministry of Public Works (14 successful projects).', 'icon' => 'award', 'accent_border' => true, 'is_visible' => true],
+      ];
+  }
+  $visibleCerts = array_filter($certItems ?? [], fn($c) => !isset($c['is_visible']) || $c['is_visible']);
+@endphp
+
+@if($partnersSectionVisible || $certsVisible)
 <!-- ==========================================================================
      SECTION: STRATEGIC CREDENTIALS & PARTNERSHIPS MATRIX
      ========================================================================== -->
 <section class="credentials-bar" id="credentials">
   <div class="container">
+    @if($partnersSectionVisible)
     <!-- Sub-Section A: Clients & Partners -->
     <div class="section-header text-center" style="margin-bottom: 2.5rem;">
+      @if(!empty(trim($partnersTag ?? '')))
       <span class="section-tag"
-        style="background: #edf4fd; color: #0B5ED7; border: 1px solid rgba(11, 94, 215, 0.25); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">Trust
-        &amp; Alliances</span>
+        style="background: #edf4fd; color: #0B5ED7; border: 1px solid rgba(11, 94, 215, 0.25); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">{{ $partnersTag }}</span>
+      @endif
+      @if(!empty(trim($partnersTitle ?? '')))
       <h2 class="section-title"
-        style="font-size: 1.85rem; font-weight: 800; color: var(--navy-primary); margin: 0.65rem 0 0.35rem;">TRUSTED
-        BY LEADING CLIENTS &amp; PARTNERS</h2>
-      <p class="section-subtitle" style="font-size: 0.95rem; color: var(--text-muted); max-width: 650px; margin: 0 auto;">Collaborating with
-        government ministries, master developers, and international engineering leaders.</p>
+        style="font-size: 1.85rem; font-weight: 800; color: var(--navy-primary); margin: 0.65rem 0 0.35rem;">{{ $partnersTitle }}</h2>
+      @endif
+      @if(!empty(trim($partnersSubtitle ?? '')))
+      <p class="section-subtitle" style="font-size: 0.95rem; color: var(--text-muted); max-width: 650px; margin: 0 auto;">{{ $partnersSubtitle }}</p>
+      @endif
     </div>
 
-    <div class="partner-logo-matrix">
-      <div class="partner-badge-item">
-        <strong>ASATI</strong>
-        <span>Air Structures American Technologies</span>
-      </div>
-      <div class="partner-badge-item">
-        <strong>Ministry of Public Works</strong>
-        <span>Strategic Partner (14 Projects)</span>
-      </div>
-      <div class="partner-badge-item">
-        <strong>RTA Dubai</strong>
-        <span>Roads &amp; Transport Authority</span>
-      </div>
-      <div class="partner-badge-item">
-        <strong>Oromia Regional Govt</strong>
-        <span>Unity Park Project</span>
-      </div>
-      <div class="partner-badge-item">
-        <strong>Nakheel &amp; Emaar</strong>
-        <span>Master Developers</span>
-      </div>
-      <div class="partner-badge-item">
-        <strong>Al Ain Municipality</strong>
-        <span>Civic Architectural Projects</span>
-      </div>
+    @if(!empty($visiblePartners))
+    <div class="partner-logo-matrix" style="margin-bottom: {{ $certsVisible ? '4rem' : '0' }};">
+      @foreach($visiblePartners as $partner)
+        @php
+          $hasUrl = !empty(trim($partner['link_url'] ?? ''));
+          $itemTag = $hasUrl ? 'a' : 'div';
+        @endphp
+        <{{ $itemTag }} @if($hasUrl) href="{{ $partner['link_url'] }}" target="_blank" rel="noopener" @endif class="partner-badge-item" style="text-decoration: none; color: inherit;">
+          <strong>{{ $partner['name'] ?? '' }}</strong>
+          @if(!empty(trim($partner['subtitle'] ?? '')))
+          <span>{{ $partner['subtitle'] }}</span>
+          @endif
+        </{{ $itemTag }}>
+      @endforeach
     </div>
+    @endif
+    @endif
 
+    @if($certsVisible && !empty($visibleCerts))
     <!-- Sub-Section B: Certifications -->
-    <div class="certifications-row" style="margin-top: 2.5rem;">
-      <div class="cert-card">
-        <div class="cert-icon-box">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            <path d="m9 12 2 2 4-4" />
-          </svg>
+    <div class="certifications-row" style="{{ $partnersSectionVisible ? 'margin-top: 2.5rem;' : '' }}">
+      @foreach($visibleCerts as $cert)
+        @php
+          $isGold = !empty($cert['accent_border']);
+          $icon = $cert['icon'] ?? 'shield';
+        @endphp
+        <div class="cert-card" @if($isGold) style="border-left: 3px solid #D99B26;" @endif>
+          <div class="cert-icon-box" @if($isGold) style="background: #fef8eb; color: #D99B26;" @endif>
+            @if($icon === 'globe')
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+              <path d="M2 12h20" />
+            </svg>
+            @elseif($icon === 'heart')
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+            @elseif($icon === 'award')
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="8" r="7" />
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+            </svg>
+            @elseif($icon === 'star')
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            @else
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+            @endif
+          </div>
+          <div class="cert-info">
+            <h4>{{ $cert['title'] ?? '' }}</h4>
+            <p>{{ $cert['description'] ?? '' }}</p>
+          </div>
         </div>
-        <div class="cert-info">
-          <h4>ISO 9001:2015</h4>
-          <p>Quality Management System Certification across design, fabrication &amp; erection.</p>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <div class="cert-icon-box">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-            <path d="M2 12h20" />
-          </svg>
-        </div>
-        <div class="cert-info">
-          <h4>ISO 14001:2015</h4>
-          <p>Environmental Management System ensuring sustainable lifecycle practices.</p>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <div class="cert-icon-box">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <path
-              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-          </svg>
-        </div>
-        <div class="cert-info">
-          <h4>ISO 45001:2018</h4>
-          <p>Occupational Health &amp; Safety certified for high-altitude tension rigging.</p>
-        </div>
-      </div>
-
-      <div class="cert-card" style="border-left: 3px solid #D99B26;">
-        <div class="cert-icon-box" style="background: #fef8eb; color: #D99B26;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <circle cx="12" cy="8" r="7" />
-            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
-          </svg>
-        </div>
-        <div class="cert-info">
-          <h4>Ministry Award</h4>
-          <p>Special Strategic Partner Award from UAE Ministry of Public Works (14 successful projects).</p>
-        </div>
-      </div>
+      @endforeach
     </div>
+    @endif
   </div>
 </section>
+@endif
 
 <!-- ==========================================================================
      SECTION 7: TECHNICAL WHITEPAPERS & INSIGHTS

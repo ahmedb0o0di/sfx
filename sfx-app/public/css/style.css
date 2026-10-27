@@ -5124,6 +5124,293 @@ button, input, select, textarea {
   box-shadow: 0 2px 10px rgba(11, 94, 215, 0.35);
 }
 
+/* ==========================================================================
+   PROJECT DETAILS PAGE (ENHANCED RESPONSIVE ARCHITECTURE)
+   ========================================================================== */
+.project-details-hero {
+  background: #081C38;
+  color: #ffffff;
+  padding: clamp(5.5rem, 8vw, 7.5rem) 0 clamp(2.5rem, 5vw, 4rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-details-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(11, 94, 215, 0.18) 0%, rgba(8, 28, 56, 0) 70%);
+  pointer-events: none;
+}
+
+.project-hero-breadcrumbs {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-hero-breadcrumbs a {
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.project-hero-breadcrumbs a:hover {
+  color: #ffffff;
+}
+
+.project-hero-meta-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.project-hero-title {
+  font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.project-hero-desc {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: #cbd5e1;
+  max-width: 800px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.project-details-section {
+  background-color: #F8FAFC;
+  padding: clamp(2.5rem, 5vw, 5rem) 0;
+}
+
+.project-details-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.project-lead-showcase {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.25rem;
+  background: #0f172a;
+  position: relative;
+}
+
+.project-lead-showcase img {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.25s ease;
+}
+
+.project-gallery-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.project-gallery-thumb {
+  border-radius: 8px;
+  overflow: hidden;
+  height: 80px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: #e2e8f0;
+  padding: 0;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.project-gallery-thumb.active,
+.project-gallery-thumb:hover {
+  border-color: #0B5ED7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(11, 94, 215, 0.25);
+}
+
+.project-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project-content-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: clamp(1.25rem, 3.5vw, 2.5rem);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  margin-bottom: 2rem;
+}
+
+.project-content-card h2 {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 800;
+  color: var(--navy-primary);
+  margin-bottom: 1rem;
+}
+
+.project-specs-sidebar {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 90px;
+}
+
+.project-specs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.project-spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 0.65rem;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+}
+
+.project-spec-label {
+  color: #64748b;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.project-spec-value {
+  color: var(--navy-primary);
+  font-weight: 700;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* Mobile Quick Specs Matrix */
+.project-mobile-quick-specs {
+  display: none;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.mobile-spec-pill {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.mobile-spec-pill .pill-lbl {
+  font-size: 0.72rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.mobile-spec-pill .pill-val {
+  font-size: 0.92rem;
+  color: var(--navy-primary);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* Mobile Sticky Action Bar */
+.project-mobile-action-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid #e2e8f0;
+  padding: 0.75rem 1rem;
+  z-index: 1000;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.project-mobile-action-bar .action-inner {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+  .project-details-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .project-specs-sidebar {
+    position: static;
+  }
+  
+  .project-mobile-quick-specs {
+    display: grid;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-gallery-strip {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 0.65rem;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .project-gallery-thumb {
+    flex: 0 0 85px;
+    height: 70px;
+    scroll-snap-align: start;
+  }
+  
+  .project-mobile-action-bar {
+    display: block;
+  }
+  
+  .project-details-section {
+    padding-bottom: 6rem;
+  }
+}
+
 .sfx-switcher-btn:not(.active):hover {
   color: #FFFFFF;
 }

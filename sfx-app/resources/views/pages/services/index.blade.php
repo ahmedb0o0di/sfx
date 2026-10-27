@@ -31,12 +31,18 @@
       @foreach($services as $service)
       <article class="solution-card" style="background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="height: 220px; overflow: hidden;">
-            <img src="{{ asset($service->hero_image) }}" alt="{{ $service->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+          <div style="height: 220px; overflow: hidden; position: relative;">
+            <a href="{{ route('services.show', $service->slug) }}" style="display: block; width: 100%; height: 100%;" title="View {{ $service->title }} details">
+              <img src="{{ asset($service->hero_image) }}" alt="{{ $service->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+            </a>
           </div>
           <div style="padding: 1.75rem;">
             <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #0284c7; letter-spacing: 0.8px;">{{ $service->subtitle }}</span>
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-primary); margin: 0.4rem 0 0.75rem;">{{ $service->title }}</h3>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-primary); margin: 0.4rem 0 0.75rem;">
+              <a href="{{ route('services.show', $service->slug) }}" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#0B5ED7'" onmouseout="this.style.color='var(--navy-primary)'">
+                {{ $service->title }}
+              </a>
+            </h3>
             <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">{{ $service->summary }}</p>
             
             @if($service->technical_specs)

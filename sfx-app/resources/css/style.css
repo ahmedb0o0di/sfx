@@ -4639,6 +4639,8 @@ button, input, select, textarea {
   overflow: hidden;
   position: relative;
   background-color: #081c38;
+  cursor: pointer;
+  display: block;
 }
 
 .solution-img-holder img {

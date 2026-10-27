@@ -60,13 +60,13 @@
     <div class="career-rows-container" style="display: flex; flex-direction: column; gap: 1.75rem; max-width: 1100px; margin: 0 auto;">
       @forelse($careers as $career)
       <article class="career-row-card">
-        <!-- Left: Image -->
-        <div class="career-row-media">
+        <!-- Left: Image (clickable) -->
+        <a href="{{ route('careers.show', $career->slug) }}" class="career-row-media" style="display: block; text-decoration: none;">
           <img src="{{ $career->image_url }}" alt="{{ $career->title }}" loading="lazy">
           <span class="career-badge-type">
             {{ $career->type ?? 'Full-time' }}
           </span>
-        </div>
+        </a>
 
         <!-- Middle: Title, Badges & Job Description -->
         <div class="career-row-content">
@@ -84,7 +84,9 @@
           </div>
 
           <h3 class="career-row-title">
-            {{ $career->title }}
+            <a href="{{ route('careers.show', $career->slug) }}" style="color: inherit; text-decoration: none;">
+              {{ $career->title }}
+            </a>
           </h3>
 
           <p class="career-row-desc">
@@ -92,22 +94,15 @@
           </p>
         </div>
 
-        <!-- Right: Apply Action -->
-        <div class="career-row-action">
-          @php
-            $isExternal = !empty($career->apply_url) && \Illuminate\Support\Str::startsWith($career->apply_url, ['http://', 'https://']);
-          @endphp
-          @if($isExternal)
-            <a href="{{ $career->apply_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-apply">
-              <span>Apply Now</span>
-              <span>&rarr;</span>
-            </a>
-          @else
-            <button type="button" onclick="openCareerApplyModal({{ $career->id }}, '{{ addslashes($career->title) }}')" class="btn btn-primary btn-apply">
-              <span>Apply Now</span>
-              <span>&rarr;</span>
-            </button>
-          @endif
+        <!-- Right: Actions -->
+        <div class="career-row-action" style="display: flex; flex-direction: column; gap: 0.65rem; align-items: stretch;">
+          <a href="{{ route('careers.show', $career->slug) }}" class="btn btn-primary btn-apply" style="justify-content: center;">
+            <span>View Role &amp; Apply</span>
+            <span>&rarr;</span>
+          </a>
+          <button type="button" onclick="openCareerApplyModal({{ $career->id }}, '{{ addslashes($career->title) }}')" class="btn btn-outline" style="padding: 0.65rem 1.15rem; font-size: 0.85rem; font-weight: 700; justify-content: center;">
+            <span>Quick Apply</span>
+          </button>
         </div>
       </article>
       @empty

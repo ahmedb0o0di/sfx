@@ -134,6 +134,13 @@ class CareerResource extends Resource
                     ->label('Location')
                     ->searchable(),
 
+                Tables\Columns\TextColumn::make('applications_count')
+                    ->counts('applications')
+                    ->label('Applications')
+                    ->badge()
+                    ->color('warning')
+                    ->sortable(),
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean()
@@ -155,6 +162,12 @@ class CareerResource extends Resource
                     ->label('Active Status'),
             ])
             ->actions([
+                Tables\Actions\Action::make('view_frontend')
+                    ->label('View Page')
+                    ->icon('heroicon-o-arrow-top-right-on-square')
+                    ->color('gray')
+                    ->url(fn (Career $record): string => route('careers.show', $record->slug))
+                    ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -163,6 +176,13 @@ class CareerResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            \App\Filament\Resources\CareerResource\RelationManagers\ApplicationsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

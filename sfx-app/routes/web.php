@@ -24,12 +24,11 @@ Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projec
 Route::get('/insights', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/insights/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
+use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CareerApplicationController;
 
-Route::get('/careers', function () {
-    $careers = \App\Models\Career::where('is_active', true)->orderBy('sort_order', 'asc')->get();
-    return view('pages.careers', compact('careers'));
-})->name('careers.index');
+Route::get('/careers', [CareerController::class, 'index'])->name('careers.index');
+Route::get('/careers/{slug}', [CareerController::class, 'show'])->name('careers.show');
 Route::post('/careers/apply', [CareerApplicationController::class, 'store'])->name('careers.apply');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

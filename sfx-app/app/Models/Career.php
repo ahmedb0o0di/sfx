@@ -32,7 +32,7 @@ class Career extends Model
     {
         parent::boot();
 
-        static::creating(function ($career) {
+        static::saving(function ($career) {
             if (empty($career->slug)) {
                 $career->slug = Str::slug($career->title);
             }

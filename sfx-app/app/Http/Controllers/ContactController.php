@@ -45,6 +45,21 @@ class ContactController extends Controller
             'status' => 'pending',
         ]);
 
+        // If this inquiry is a career application, also record it into CareerApplication
+        $isCareerInquiry = stripos($validated['subject'], 'career') !== false || $request->input('inquiry') === 'careers';
+        if ($isCareerInquiry) {
+            $jobTitle = $request->input('role') ?: $validated['subject'];
+            \App\Models\CareerApplication::create([
+                'job_title' => $jobTitle,
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'] ?? '',
+                'cover_letter' => $validated['message'],
+                'cv_path' => $attachmentPath,
+                'status' => 'pending',
+            ]);
+        }
+
         if ($request->wantsJson()) {
             return response()->json([
                 'success' => true,

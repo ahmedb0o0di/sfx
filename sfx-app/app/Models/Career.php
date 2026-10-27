@@ -58,4 +58,12 @@ class Career extends Model
 
         return asset('storage/' . $this->image);
     }
+
+    /**
+     * Applications submitted for this career position.
+     */
+    public function applications(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CareerApplication::class);
+    }
 }

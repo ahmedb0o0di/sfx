@@ -829,24 +829,36 @@
 
         <!-- Right: Apply Action -->
         <div class="career-row-action" style="flex-shrink: 0; text-align: right;">
-          <a href="{{ $career->apply_url ?: route('contact.index', ['inquiry' => 'careers', 'role' => $career->title]) }}" class="btn btn-primary" style="white-space: nowrap; padding: 0.85rem 1.65rem; font-size: 0.9rem; font-weight: 700;">
-            <span>Apply for Position</span>
-            <span>&rarr;</span>
-          </a>
+          @php
+            $isExternal = !empty($career->apply_url) && \Illuminate\Support\Str::startsWith($career->apply_url, ['http://', 'https://']);
+          @endphp
+          @if($isExternal)
+            <a href="{{ $career->apply_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="white-space: nowrap; padding: 0.85rem 1.65rem; font-size: 0.9rem; font-weight: 700;">
+              <span>Apply for Position</span>
+              <span>&rarr;</span>
+            </a>
+          @else
+            <button type="button" onclick="openCareerApplyModal({{ $career->id }}, '{{ addslashes($career->title) }}')" class="btn btn-primary" style="white-space: nowrap; padding: 0.85rem 1.65rem; font-size: 0.9rem; font-weight: 700;">
+              <span>Apply for Position</span>
+              <span>&rarr;</span>
+            </button>
+          @endif
         </div>
       </article>
       @empty
       <div style="text-align: center; padding: 3rem; background: #F8FAFC; border-radius: 12px; border: 1px dashed #cbd5e1;">
         <p style="color: #64748b; font-size: 1rem; margin-bottom: 1rem;">We are always welcoming exceptional structural talents to join our talent pool.</p>
-        <a href="{{ route('contact.index', ['inquiry' => 'careers']) }}" class="btn btn-primary">
+        <button type="button" onclick="openCareerApplyModal(null, 'Speculative Application')" class="btn btn-primary">
           <span>Submit Speculative CV</span>
           <span>&rarr;</span>
-        </a>
+        </button>
       </div>
       @endforelse
     </div>
   </div>
 </section>
+
+@include('components.career-apply-modal')
 
 <!-- ==========================================================================
      SECTION 8: PROJECT INQUIRIES & CONSULTATION

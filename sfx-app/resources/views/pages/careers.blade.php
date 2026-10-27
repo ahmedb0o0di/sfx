@@ -27,6 +27,23 @@
 <!-- Careers Single-Item-Per-Row List -->
 <section class="section section-careers" style="background-color: #F8FAFC; padding: 5.5rem 0;">
   <div class="container">
+    @if(session('career_success'))
+    <div style="background: #e6f6ec; border: 1.5px solid #008e38; color: #00732d; padding: 1.25rem 1.75rem; border-radius: 10px; margin-bottom: 2.5rem; font-size: 1rem; font-weight: 700; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; box-shadow: 0 4px 12px rgba(0, 142, 56, 0.08);">
+      ✓ {{ session('career_success') }}
+    </div>
+    @endif
+
+    @if($errors->any())
+    <div style="background: #fef2f2; border: 1.5px solid #dc2626; color: #991b1b; padding: 1.25rem 1.75rem; border-radius: 10px; margin-bottom: 2.5rem; font-size: 0.95rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+      <strong style="display: block; margin-bottom: 0.35rem;">Please review the following errors:</strong>
+      <ul style="margin: 0; padding-left: 1.25rem;">
+        @foreach($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
+
     <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 3.5rem;">
       <span class="section-tag" style="background: #edf4fd; color: #0B5ED7; border: 1px solid rgba(11, 94, 215, 0.25); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">
         Open Positions
@@ -77,10 +94,20 @@
 
         <!-- Right: Apply Action -->
         <div class="career-row-action">
-          <a href="{{ $career->apply_url ?: route('contact.index', ['inquiry' => 'careers', 'role' => $career->title]) }}" class="btn btn-primary btn-apply">
-            <span>Apply Now</span>
-            <span>&rarr;</span>
-          </a>
+          @php
+            $isExternal = !empty($career->apply_url) && \Illuminate\Support\Str::startsWith($career->apply_url, ['http://', 'https://']);
+          @endphp
+          @if($isExternal)
+            <a href="{{ $career->apply_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-apply">
+              <span>Apply Now</span>
+              <span>&rarr;</span>
+            </a>
+          @else
+            <button type="button" onclick="openCareerApplyModal({{ $career->id }}, '{{ addslashes($career->title) }}')" class="btn btn-primary btn-apply">
+              <span>Apply Now</span>
+              <span>&rarr;</span>
+            </button>
+          @endif
         </div>
       </article>
       @empty
@@ -89,10 +116,10 @@
         <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
           We are consistently evaluating visionary structural talent. Submit your speculative application and CV to be considered for forthcoming regional projects.
         </p>
-        <a href="{{ route('contact.index', ['inquiry' => 'careers']) }}" class="btn btn-primary">
+        <button type="button" onclick="openCareerApplyModal(null, 'Speculative Application')" class="btn btn-primary">
           <span>Submit Speculative CV</span>
           <span>&rarr;</span>
-        </a>
+        </button>
       </div>
       @endforelse
     </div>
@@ -110,10 +137,12 @@
           We frequently create bespoke positions for top-tier computational form-finders, tensile riggers, and project managers. Connect directly with our Dubai leadership team.
         </p>
       </div>
-      <a href="{{ route('contact.index', ['inquiry' => 'careers', 'role' => 'General Talent Application']) }}" class="btn btn-outline" style="white-space: nowrap; padding: 0.85rem 1.65rem;">
+      <button type="button" onclick="openCareerApplyModal(null, 'General Practice Application')" class="btn btn-outline" style="white-space: nowrap; padding: 0.85rem 1.65rem;">
         <span>Submit General Application &rarr;</span>
-      </a>
+      </button>
     </div>
   </div>
 </section>
+
+@include('components.career-apply-modal')
 @endsection

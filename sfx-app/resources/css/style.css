@@ -6483,6 +6483,156 @@ textarea {
   gap: 2rem;
 }
 
+/* Solution Card System */
+.solution-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.solution-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+.solution-card-media {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.solution-card-media a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.solution-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.solution-card:hover .solution-card-media img {
+  transform: scale(1.06);
+}
+
+.solution-card-body {
+  padding: 1.75rem;
+}
+
+.solution-card-subtitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #0284c7;
+  letter-spacing: 0.8px;
+  display: block;
+}
+
+.solution-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--navy-primary);
+  margin: 0.4rem 0 0.75rem;
+}
+
+.solution-card-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.solution-card-title a:hover {
+  color: #0B5ED7;
+}
+
+.solution-card-summary {
+  font-size: 0.88rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.solution-card-specs {
+  background: #F8FAFC;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 0.82rem;
+}
+
+.solution-spec-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.solution-spec-item:last-child {
+  margin-bottom: 0;
+}
+
+.solution-spec-key {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.solution-spec-val {
+  color: var(--navy-primary);
+  font-weight: 600;
+}
+
+.solution-card-footer {
+  padding: 0 1.75rem 1.75rem;
+}
+
+.btn-solution-action {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--navy-primary);
+  color: #ffffff !important;
+  border: 1px solid var(--navy-primary);
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(8, 28, 56, 0.12);
+  cursor: pointer;
+}
+
+.btn-solution-action:hover {
+  background: #0B5ED7;
+  border-color: #0B5ED7;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(11, 94, 215, 0.25);
+}
+
+.btn-solution-action .btn-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.btn-solution-action:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
 .services-capabilities-section {
   background-color: #081C38;
   color: #fff;
@@ -6691,6 +6841,41 @@ textarea {
     gap: 1.25rem !important;
   }
 
+  /* Solution Card & Button in Capabilities on Mobile */
+  .solution-card-media {
+    height: 195px !important;
+  }
+
+  .solution-card-body {
+    padding: 1.25rem 1.15rem 0.85rem !important;
+  }
+
+  .solution-card-title {
+    font-size: 1.15rem !important;
+  }
+
+  .solution-card-footer {
+    padding: 0 1.15rem 1.25rem !important;
+  }
+
+  .btn-solution-action {
+    width: 100% !important;
+    padding: 0.82rem 0.85rem !important;
+    font-size: clamp(0.78rem, 3.2vw, 0.88rem) !important;
+    border-radius: 8px !important;
+    letter-spacing: 0.2px !important;
+    white-space: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    gap: 0.45rem !important;
+  }
+
+  .btn-solution-action .btn-arrow {
+    font-size: 1rem !important;
+    line-height: 1 !important;
+  }
+
   .service-detail-body {
     padding: 1.5rem 1.25rem !important;
   }
@@ -6698,5 +6883,13 @@ textarea {
   .service-specs-grid {
     grid-template-columns: 1fr !important;
     gap: 0.75rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .btn-solution-action {
+    font-size: 0.76rem !important;
+    padding: 0.75rem 0.5rem !important;
+    gap: 0.35rem !important;
   }
 }

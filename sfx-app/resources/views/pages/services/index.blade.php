@@ -29,38 +29,38 @@
   <div class="container">
     <div class="solutions-grid">
       @foreach($services as $service)
-      <article class="solution-card" style="background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+      <article class="solution-card">
         <div>
-          <div style="height: 220px; overflow: hidden; position: relative;">
-            <a href="{{ route('services.show', $service->slug) }}" style="display: block; width: 100%; height: 100%;" title="View {{ $service->title }} details">
-              <img src="{{ asset($service->hero_image) }}" alt="{{ $service->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+          <div class="solution-card-media">
+            <a href="{{ route('services.show', $service->slug) }}" title="View {{ $service->title }} details">
+              <img src="{{ asset($service->hero_image) }}" alt="{{ $service->title }}" loading="lazy">
             </a>
           </div>
-          <div style="padding: 1.75rem;">
-            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #0284c7; letter-spacing: 0.8px;">{{ $service->subtitle }}</span>
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-primary); margin: 0.4rem 0 0.75rem;">
-              <a href="{{ route('services.show', $service->slug) }}" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#0B5ED7'" onmouseout="this.style.color='var(--navy-primary)'">
+          <div class="solution-card-body">
+            <span class="solution-card-subtitle">{{ $service->subtitle }}</span>
+            <h3 class="solution-card-title">
+              <a href="{{ route('services.show', $service->slug) }}">
                 {{ $service->title }}
               </a>
             </h3>
-            <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">{{ $service->summary }}</p>
+            <p class="solution-card-summary">{{ $service->summary }}</p>
             
             @if($service->technical_specs)
-            <div style="background: #F8FAFC; border-radius: 8px; padding: 1rem; margin-top: 1rem; font-size: 0.82rem;">
+            <div class="solution-card-specs">
               @foreach($service->technical_specs as $key => $val)
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
-                  <strong style="color: #64748b;">{{ $key }}:</strong>
-                  <span style="color: var(--navy-primary); font-weight: 600;">{{ $val }}</span>
+                <div class="solution-spec-item">
+                  <strong class="solution-spec-key">{{ $key }}:</strong>
+                  <span class="solution-spec-val">{{ $val }}</span>
                 </div>
               @endforeach
             </div>
             @endif
           </div>
         </div>
-        <div style="padding: 0 1.75rem 1.75rem;">
-          <a href="{{ route('services.show', $service->slug) }}" class="btn btn-hero-white" style="width: 100%; justify-content: center; font-size: 0.88rem;">
+        <div class="solution-card-footer">
+          <a href="{{ route('services.show', $service->slug) }}" class="btn btn-solution-action">
             <span>System Details &amp; Case Studies</span>
-            <span>&rarr;</span>
+            <span class="btn-arrow">&rarr;</span>
           </a>
         </div>
       </article>

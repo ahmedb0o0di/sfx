@@ -233,7 +233,7 @@
   @if(count($outcomes) > 0)
   <div class="outcomes-bar">
     <div class="container">
-      <div class="outcomes-grid" style="grid-template-columns: repeat({{ count($outcomes) }}, minmax(0, 1fr));">
+      <div class="outcomes-grid">
         @foreach($outcomes as $msg)
         <div class="outcome-badge-item">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">

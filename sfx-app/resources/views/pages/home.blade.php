@@ -542,54 +542,6 @@
   </div>
 </section>
 
-<!-- ==========================================================================
-     SECTION: INTERACTIVE MATERIALS MATRIX
-     ========================================================================== -->
-<section class="section section-materials" id="materials" style="background-color: #ffffff; padding: 5.5rem 0;">
-  <div class="container">
-    <div class="section-header text-center" style="margin-bottom: 3.5rem;">
-      <span class="section-tag">Engineering Selection Matrix</span>
-      <h2 style="font-size: 2.35rem; font-weight: 800; color: var(--navy-primary); margin-top: 0.75rem;">PTFE vs. ETFE vs. PVC Architectural Membranes</h2>
-      <p style="color: var(--text-muted); max-width: 680px; margin: 0 auto; font-size: 1rem; line-height: 1.6;">
-        Compare technical parameters to determine the ideal membrane solution for your structural spans, daylighting requirements, and lifecycle performance.
-      </p>
-    </div>
-
-    <!-- Materials Cards Matrix -->
-    <div class="materials-matrix-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem;">
-      @foreach($materials as $material)
-      <div class="material-matrix-card" style="background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem;">
-            <h3 style="font-size: 1.45rem; font-weight: 800; color: var(--navy-primary); margin: 0;">{{ $material->name }}</h3>
-            <span style="background: #081C38; color: #f3b90d; font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase;">{{ $material->code }}</span>
-          </div>
-
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.85rem;">
-            <li style="display: flex; justify-content: space-between;"><strong style="color: #64748b;">Tensile Strength:</strong> <span style="font-weight: 600; color: var(--navy-primary);">{{ $material->tensile_strength }}</span></li>
-            <li style="display: flex; justify-content: space-between;"><strong style="color: #64748b;">Light Transmission:</strong> <span style="font-weight: 600; color: #0284c7;">{{ $material->light_transmission }}</span></li>
-            <li style="display: flex; justify-content: space-between;"><strong style="color: #64748b;">Solar Heat Gain:</strong> <span style="font-weight: 600; color: var(--navy-primary);">{{ $material->solar_heat_gain }}</span></li>
-            <li style="display: flex; justify-content: space-between;"><strong style="color: #64748b;">Expected Lifespan:</strong> <span style="font-weight: 700; color: #059669;">{{ $material->expected_lifespan }}</span></li>
-            <li style="display: flex; justify-content: space-between;"><strong style="color: #64748b;">Fire Rating:</strong> <span style="font-weight: 600; color: var(--navy-primary);">{{ $material->fire_rating }}</span></li>
-            <li style="display: flex; justify-content: space-between;"><strong style="color: #64748b;">Self-Cleaning:</strong> <span style="font-weight: 600; color: var(--navy-primary);">{{ $material->self_cleaning }}</span></li>
-          </ul>
-
-          <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #f1f5f9;">
-            <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #64748b; display: block; margin-bottom: 0.35rem;">Typical Applications</span>
-            <p style="font-size: 0.84rem; color: #475569; line-height: 1.5; margin: 0;">{{ $material->typical_applications }}</p>
-          </div>
-        </div>
-
-        <div style="margin-top: 2rem;">
-          <button type="button" class="btn btn-request-consult" style="width: 100%; justify-content: center;" onclick="document.getElementById('estimatorModal').style.display='flex'">
-            <span>Estimate {{ $material->code }} Structure</span>
-          </button>
-        </div>
-      </div>
-      @endforeach
-    </div>
-  </div>
-</section>
 
 <!-- ==========================================================================
      SECTION 5: DYNAMIC SCOPE ESTIMATOR PROMO BANNER

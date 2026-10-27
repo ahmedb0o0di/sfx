@@ -29,7 +29,7 @@ class ManageFooter extends Page implements HasForms
 
     protected static ?string $title = 'Footer Settings & Navigation';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 6;
 
     protected static string $view = 'filament.pages.manage-footer';
 

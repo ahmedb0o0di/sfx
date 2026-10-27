@@ -16,15 +16,15 @@
     </div>
     
     <span class="section-tag" style="background: rgba(243, 185, 13, 0.15); color: #f3b90d; border: 1px solid rgba(243, 185, 13, 0.3); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; padding: 0.3rem 0.85rem; border-radius: 999px;">
-      Direct Engineering Consultation
+      {{ \App\Models\Setting::get('contact_banner_tag', 'Direct Engineering Consultation') }}
     </span>
     
     <h1 class="page-banner-title">
-      Regional Engineering Hubs: Dubai &amp; Cairo
+      {{ \App\Models\Setting::get('contact_banner_title', 'Regional Engineering Hubs: Dubai & Cairo') }}
     </h1>
     
     <p class="page-banner-subtitle">
-      Connect directly with our structural engineering and commercial leadership in Dubai and Cairo for architectural form-finding, material specifications, and turnkey B2B budgeting.
+      {{ \App\Models\Setting::get('contact_banner_subtitle', 'Connect directly with our structural engineering and commercial leadership in Dubai and Cairo for architectural form-finding, material specifications, and turnkey B2B budgeting.') }}
     </p>
   </div>
 </section>
@@ -156,8 +156,12 @@
         <!-- WhatsApp Quick Connect -->
         <div class="contact-whatsapp-box">
           <span style="font-size: 1.75rem; display: block; margin-bottom: 0.4rem;">💬</span>
-          <h4 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Need Urgent Feasibility Assessment?</h4>
-          <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 1.25rem; line-height: 1.5;">Chat directly with our Dubai duty engineering team on WhatsApp.</p>
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">
+            {{ \App\Models\Setting::get('whatsapp_title', 'Need Urgent Feasibility Assessment?') }}
+          </h4>
+          <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 1.25rem; line-height: 1.5;">
+            {{ \App\Models\Setting::get('whatsapp_text', 'Chat directly with our Dubai duty engineering team on WhatsApp.') }}
+          </p>
           <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', \App\Models\Setting::get('whatsapp_number', '971502959942')) }}" target="_blank" rel="noopener noreferrer" class="contact-whatsapp-btn">
             <span>💬 Open WhatsApp Chat</span>
             <span>&rarr;</span>

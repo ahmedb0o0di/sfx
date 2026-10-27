@@ -2587,6 +2587,10 @@ button, input, select, textarea {
   transform: scale(1) translateY(0);
 }
 
+.modal-card > * {
+  flex-shrink: 0;
+}
+
 /* Custom Scrollbar for Modal Card */
 .modal-card::-webkit-scrollbar {
   width: 8px;
@@ -2773,7 +2777,9 @@ button, input, select, textarea {
   position: relative;
   width: calc(100% - 4rem);
   margin: 0 2rem 1rem;
-  height: clamp(240px, 34vh, 340px);
+  height: 380px;
+  min-height: 380px;
+  flex-shrink: 0;
   background: #040d1a;
   border-radius: 14px;
   overflow: hidden;

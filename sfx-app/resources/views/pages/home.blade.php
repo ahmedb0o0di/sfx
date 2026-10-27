@@ -543,29 +543,6 @@
 </section>
 
 
-<!-- ==========================================================================
-     SECTION 5: DYNAMIC SCOPE ESTIMATOR PROMO BANNER
-     ========================================================================== -->
-<section style="background: linear-gradient(135deg, #070B14 0%, #0F1D36 100%); padding: 5rem 0; color: #fff; position: relative; overflow: hidden;">
-  <div class="container" style="position: relative; z-index: 2;">
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap;">
-      <div style="max-width: 650px;">
-        <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: #f3b90d; font-weight: 700;">Pre-Tender Technical Tool</span>
-        <h2 style="font-size: 2.25rem; font-weight: 800; color: #fff; margin: 0.5rem 0 1rem;">Have a Project Footprint in Mind?</h2>
-        <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin: 0;">
-          Use our interactive Scope &amp; Cost Estimator to model membrane tonnage, structural steel demands, and daylighting transmission for spans up to 25,000 m².
-        </p>
-      </div>
-      <div>
-        <button type="button" class="btn btn-request-consult" style="padding: 1.15rem 2.25rem; font-size: 1.05rem;" onclick="document.getElementById('estimatorModal').style.display='flex'">
-          <span>Launch Scope Estimator</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
 @php
   $partnersSectionVisible = (bool) \App\Models\Setting::get('partners_section_visible', true);
   $partnersTag = \App\Models\Setting::get('partners_section_tag', 'Trust & Alliances');

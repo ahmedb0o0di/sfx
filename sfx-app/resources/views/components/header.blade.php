@@ -50,7 +50,7 @@
                   'capabilities' => route('services.index') . '#capabilities',
                   'about' => route('about'),
                   'blog' => route('blog.index'),
-                  'careers' => route('contact.index', ['inquiry' => 'careers']),
+                  'careers' => route('careers.index'),
                   'contact' => route('contact.index'),
                   default => $item['url'] ?? '#',
               };
@@ -60,6 +60,7 @@
               elseif ($pageKey === 'projects' && request()->routeIs('projects.*')) $isActive = true;
               elseif ($pageKey === 'about' && request()->routeIs('about')) $isActive = true;
               elseif ($pageKey === 'blog' && request()->routeIs('blog.*')) $isActive = true;
+              elseif ($pageKey === 'careers' && request()->routeIs('careers.*')) $isActive = true;
               elseif ($pageKey === 'contact' && request()->routeIs('contact.*') && !request()->has('inquiry')) $isActive = true;
             @endphp
             <li><a href="{{ $href }}" class="nav-link {{ $isActive ? 'active' : '' }}">{{ $item['label'] }}</a></li>

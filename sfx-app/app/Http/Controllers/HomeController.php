@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Career;
 use App\Models\Material;
 use App\Models\Post;
 use App\Models\Project;
@@ -33,13 +34,18 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
+        $careers = Career::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
         return view('pages.home', compact(
             'featuredProjects',
             'allProjects',
             'categories',
             'services',
             'materials',
-            'latestPosts'
+            'latestPosts',
+            'careers'
         ));
     }
 }

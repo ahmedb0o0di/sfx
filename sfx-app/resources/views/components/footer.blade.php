@@ -165,7 +165,7 @@
                   'capabilities' => route('home') . '#capabilities',
                   'credentials' => route('home') . '#credentials',
                   'blog' => route('blog.index'),
-                  'careers' => route('contact.index', ['inquiry' => 'careers']),
+                  'careers' => route('careers.index'),
                   'contact' => route('contact.index'),
                   'privacy' => route('privacy'),
                   'terms' => route('terms'),

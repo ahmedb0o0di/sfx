@@ -775,28 +775,75 @@
 </section>
 
 <!-- ==========================================================================
-     CAREERS CALLOUT SECTION
+     CAREERS OPENINGS SECTION (SINGLE ITEM PER ROW LIST)
      ========================================================================== -->
-<section class="section" id="careers" style="background-color: #ffffff; padding: 4.5rem 0;">
+<section class="section section-careers" id="careers" style="background-color: #ffffff; padding: 5.5rem 0;">
   <div class="container">
-    <div
-      style="background: linear-gradient(135deg, #081C38 0%, #041026 100%); border-radius: 12px; padding: 3rem 2.5rem; color: #ffffff; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; box-shadow: 0 12px 30px rgba(8, 28, 56, 0.15);">
-      <div style="max-width: 680px;">
-        <span
-          style="color: #D99B26; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Join
-          Our Engineering Practice</span>
-        <h3 style="font-size: 1.85rem; font-weight: 800; color: #ffffff; margin: 0.5rem 0 0.75rem;">Build
-          Architectural Icons Across MENA &amp; Africa</h3>
-        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.55; margin: 0;">We are consistently seeking
-          visionary structural engineers, parametric computational designers, master riggers, and project managers
-          for landmark commissions.</p>
-      </div>
-      <div>
-        <a href="{{ route('contact.index', ['inquiry' => 'careers']) }}" class="btn btn-hero-white" style="white-space: nowrap;">
-          <span>Explore Careers &amp; Inquire</span>
+    <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 3.5rem;">
+      <span class="section-tag" style="background: #fef8eb; color: #D99B26; border: 1px solid rgba(217, 155, 38, 0.3); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">
+        Join Our Engineering Practice
+      </span>
+      <h2 class="section-title" style="font-size: var(--h2-size); font-weight: 800; color: var(--navy-primary); margin: 0.75rem 0 0.5rem; letter-spacing: -0.02em;">
+        Build Architectural Icons Across MENA &amp; Africa
+      </h2>
+      <p class="section-subtitle" style="font-size: 1.05rem; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.6;">
+        We are consistently seeking visionary structural engineers, parametric computational designers, master riggers, and project managers for landmark commissions.
+      </p>
+    </div>
+
+    <!-- Single Item per Row Career List -->
+    <div class="career-rows-container" style="display: flex; flex-direction: column; gap: 1.75rem;">
+      @forelse($careers as $career)
+      <article class="career-row-card" style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 1.75rem; box-shadow: 0 4px 18px rgba(8, 28, 56, 0.05); transition: all 0.3s ease; display: grid; grid-template-columns: 240px 1fr auto; gap: 2rem; align-items: center;">
+        <!-- Left: Image -->
+        <div class="career-row-media" style="width: 100%; height: 160px; border-radius: 10px; overflow: hidden; background: #081C38; position: relative;">
+          <img src="{{ $career->image_url }}" alt="{{ $career->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+          <span style="position: absolute; top: 10px; left: 10px; background: rgba(8, 28, 56, 0.85); backdrop-filter: blur(4px); color: #fff; font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
+            {{ $career->type ?? 'Full-time' }}
+          </span>
+        </div>
+
+        <!-- Middle: Title, Badges & Job Description -->
+        <div class="career-row-content">
+          <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+            @if(!empty($career->department))
+            <span style="background: #edf4fd; color: #0B5ED7; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 0.25rem 0.65rem; border-radius: 999px;">
+              {{ $career->department }}
+            </span>
+            @endif
+            @if(!empty($career->location))
+            <span style="color: #64748b; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 0.3rem;">
+              📍 {{ $career->location }}
+            </span>
+            @endif
+          </div>
+
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--navy-primary); margin: 0 0 0.65rem; line-height: 1.3;">
+            {{ $career->title }}
+          </h3>
+
+          <p style="color: #475569; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            {{ $career->description }}
+          </p>
+        </div>
+
+        <!-- Right: Apply Action -->
+        <div class="career-row-action" style="flex-shrink: 0; text-align: right;">
+          <a href="{{ $career->apply_url ?: route('contact.index', ['inquiry' => 'careers', 'role' => $career->title]) }}" class="btn btn-primary" style="white-space: nowrap; padding: 0.85rem 1.65rem; font-size: 0.9rem; font-weight: 700;">
+            <span>Apply for Position</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+      @empty
+      <div style="text-align: center; padding: 3rem; background: #F8FAFC; border-radius: 12px; border: 1px dashed #cbd5e1;">
+        <p style="color: #64748b; font-size: 1rem; margin-bottom: 1rem;">We are always welcoming exceptional structural talents to join our talent pool.</p>
+        <a href="{{ route('contact.index', ['inquiry' => 'careers']) }}" class="btn btn-primary">
+          <span>Submit Speculative CV</span>
           <span>&rarr;</span>
         </a>
       </div>
+      @endforelse
     </div>
   </div>
 </section>

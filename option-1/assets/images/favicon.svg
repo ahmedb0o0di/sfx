@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#081C38"/>
+  <!-- Tensile Membrane Tri-Color Swooshes from 2018 Logo -->
+  <path d="M 12 48 C 16 28, 30 14, 52 14" fill="none" stroke="#008E38" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 16 51 C 22 34, 34 22, 52 22" fill="none" stroke="#F3B90D" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 20 54 C 28 40, 38 30, 52 30" fill="none" stroke="#115697" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="52" cy="14" r="2.5" fill="#FFFFFF"/>
+</svg>

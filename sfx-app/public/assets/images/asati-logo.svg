@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" width="280" height="80">
+  <defs>
+    <linearGradient id="asatiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#005A9C"/>
+      <stop offset="100%" stop-color="#0B5ED7"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Pill / Card -->
+  <rect x="0" y="0" width="280" height="80" rx="10" fill="#FFFFFF"/>
+  <!-- ASATI Inflatable Arch Icon -->
+  <g transform="translate(14, 16)">
+    <path d="M 6 42 C 6 16, 22 4, 38 4 C 54 4, 70 16, 70 42" fill="none" stroke="url(#asatiGrad)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M 14 42 C 14 24, 25 14, 38 14 C 51 14, 62 24, 62 42" fill="none" stroke="#D99B26" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="38" cy="28" r="4" fill="#005A9C"/>
+  </g>
+  <!-- ASATI Typography -->
+  <text x="96" y="36" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="900" font-size="24" fill="#081C38" letter-spacing="1">ASATI</text>
+  <text x="97" y="52" font-family="'Inter', sans-serif" font-weight="700" font-size="9" fill="#0B5ED7" letter-spacing="2">UNITED ARAB EMIRATES</text>
+  <text x="97" y="64" font-family="'Inter', sans-serif" font-weight="500" font-size="8" fill="#6C757D" letter-spacing="0.5">AIR STRUCTURES PARTNER</text>
+</svg>

@@ -20,67 +20,83 @@
     <div class="hero-blueprint-grid">
       <!-- Left Column (60%) -->
       <div class="hero-blueprint-left">
+        @php
+          $pillBadge = \App\Models\Setting::get('hero_pill_badge', '85+ Years Heritage');
+          $pillText = \App\Models\Setting::get('hero_pill_text', 'Specialized Tensile & Lightweight Contractor');
+        @endphp
+        @if(!empty(trim($pillBadge ?? '')) || !empty(trim($pillText ?? '')))
         <div class="hero-pill"
           style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.5rem; backdrop-filter: blur(8px);">
+          @if(!empty(trim($pillBadge ?? '')))
           <span class="hero-pill-badge"
-            style="background: #D99B26; color: #081C38; font-weight: 800; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 999px; text-transform: uppercase;">85+ Years Heritage</span>
-          <span class="hero-pill-text" style="color: #ffffff; font-size: 0.8rem; font-weight: 500;">Specialized Tensile &amp; Lightweight Contractor</span>
+            style="background: #D99B26; color: #081C38; font-weight: 800; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 999px; text-transform: uppercase;">{{ $pillBadge }}</span>
+          @endif
+          @if(!empty(trim($pillText ?? '')))
+          <span class="hero-pill-text" style="color: #ffffff; font-size: 0.8rem; font-weight: 500;">{{ $pillText }}</span>
+          @endif
         </div>
+        @endif
 
         <h1 class="hero-blueprint-h1">
-          Engineering Inspiring Spaces.<br>Delivering Lasting Performance.
+          {!! \App\Models\Setting::get('hero_title', 'Engineering Inspiring Spaces.<br>Delivering Lasting Performance.') !!}
         </h1>
 
         <p class="hero-blueprint-sub">
-          Specialists in Tensile Membrane, Lightweight and Air-Supported Structures across the Middle East, Africa
-          and beyond. Turnkey design development, non-linear engineering, cleanroom fabrication, and lifetime
-          structural maintenance.
+          {{ \App\Models\Setting::get('hero_subtitle', 'Specialists in Tensile Membrane, Lightweight and Air-Supported Structures across the Middle East, Africa and beyond. Turnkey design development, non-linear engineering, cleanroom fabrication, and lifetime structural maintenance.') }}
         </p>
 
         <div class="hero-blueprint-ctas">
-          <a href="#solutions" class="btn btn-hero-solid">
-            <span>Our Solutions</span>
+          @php
+            $btn1Text = \App\Models\Setting::get('hero_btn1_text', 'Our Solutions');
+            $btn1Url = \App\Models\Setting::get('hero_btn1_url', '#solutions');
+            $btn2Text = \App\Models\Setting::get('hero_btn2_text', 'View Projects');
+            $btn2Url = \App\Models\Setting::get('hero_btn2_url', route('projects.index'));
+          @endphp
+          @if(!empty(trim($btn1Text ?? '')))
+          <a href="{{ $btn1Url }}" class="btn btn-hero-solid">
+            <span>{{ $btn1Text }}</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a href="{{ route('projects.index') }}" class="btn btn-hero-white">
-            <span>View Projects</span>
+          @endif
+          @if(!empty(trim($btn2Text ?? '')))
+          <a href="{{ $btn2Url }}" class="btn btn-hero-white">
+            <span>{{ $btn2Text }}</span>
           </a>
+          @endif
         </div>
       </div>
 
       <!-- Right Column (40% - Floating ASATI Partnership Card) -->
       <div class="hero-blueprint-right">
         <div class="hero-asati-card">
-          <div class="hero-asati-badge">Strategic Regional Alliance</div>
+          <div class="hero-asati-badge">{{ \App\Models\Setting::get('hero_asati_badge', 'Strategic Regional Alliance') }}</div>
           <div class="hero-asati-logo-wrap">
             <img src="{{ asset('assets/images/asati-logo.svg') }}" alt="ASATI United Arab Emirates"
               style="height: 50px; width: auto; max-width: 100%;">
           </div>
-          <h3>Delivering Air-Supported Structures Across MENA</h3>
+          <h3>{{ \App\Models\Setting::get('hero_asati_title', 'Delivering Air-Supported Structures Across MENA') }}</h3>
           <p>
-            In partnership with ASATI (Air Structures American Technologies, Inc.), delivering turnkey air-supported
-            domes for sports arenas, industrial bulk warehousing, seasonal exhibitions, and rapid-deployment
-            facilities.
+            {{ \App\Models\Setting::get('hero_asati_desc', 'In partnership with ASATI (Air Structures American Technologies, Inc.), delivering turnkey air-supported domes for sports arenas, industrial bulk warehousing, seasonal exhibitions, and rapid-deployment facilities.') }}
           </p>
           <div class="hero-asati-specs">
             <div class="hero-asati-spec-item">
-              <strong>150m+</strong>
-              <span>Clear Span</span>
+              <strong>{{ \App\Models\Setting::get('hero_asati_spec1_val', '150m+') }}</strong>
+              <span>{{ \App\Models\Setting::get('hero_asati_spec1_label', 'Clear Span') }}</span>
             </div>
             <div class="hero-asati-spec-item">
-              <strong>HVAC</strong>
-              <span>Climate Control</span>
+              <strong>{{ \App\Models\Setting::get('hero_asati_spec2_val', 'HVAC') }}</strong>
+              <span>{{ \App\Models\Setting::get('hero_asati_spec2_label', 'Climate Control') }}</span>
             </div>
             <div class="hero-asati-spec-item">
-              <strong>Rapid</strong>
-              <span>Turnkey Erection</span>
+              <strong>{{ \App\Models\Setting::get('hero_asati_spec3_val', 'Rapid') }}</strong>
+              <span>{{ \App\Models\Setting::get('hero_asati_spec3_label', 'Turnkey Erection') }}</span>
             </div>
           </div>
-          <a href="{{ route('services.index') }}#air-supported" class="hero-asati-link"
+          <a href="{{ \App\Models\Setting::get('hero_asati_link_url', route('services.index') . '#air-supported') }}" class="hero-asati-link"
             onclick="const el = document.querySelector('#card-asati'); if (el) { el.scrollIntoView({behavior:'smooth'}); }">
-            <span>Learn More About ASATI Air Domes</span>
+            <span>{{ \App\Models\Setting::get('hero_asati_link_text', 'Learn More About ASATI Air Domes') }}</span>
             <span class="arrow">&rarr;</span>
           </a>
         </div>
@@ -95,35 +111,51 @@
 <section class="trust-stats-bar" id="trust-metrics">
   <div class="container">
     <div class="trust-stats-grid">
-      <div class="trust-stat-box">
-        <div class="trust-stat-val" data-target="85" data-suffix="+">85+</div>
-        <div class="trust-stat-label">Years of Heritage</div>
-        <div class="trust-stat-sub">Originated in 1937</div>
-      </div>
-
-      <div class="trust-stat-box">
-        <div class="trust-stat-val" data-target="9000" data-suffix="+">9,000+</div>
-        <div class="trust-stat-label">Projects Delivered</div>
-        <div class="trust-stat-sub">Proven Global Track Record</div>
-      </div>
-
-      <div class="trust-stat-box">
-        <div class="trust-stat-val" data-target="30" data-suffix="+">30+</div>
-        <div class="trust-stat-label">Countries Served</div>
-        <div class="trust-stat-sub">Middle East, Africa &amp; Beyond</div>
-      </div>
-
-      <div class="trust-stat-box">
-        <div class="trust-stat-val" style="font-size: 1.55rem; color: #0B5ED7;">End-to-End</div>
-        <div class="trust-stat-label">Turnkey Solutions</div>
-        <div class="trust-stat-sub">From Design to Lifecycle AMC</div>
-      </div>
-
-      <div class="trust-stat-box">
-        <div class="trust-stat-val" style="font-size: 1.35rem; color: #008E38;">ISO Certified</div>
-        <div class="trust-stat-label">Safety, Quality &amp; Eco</div>
-        <div class="trust-stat-sub">ISO 9001 | 14001 | 45001</div>
-      </div>
+      @php
+        $stats = [
+            [
+                'val' => \App\Models\Setting::get('stat_1_val', '85+'),
+                'label' => \App\Models\Setting::get('stat_1_label', 'Years of Heritage'),
+                'sub' => \App\Models\Setting::get('stat_1_sub', 'Originated in 1937'),
+                'color' => null,
+            ],
+            [
+                'val' => \App\Models\Setting::get('stat_2_val', '9,000+'),
+                'label' => \App\Models\Setting::get('stat_2_label', 'Projects Delivered'),
+                'sub' => \App\Models\Setting::get('stat_2_sub', 'Proven Global Track Record'),
+                'color' => null,
+            ],
+            [
+                'val' => \App\Models\Setting::get('stat_3_val', '30+'),
+                'label' => \App\Models\Setting::get('stat_3_label', 'Countries Served'),
+                'sub' => \App\Models\Setting::get('stat_3_sub', 'Middle East, Africa & Beyond'),
+                'color' => null,
+            ],
+            [
+                'val' => \App\Models\Setting::get('stat_4_val', 'End-to-End'),
+                'label' => \App\Models\Setting::get('stat_4_label', 'Turnkey Solutions'),
+                'sub' => \App\Models\Setting::get('stat_4_sub', 'From Design to Lifecycle AMC'),
+                'color' => '#0B5ED7',
+            ],
+            [
+                'val' => \App\Models\Setting::get('stat_5_val', 'ISO Certified'),
+                'label' => \App\Models\Setting::get('stat_5_label', 'Safety, Quality & Eco'),
+                'sub' => \App\Models\Setting::get('stat_5_sub', 'ISO 9001 | 14001 | 45001'),
+                'color' => '#008E38',
+            ],
+        ];
+      @endphp
+      @foreach($stats as $st)
+        @if(!empty(trim($st['val'] ?? '')))
+        <div class="trust-stat-box">
+          <div class="trust-stat-val" data-target="{{ preg_replace('/[^0-9]/', '', $st['val']) }}" data-suffix="{{ preg_replace('/[0-9]/', '', $st['val']) }}" @if($st['color']) style="font-size: 1.45rem; color: {{ $st['color'] }};" @endif>
+            {{ $st['val'] }}
+          </div>
+          <div class="trust-stat-label">{{ $st['label'] }}</div>
+          <div class="trust-stat-sub">{{ $st['sub'] }}</div>
+        </div>
+        @endif
+      @endforeach
     </div>
   </div>
 </section>

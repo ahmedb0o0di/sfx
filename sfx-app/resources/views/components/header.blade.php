@@ -65,20 +65,37 @@
             <li><a href="{{ $href }}" class="nav-link {{ $isActive ? 'active' : '' }}">{{ $item['label'] }}</a></li>
           @endif
         @endforeach
+
+        <!-- Mobile Drawer Bottom Actions & Hotline -->
+        <li class="mobile-drawer-cta">
+          @if($ctaVisible && !empty(trim($ctaText ?? '')))
+          <a href="{{ $ctaUrl }}" class="btn btn-request-consult mobile-drawer-btn">
+            <span>{{ $ctaText }}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          @endif
+          <div class="mobile-drawer-contact">
+            <a href="tel:+97142388455">📞 +971 4 238 8455</a>
+            <a href="mailto:info@structurflex.ae">✉️ info@structurflex.ae</a>
+          </div>
+        </li>
       </ul>
     </nav>
 
     <div class="nav-actions">
       @if($ctaVisible && !empty(trim($ctaText ?? '')))
       <a href="{{ $ctaUrl }}" class="btn btn-request-consult" id="btnNavRFP">
-        <span>{{ $ctaText }}</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <span class="btn-text-full">{{ $ctaText }}</span>
+        <span class="btn-text-mobile">Consult</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </a>
       @endif
-      <button class="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <button class="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" type="button">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <line x1="3" y1="12" x2="21" y2="12"></line>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <line x1="3" y1="18" x2="21" y2="18"></line>

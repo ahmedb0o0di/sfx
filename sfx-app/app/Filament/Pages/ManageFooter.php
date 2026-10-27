@@ -40,8 +40,16 @@ class ManageFooter extends Page implements HasForms
         $this->form->fill([
             // Column 1: Brand details
             'footer_brand_desc' => Setting::get('footer_brand_desc', 'From humble sail-making beginnings in 1937 (Sails & Covers Ltd) to a world leader in tensile membranes. Established in Dubai in 2005 as Structurflex Middle East Contracting LLC to engineer visionary spaces across MENA and Africa.'),
+            
+            // Social Media Channels
             'social_linkedin' => Setting::get('social_linkedin', 'https://www.linkedin.com/company/structurflex/'),
             'social_twitter' => Setting::get('social_twitter', 'https://twitter.com/structurflex'),
+            'social_facebook' => Setting::get('social_facebook', ''),
+            'social_instagram' => Setting::get('social_instagram', ''),
+            'social_youtube' => Setting::get('social_youtube', ''),
+            'social_whatsapp' => Setting::get('social_whatsapp', ''),
+            'social_tiktok' => Setting::get('social_tiktok', ''),
+            'social_pinterest' => Setting::get('social_pinterest', ''),
 
             // Column 2: Solutions links (selectable from Projects or custom)
             'footer_solutions' => $this->getInitialSolutions(),
@@ -227,82 +235,137 @@ class ManageFooter extends Page implements HasForms
 
                 // Section 3: Column 4 - Get In Touch Information
                 Section::make('Column 4: Get In Touch Information')
-                    ->description('Manage regional contact details shown in the 4th column of the footer.')
+                    ->description('Manage regional contact details shown in the 4th column of the footer. Leave any field blank to hide it on the frontend.')
                     ->schema([
                         TextInput::make('footer_address')
                             ->label('Factory / Regional Office Address')
-                            ->required()
+                            ->placeholder('Shed 01 (S-464), Al Ttay Area, Al Khawaneej 2 Industrial Area, Dubai, UAE')
+                            ->nullable()
                             ->columnSpanFull(),
 
                         Grid::make(3)
                             ->schema([
                                 TextInput::make('footer_phone')
                                     ->label('Contact Phone / Landline')
-                                    ->required(),
+                                    ->placeholder('+971 4 238 8455')
+                                    ->nullable(),
 
                                 TextInput::make('footer_email')
                                     ->label('Official Email')
+                                    ->placeholder('info@structurflex.ae')
                                     ->email()
-                                    ->required(),
+                                    ->nullable(),
 
                                 TextInput::make('footer_website')
                                     ->label('Official Domain / Website')
-                                    ->required(),
+                                    ->placeholder('www.structurflex.ae')
+                                    ->nullable(),
                             ]),
                     ]),
 
                 // Section 4: 5 Strategic Outcomes Messages Below The Footer
                 Section::make('Strategic Outcomes Bar (5 Messages Below Footer)')
-                    ->description('Adjust the 5 core value-proposition message badges displayed in the outcomes ribbon below the footer columns.')
+                    ->description('Adjust the 5 core value-proposition messages displayed in the ribbon below the footer columns. Empty messages are automatically hidden.')
                     ->schema([
                         Grid::make(5)
                             ->schema([
                                 TextInput::make('footer_outcome_1')
                                     ->label('Message 1')
-                                    ->required(),
+                                    ->placeholder('Stronger Brand Positioning')
+                                    ->nullable(),
 
                                 TextInput::make('footer_outcome_2')
                                     ->label('Message 2')
-                                    ->required(),
+                                    ->placeholder('Increased Trust & Credibility')
+                                    ->nullable(),
 
                                 TextInput::make('footer_outcome_3')
                                     ->label('Message 3')
-                                    ->required(),
+                                    ->placeholder('Higher Quality Leads')
+                                    ->nullable(),
 
                                 TextInput::make('footer_outcome_4')
                                     ->label('Message 4')
-                                    ->required(),
+                                    ->placeholder('Improved Conversion Rate')
+                                    ->nullable(),
 
                                 TextInput::make('footer_outcome_5')
                                     ->label('Message 5')
-                                    ->required(),
+                                    ->placeholder('Supporting Business Growth')
+                                    ->nullable(),
                             ]),
                     ]),
 
-                // Section 5: Brand Narrative, Socials & Sub-Footer
-                Section::make('Brand Heritage, Social Profiles & Sub-Footer')
-                    ->description('Update the brand intro statement in column 1, social media icons, and the bottom copyright notice.')
+                // Section 5: Brand Narrative, All Social Profiles & Sub-Footer
+                Section::make('Brand Heritage, Social Media & Sub-Footer')
+                    ->description('Update the brand intro statement in column 1, all social media channels, and the bottom copyright notice. Empty social links will automatically be hidden on the frontend.')
                     ->schema([
                         Textarea::make('footer_brand_desc')
                             ->label('Brand Heritage Summary (Col 1)')
+                            ->placeholder('Describe company heritage...')
                             ->rows(3)
                             ->columnSpanFull()
-                            ->required(),
+                            ->nullable(),
 
-                        Grid::make(2)
+                        Section::make('Social Media Profiles')
+                            ->description('Provide profile or page URLs. Leave any platform blank to automatically hide its icon from the frontend footer.')
                             ->schema([
-                                TextInput::make('social_linkedin')
-                                    ->label('LinkedIn URL')
-                                    ->url(),
+                                Grid::make(4)
+                                    ->schema([
+                                        TextInput::make('social_linkedin')
+                                            ->label('LinkedIn')
+                                            ->placeholder('https://linkedin.com/company/...')
+                                            ->url()
+                                            ->nullable(),
 
-                                TextInput::make('social_twitter')
-                                    ->label('Twitter / X URL')
-                                    ->url(),
-                            ]),
+                                        TextInput::make('social_twitter')
+                                            ->label('Twitter / X')
+                                            ->placeholder('https://x.com/...')
+                                            ->url()
+                                            ->nullable(),
+
+                                        TextInput::make('social_facebook')
+                                            ->label('Facebook')
+                                            ->placeholder('https://facebook.com/...')
+                                            ->url()
+                                            ->nullable(),
+
+                                        TextInput::make('social_instagram')
+                                            ->label('Instagram')
+                                            ->placeholder('https://instagram.com/...')
+                                            ->url()
+                                            ->nullable(),
+
+                                        TextInput::make('social_youtube')
+                                            ->label('YouTube')
+                                            ->placeholder('https://youtube.com/@...')
+                                            ->url()
+                                            ->nullable(),
+
+                                        TextInput::make('social_whatsapp')
+                                            ->label('WhatsApp')
+                                            ->placeholder('https://wa.me/971501234567')
+                                            ->nullable(),
+
+                                        TextInput::make('social_tiktok')
+                                            ->label('TikTok')
+                                            ->placeholder('https://tiktok.com/@...')
+                                            ->url()
+                                            ->nullable(),
+
+                                        TextInput::make('social_pinterest')
+                                            ->label('Pinterest')
+                                            ->placeholder('https://pinterest.com/...')
+                                            ->url()
+                                            ->nullable(),
+                                    ]),
+                            ])
+                            ->collapsible(),
 
                         TextInput::make('footer_copyright')
                             ->label('Copyright Notice')
-                            ->required()
+                            ->placeholder('Structurflex Middle East Contracting LLC. All rights reserved.')
+                            ->nullable()
                             ->columnSpanFull(),
                     ])
                     ->collapsible(),
@@ -326,8 +389,16 @@ class ManageFooter extends Page implements HasForms
         $state = $this->form->getState();
 
         Setting::set('footer_brand_desc', $state['footer_brand_desc'] ?? '');
+
+        // Save all social media links
         Setting::set('social_linkedin', $state['social_linkedin'] ?? '');
         Setting::set('social_twitter', $state['social_twitter'] ?? '');
+        Setting::set('social_facebook', $state['social_facebook'] ?? '');
+        Setting::set('social_instagram', $state['social_instagram'] ?? '');
+        Setting::set('social_youtube', $state['social_youtube'] ?? '');
+        Setting::set('social_whatsapp', $state['social_whatsapp'] ?? '');
+        Setting::set('social_tiktok', $state['social_tiktok'] ?? '');
+        Setting::set('social_pinterest', $state['social_pinterest'] ?? '');
 
         Setting::set('footer_solutions', json_encode(array_values($state['footer_solutions'] ?? [])));
         Setting::set('footer_company_links', json_encode(array_values($state['footer_company_links'] ?? [])));

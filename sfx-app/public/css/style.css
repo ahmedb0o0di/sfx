@@ -6072,5 +6072,226 @@ button, input, select, textarea {
   }
 }
 
+/* ==========================================================================
+   INSIGHTS & PUBLICATIONS RESPONSIVE SYSTEM
+   ========================================================================== */
+.insights-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.insight-card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1.5px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(8, 28, 56, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.insight-card:hover {
+  border-color: #0B5ED7;
+  box-shadow: 0 12px 30px rgba(11, 94, 215, 0.12);
+  transform: translateY(-3px);
+}
+
+.insight-card-media {
+  display: block;
+  height: 240px;
+  overflow: hidden;
+  text-decoration: none;
+  background: #081C38;
+  position: relative;
+}
+
+.insight-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.insight-card:hover .insight-card-media img {
+  transform: scale(1.05);
+}
+
+.insight-card-body {
+  padding: 1.75rem 2rem;
+}
+
+.insight-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.insight-card-badge {
+  font-weight: 700;
+  color: #D99B26;
+  background: #fef8eb;
+  border: 1px solid rgba(217, 155, 38, 0.25);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.insight-card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--navy-primary, #081C38);
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.insight-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.insight-card:hover .insight-card-title a {
+  color: #0B5ED7;
+}
+
+.insight-card-excerpt {
+  font-size: 0.92rem;
+  color: #64748b;
+  line-height: 1.65;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.insight-card-footer {
+  padding: 1rem 2rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f1f5f9;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.insight-card-author {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.insight-card-link {
+  color: #0B5ED7;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: transform 0.2s ease;
+}
+
+.insight-card:hover .insight-card-link {
+  transform: translateX(3px);
+}
+
+/* Category Filter Chips */
+.insights-filter-bar {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  justify-content: center;
+}
+
+.insights-filter-btn {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  color: #475569;
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.insights-filter-btn:hover,
+.insights-filter-btn.active {
+  background: #081C38;
+  color: #ffffff;
+  border-color: #081C38;
+}
+
+/* Small Screens Responsive Adjustments */
+@media (max-width: 850px) {
+  .insights-matrix-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .insight-card-media {
+    height: 210px !important;
+  }
+  .insight-card-body {
+    padding: 1.35rem 1.25rem 1rem !important;
+  }
+  .insight-card-title {
+    font-size: 1.2rem !important;
+  }
+  .insight-card-footer {
+    padding: 0.85rem 1.25rem 1.25rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .insights-section {
+    padding: 3.5rem 0 !important;
+  }
+  .insights-filter-bar {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    padding-bottom: 0.5rem !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .insights-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .insights-filter-btn {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    font-size: 0.8rem !important;
+    padding: 0.45rem 0.95rem !important;
+  }
+  .insight-article-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+  }
+  .insight-article-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .insight-article-content {
+    padding: 1.5rem !important;
+  }
+}
+
+
 
 

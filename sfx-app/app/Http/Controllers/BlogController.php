@@ -7,13 +7,21 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->paginate(9);
+        $selectedCategory = $request->query('category');
 
-        return view('pages.blog.index', compact('posts'));
+        $query = Post::where('status', 'published')
+            ->orderBy('published_at', 'desc');
+
+        if ($selectedCategory) {
+            $query->where('category', $selectedCategory);
+        }
+
+        $posts = $query->paginate(9)->withQueryString();
+        $categories = Post::where('status', 'published')->distinct()->pluck('category')->filter();
+
+        return view('pages.blog.index', compact('posts', 'categories', 'selectedCategory'));
     }
 
     public function show($slug)

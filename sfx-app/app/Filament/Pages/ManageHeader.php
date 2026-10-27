@@ -26,9 +26,9 @@ class ManageHeader extends Page implements HasForms
 
     protected static ?string $navigationGroup = 'Site Settings & Branding';
 
-    protected static ?string $navigationLabel = 'Header & Homepage';
+    protected static ?string $navigationLabel = 'Header & Hero';
 
-    protected static ?string $title = 'Header & Homepage Management';
+    protected static ?string $title = 'Header & Homepage Hero Management';
 
     protected static ?int $navigationSort = 1;
 
@@ -90,63 +90,7 @@ class ManageHeader extends Page implements HasForms
             'stat_5_val' => Setting::get('stat_5_val', 'ISO Certified'),
             'stat_5_label' => Setting::get('stat_5_label', 'Safety, Quality & Eco'),
             'stat_5_sub' => Setting::get('stat_5_sub', 'ISO 9001 | 14001 | 45001'),
-
-            // 5. Turnkey Workflow (Our Capabilities)
-            'workflow_section_visible' => (bool) Setting::get('workflow_section_visible', true),
-            'workflow_section_tag' => Setting::get('workflow_section_tag', 'Turnkey Workflow'),
-            'workflow_section_title' => Setting::get('workflow_section_title', 'OUR CAPABILITIES'),
-            'workflow_section_subtitle' => Setting::get('workflow_section_subtitle', 'From initial mathematical form-finding to lifetime structural stewardship, Structurflex Middle East manages the entire project lifecycle in-house.'),
-            'workflow_steps' => $this->getInitialWorkflowSteps(),
         ]);
-    }
-
-    protected function getInitialWorkflowSteps(): array
-    {
-        $saved = Setting::get('workflow_steps');
-        if ($saved) {
-            $decoded = json_decode($saved, true);
-            if (is_array($decoded) && count($decoded) > 0) {
-                return $decoded;
-            }
-        }
-
-        return [
-            [
-                'step_num' => 'Step 01',
-                'title' => 'Design',
-                'icon' => 'design',
-                'description' => 'Parametric form-finding, 3D architectural geometry, conceptual equilibrium modeling & digital prototyping.',
-                'is_visible' => true,
-            ],
-            [
-                'step_num' => 'Step 02',
-                'title' => 'Engineering',
-                'icon' => 'engineering',
-                'description' => 'Advanced membrane analysis, non-linear FEA, computational wind load modeling, and structural cable sizing.',
-                'is_visible' => true,
-            ],
-            [
-                'step_num' => 'Step 03',
-                'title' => 'Fabrication',
-                'icon' => 'fabrication',
-                'description' => 'State-of-the-art cleanroom manufacturing, automated CNC precision cutting, and high-frequency molecular seaming.',
-                'is_visible' => true,
-            ],
-            [
-                'step_num' => 'Step 04',
-                'title' => 'Installation',
-                'icon' => 'installation',
-                'description' => 'Expert site execution, certified master rigging, crane erection, laser-measured pre-stressing, and stringent HSE.',
-                'is_visible' => true,
-            ],
-            [
-                'step_num' => 'Step 05',
-                'title' => 'Inspection & AMC',
-                'icon' => 'maintenance',
-                'description' => 'Regular membrane condition audits, non-destructive cleaning, cable re-tensioning, and lifetime preventive maintenance.',
-                'is_visible' => true,
-            ],
-        ];
     }
 
     protected function getInitialNavMenu(): array
@@ -427,85 +371,6 @@ class ManageHeader extends Page implements HasForms
                             ]),
                     ])
                     ->collapsible(),
-
-                // 5. Turnkey Workflow (Our Capabilities)
-                Section::make('Turnkey Workflow Section (Our Capabilities)')
-                    ->description('Configure the 5-step turnkey engineering process chain displayed on the homepage.')
-                    ->schema([
-                        Grid::make(3)
-                            ->schema([
-                                TextInput::make('workflow_section_tag')
-                                    ->label('Section Badge / Tag')
-                                    ->placeholder('Turnkey Workflow')
-                                    ->required()
-                                    ->columnSpan(2),
-
-                                Toggle::make('workflow_section_visible')
-                                    ->label('Show Section')
-                                    ->default(true),
-                            ]),
-
-                        TextInput::make('workflow_section_title')
-                            ->label('Section Main Title (H2)')
-                            ->placeholder('OUR CAPABILITIES')
-                            ->required(),
-
-                        Textarea::make('workflow_section_subtitle')
-                            ->label('Section Description')
-                            ->rows(2)
-                            ->placeholder('From initial mathematical form-finding to lifetime structural stewardship...')
-                            ->required(),
-
-                        Repeater::make('workflow_steps')
-                            ->label('Workflow Step Cards')
-                            ->helperText('Manage each sequential step in the turnkey delivery workflow (reorder, customize, or toggle visibility).')
-                            ->schema([
-                                Grid::make(12)
-                                    ->schema([
-                                        TextInput::make('step_num')
-                                            ->label('Step Number')
-                                            ->placeholder('Step 01')
-                                            ->required()
-                                            ->columnSpan(3),
-
-                                        TextInput::make('title')
-                                            ->label('Step Title')
-                                            ->placeholder('Design')
-                                            ->required()
-                                            ->columnSpan(4),
-
-                                        Select::make('icon')
-                                            ->label('Icon Style')
-                                            ->options([
-                                                'design' => 'Design (Pencil / Compass)',
-                                                'engineering' => 'Engineering (FEA Calipers / Axes)',
-                                                'fabrication' => 'Fabrication (Cleanroom / Machinery)',
-                                                'installation' => 'Installation (Laser Survey / Rigging)',
-                                                'maintenance' => 'Inspection & AMC (Shield / Quality)',
-                                            ])
-                                            ->default('design')
-                                            ->required()
-                                            ->columnSpan(3),
-
-                                        Toggle::make('is_visible')
-                                            ->label('Visible')
-                                            ->default(true)
-                                            ->columnSpan(2),
-
-                                        Textarea::make('description')
-                                            ->label('Step Description')
-                                            ->rows(2)
-                                            ->placeholder('Parametric form-finding, 3D architectural geometry...')
-                                            ->required()
-                                            ->columnSpan(12),
-                                    ]),
-                            ])
-                            ->collapsible()
-                            ->itemLabel(fn (array $state): ?string => ($state['step_num'] ?? '') . ' - ' . ($state['title'] ?? 'Workflow Step'))
-                            ->addActionLabel('Add Workflow Step')
-                            ->reorderableWithButtons(),
-                    ])
-                    ->collapsible(),
             ])
             ->statePath('data');
     }
@@ -514,7 +379,7 @@ class ManageHeader extends Page implements HasForms
     {
         return [
             Action::make('save')
-                ->label('Save Header & Homepage Settings')
+                ->label('Save Header & Hero Settings')
                 ->submit('save')
                 ->icon('heroicon-o-check-circle')
                 ->color('primary'),
@@ -577,16 +442,9 @@ class ManageHeader extends Page implements HasForms
         Setting::set('stat_5_label', $state['stat_5_label'] ?? '');
         Setting::set('stat_5_sub', $state['stat_5_sub'] ?? '');
 
-        // 5. Turnkey Workflow (Our Capabilities)
-        Setting::set('workflow_section_visible', $state['workflow_section_visible'] ?? true);
-        Setting::set('workflow_section_tag', $state['workflow_section_tag'] ?? '');
-        Setting::set('workflow_section_title', $state['workflow_section_title'] ?? '');
-        Setting::set('workflow_section_subtitle', $state['workflow_section_subtitle'] ?? '');
-        Setting::set('workflow_steps', json_encode(array_values($state['workflow_steps'] ?? [])));
-
         Notification::make()
-            ->title('Header & Homepage settings saved successfully')
-            ->body('The website navigation header, hero banner, trust metrics, and turnkey workflow have been updated with your latest changes.')
+            ->title('Header & Hero settings saved successfully')
+            ->body('The public website header and hero banner have been updated with your latest changes.')
             ->success()
             ->send();
     }

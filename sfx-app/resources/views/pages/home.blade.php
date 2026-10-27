@@ -468,8 +468,7 @@
     </div>
 
     <!-- Filter Tabs -->
-    <div class="portfolio-filter-bar"
-      style="display: flex; gap: 0.65rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.75rem;">
+    <div class="portfolio-filter-bar">
       <button class="filter-btn active" data-filter="all">All Projects</button>
       <button class="filter-btn" data-filter="architectural">Architectural</button>
       <button class="filter-btn" data-filter="sports">Sports &amp; Stadia</button>

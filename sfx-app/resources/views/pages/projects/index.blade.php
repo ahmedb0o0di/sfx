@@ -26,7 +26,7 @@
 <section class="section" style="background-color: #F4F6F9; padding: 5.5rem 0;">
   <div class="container">
     <!-- Filter Controls -->
-    <div class="portfolio-filter-bar" style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+    <div class="portfolio-filter-bar">
       <a href="{{ route('projects.index') }}" class="filter-btn {{ !$selectedCategory || $selectedCategory == 'all' ? 'active' : '' }}" style="text-decoration: none;">All Projects</a>
       @foreach($categories as $cat)
         <a href="{{ route('projects.index', ['category' => $cat->filter_tag]) }}" class="filter-btn {{ $selectedCategory == $cat->filter_tag ? 'active' : '' }}" style="text-decoration: none;">

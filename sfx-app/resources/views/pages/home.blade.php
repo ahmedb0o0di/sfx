@@ -795,48 +795,48 @@
     <!-- Single Item per Row Career List -->
     <div class="career-rows-container" style="display: flex; flex-direction: column; gap: 1.75rem;">
       @forelse($careers as $career)
-      <article class="career-row-card" style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 1.75rem; box-shadow: 0 4px 18px rgba(8, 28, 56, 0.05); transition: all 0.3s ease; display: grid; grid-template-columns: 240px 1fr auto; gap: 2rem; align-items: center;">
+      <article class="career-row-card">
         <!-- Left: Image (clickable) -->
-        <a href="{{ route('careers.show', $career->slug) }}" class="career-row-media" style="width: 100%; height: 160px; border-radius: 10px; overflow: hidden; background: #081C38; position: relative; display: block; text-decoration: none;">
-          <img src="{{ $career->image_url }}" alt="{{ $career->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
-          <span style="position: absolute; top: 10px; left: 10px; background: rgba(8, 28, 56, 0.85); backdrop-filter: blur(4px); color: #fff; font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
+        <a href="{{ route('careers.show', $career->slug) }}" class="career-row-media" style="display: block; text-decoration: none;">
+          <img src="{{ $career->image_url }}" alt="{{ $career->title }}" loading="lazy">
+          <span class="career-badge-type">
             {{ $career->type ?? 'Full-time' }}
           </span>
         </a>
 
         <!-- Middle: Title, Badges & Job Description -->
         <div class="career-row-content">
-          <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+          <div class="career-row-meta">
             @if(!empty($career->department))
-            <span style="background: #edf4fd; color: #0B5ED7; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 0.25rem 0.65rem; border-radius: 999px;">
+            <span class="career-badge-dept">
               {{ $career->department }}
             </span>
             @endif
             @if(!empty($career->location))
-            <span style="color: #64748b; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 0.3rem;">
+            <span class="career-meta-location">
               📍 {{ $career->location }}
             </span>
             @endif
           </div>
 
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--navy-primary); margin: 0 0 0.65rem; line-height: 1.3;">
+          <h3 class="career-row-title">
             <a href="{{ route('careers.show', $career->slug) }}" style="color: inherit; text-decoration: none;">
               {{ $career->title }}
             </a>
           </h3>
 
-          <p style="color: #475569; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+          <p class="career-row-desc">
             {{ $career->description }}
           </p>
         </div>
 
         <!-- Right: Actions -->
-        <div class="career-row-action" style="flex-shrink: 0; display: flex; flex-direction: column; gap: 0.65rem; align-items: stretch;">
-          <a href="{{ route('careers.show', $career->slug) }}" class="btn btn-primary" style="white-space: nowrap; padding: 0.75rem 1.45rem; font-size: 0.9rem; font-weight: 700; justify-content: center;">
+        <div class="career-row-action">
+          <a href="{{ route('careers.show', $career->slug) }}" class="btn btn-primary btn-apply">
             <span>View Role &amp; Apply</span>
             <span>&rarr;</span>
           </a>
-          <button type="button" onclick="openCareerApplyModal({{ $career->id }}, '{{ addslashes($career->title) }}')" class="btn btn-outline" style="white-space: nowrap; padding: 0.65rem 1.15rem; font-size: 0.85rem; font-weight: 700; justify-content: center;">
+          <button type="button" onclick="openCareerApplyModal({{ $career->id }}, '{{ addslashes($career->title) }}')" class="btn btn-outline btn-quick-apply">
             <span>Quick Apply</span>
           </button>
         </div>

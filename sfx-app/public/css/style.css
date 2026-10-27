@@ -6114,7 +6114,10 @@ textarea {
 
 .career-row-action {
   flex-shrink: 0;
-  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  align-items: stretch;
 }
 
 .career-row-action .btn-apply {
@@ -6124,7 +6127,18 @@ textarea {
   font-weight: 700;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+}
+
+.career-row-action .btn-quick-apply {
+  white-space: nowrap;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 991px) {
@@ -6139,12 +6153,53 @@ textarea {
   }
 
   .career-row-action {
-    text-align: left;
+    width: 100%;
   }
 
-  .career-row-action .btn-apply {
+  .career-row-action .btn-apply,
+  .career-row-action .btn-quick-apply {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .career-row-card {
+    padding: 1.25rem 1rem !important;
+    gap: 1.25rem !important;
+    border-radius: 12px !important;
+  }
+
+  .career-row-media {
+    height: 180px !important;
+    border-radius: 8px !important;
+  }
+
+  .career-row-title {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.45rem !important;
+  }
+
+  .career-row-desc {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .career-row-action {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.6rem !important;
+  }
+
+  .career-row-action .btn-apply,
+  .career-row-action .btn-quick-apply {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0.8rem 1rem !important;
+    font-size: 0.88rem !important;
+    border-radius: 8px !important;
   }
 }
 

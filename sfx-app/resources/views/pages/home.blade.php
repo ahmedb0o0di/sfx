@@ -160,11 +160,190 @@
   </div>
 </section>
 
-
-
 <!-- ==========================================================================
-     SECTION 3: INTERACTIVE MATERIALS MATRIX
+     SECTION 2: OUR SOLUTIONS (SEGMENTED GRID HUB)
      ========================================================================== -->
+<section class="section" id="solutions" style="background-color: #ffffff; padding: 5.5rem 0;">
+  <div class="container">
+    <div class="section-header text-center" style="margin-bottom: 3.5rem;">
+      <span class="section-tag"
+        style="background: #edf4fd; color: #0B5ED7; border: 1px solid rgba(11, 94, 215, 0.25); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">Engineering
+        Portfolios</span>
+      <h2 class="section-title"
+        style="font-size: var(--h2-size); font-weight: 800; color: var(--navy-primary); margin: 0.75rem 0 0.5rem; letter-spacing: -0.02em;">
+        OUR SOLUTIONS</h2>
+      <p class="section-subtitle"
+        style="font-size: 1.1rem; color: var(--text-muted); max-width: 620px; margin: 0 auto; line-height: 1.6;">Innovative structures
+        engineered for every architectural, recreational, and industrial requirement.</p>
+    </div>
+
+    <div class="solutions-segmented-grid">
+      <!-- Card 1: Architectural Structures -->
+      <article class="solution-hub-card" data-id="sol-architectural" role="button" tabindex="0" aria-label="View Architectural Structures specifications & photos">
+        <div class="solution-img-holder">
+          <img src="{{ asset('assets/images/solutions/architectural.png') }}"
+            alt="Architectural Tensile Structures - Al Jamea ETFE" loading="lazy">
+          <span class="solution-tag-badge">ETFE & PTFE</span>
+        </div>
+        <div class="solution-card-body">
+          <h3>Architectural Structures</h3>
+          <p>Iconic translucent single skin and cushion ETFE daylighting systems, sculptural PTFE envelopes, and
+            bespoke building atriums that elevate architectural vision.</p>
+          <div class="solution-card-actions">
+            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
+            <a href="{{ route('services.index') }}#architectural" class="solution-card-link">
+              <span>Explore Scope</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Sports & Recreation Structures -->
+      <article class="solution-hub-card" data-id="sol-sports" role="button" tabindex="0" aria-label="View Sports & Recreation Structures specifications & photos">
+        <div class="solution-img-holder">
+          <img src="{{ asset('assets/images/solutions/sports.jpg') }}" alt="Sports and Recreation Tensile Canopies" loading="lazy">
+          <span class="solution-tag-badge">Stadia & Arenas</span>
+        </div>
+        <div class="solution-card-body">
+          <h3>Sports & Recreation Structures</h3>
+          <p>Column-free sports court canopies, grandstand stadium roofs, Olympic aquatics shelters, and school
+            sports complexes engineered for maximum thermal protection.</p>
+          <div class="solution-card-actions">
+            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
+            <a href="{{ route('services.index') }}#sports" class="solution-card-link">
+              <span>Explore Scope</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Commercial & Retail Structures -->
+      <article class="solution-hub-card" data-id="sol-commercial" role="button" tabindex="0" aria-label="View Commercial & Retail Structures specifications & photos">
+        <div class="solution-img-holder">
+          <img src="{{ asset('assets/images/solutions/commercial.jpg') }}"
+            alt="Commercial and Retail Tensile Roofing - Dubai Outlet Mall" loading="lazy">
+          <span class="solution-tag-badge">Malls & Atriums</span>
+        </div>
+        <div class="solution-card-body">
+          <h3>Commercial & Retail Structures</h3>
+          <p>Desert-proof shopping center roofs, open-air retail canopies, hotel terraces, and civic bazaar canopies
+            providing soft ambient daylight and cool microclimates.</p>
+          <div class="solution-card-actions">
+            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
+            <a href="{{ route('services.index') }}#commercial" class="solution-card-link">
+              <span>Explore Scope</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: Transport & Infrastructure Structures -->
+      <article class="solution-hub-card" data-id="sol-transport" role="button" tabindex="0" aria-label="View Transport & Infrastructure Structures specifications & photos">
+        <div class="solution-img-holder">
+          <img src="{{ asset('assets/images/solutions/transport.jpg') }}" alt="Transport and Infrastructure Tensile Canopies"
+            loading="lazy">
+          <span class="solution-tag-badge">Transit Hubs</span>
+        </div>
+        <div class="solution-card-body">
+          <h3>Transport & Infrastructure Structures</h3>
+          <p>RTA marine floating transit hubs, airport concourse canopies, rail terminal tension roofs, and
+            pedestrian bridge shades with heavy-duty aerodynamic durability.</p>
+          <div class="solution-card-actions">
+            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
+            <a href="{{ route('services.index') }}#transport" class="solution-card-link">
+              <span>Explore Scope</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: Industrial & Warehouse Structures -->
+      <article class="solution-hub-card" data-id="sol-industrial" role="button" tabindex="0" aria-label="View Industrial & Warehouse Structures specifications & photos">
+        <div class="solution-img-holder">
+          <img src="{{ asset('assets/images/solutions/industrial.jpg') }}" alt="Industrial and Warehouse Tensile Structures"
+            loading="lazy">
+          <span class="solution-tag-badge">Bulk Logistics</span>
+        </div>
+        <div class="solution-card-body">
+          <h3>Industrial & Warehouse Structures</h3>
+          <p>Wide-span storage enclosures, bulk material protection, agricultural sunscreens, and rapidly deployable
+            logistics shelters engineered for harsh Middle Eastern weather.</p>
+          <div class="solution-card-actions">
+            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
+            <a href="{{ route('services.index') }}#industrial" class="solution-card-link">
+              <span>Explore Scope</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6: Air-Supported Structures (ASATI) -->
+      <article class="solution-hub-card" id="card-asati" data-id="asati-dome" role="button" tabindex="0" aria-label="View Air-Supported Dome specifications & photos">
+        <div class="solution-img-holder">
+          <img src="{{ asset('assets/images/solutions/air-supported-asati.jpg') }}" alt="ASATI Air-Supported Dome Structures"
+            loading="lazy">
+          <span class="solution-tag-badge" style="background: #0B5ED7;">ASATI UAE Partner</span>
+        </div>
+        <div class="solution-card-body">
+          <h3>Air-Supported Structures (ASATI)</h3>
+          <p>State-of-the-art air domes clear-spanning up to 150m+ with automated pressure control, complete thermal
+            HVAC, and rapid deployment for indoor sports and warehousing.</p>
+          <div class="solution-card-actions">
+            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
+            <a href="{{ route('services.index') }}#air-supported" class="solution-card-link">
+              <span>Explore Scope</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 7: Lifecycle Services (Inspection & AMC) -->
+      <article class="solution-hub-card" data-id="sol-lifecycle" role="button" tabindex="0" aria-label="View Lifecycle Services specifications & photos">
+        <div class="solution-img-holder">
+          <img src="{{ asset('assets/images/solutions/lifecycle-amc.jpg') }}" alt="Lifecycle Services Inspection and AMC"
+            loading="lazy">
+          <span class="solution-tag-badge">Asset Stewardship</span>
+        </div>
+        <div class="solution-card-body">
+          <h3>Lifecycle Services (Inspection & AMC)</h3>
+          <p>Comprehensive condition audits, biaxial membrane tension calibration, ultrasonic weld verification,
+            specialized cleaning, and certified annual maintenance contracts.</p>
+          <div class="solution-card-actions">
+            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
+            <a href="{{ route('services.index') }}#lifecycle" class="solution-card-link">
+              <span>Explore Scope</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 8: Lead Gen Action Card -->
+      <div class="solution-lead-cta-card">
+        <div>
+          <span class="lead-cta-badge">Ready To Build?</span>
+          <h3>Have a Project in Mind?</h3>
+          <p>
+            Let's build something great together. Partner directly with our Middle East engineering leadership for
+            initial form-finding equilibrium, material advice, and turnkey B2B budgeting.
+          </p>
+        </div>
+        <div>
+          <a href="{{ route('contact.index') }}" class="btn btn-lead-white">
+            <span>GET IN TOUCH</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="section section-materials" style="background-color: #F8FAFC; padding: 5.5rem 0;">
   <div class="container">
     <div class="section-header text-center" style="margin-bottom: 3.5rem;">

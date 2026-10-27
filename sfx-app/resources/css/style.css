@@ -3118,87 +3118,277 @@ button, input, select, textarea {
 
 /* Modal Responsive Media Queries */
 @media (max-width: 1024px) {
+  .modal-card {
+    max-width: 90vw;
+  }
+
   .modal-image-showcase {
-    width: calc(100% - 4rem);
-    margin: 0 2rem 1rem;
-    height: 420px;
+    width: calc(100% - 3rem);
+    margin: 0 1.5rem 1rem;
+    height: 320px;
+    min-height: 320px;
   }
 
   .modal-title-bar {
-    padding: 1.25rem 2rem 0.75rem;
+    padding: 1.15rem 1.5rem 0.65rem;
   }
 
   .modal-thumbs-strip {
-    margin: 0 2rem 1.25rem;
+    margin: 0 1.5rem 1rem;
   }
 
   .modal-specs-bar {
     grid-template-columns: repeat(3, 1fr);
-    padding: 1.25rem 2rem;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
   }
   
   .modal-body-content {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding: 2rem;
+    gap: 2rem;
+    padding: 1.75rem 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .modal-overlay {
-    padding: 0.75rem;
+    padding: 0.5rem;
   }
   
   .modal-card {
-    border-radius: 18px;
-    max-height: 95vh;
+    border-radius: 16px;
+    max-height: 94vh;
+    max-width: 100%;
+    width: 100%;
   }
   
   .modal-header-bar {
-    padding: 0.85rem 1.25rem;
-  }
-
-  .modal-title-bar {
-    padding: 1.25rem 1.25rem 0.75rem;
-  }
-
-  .modal-product-title {
-    font-size: 1.45rem;
-  }
-
-  .modal-image-showcase {
-    width: calc(100% - 2.5rem);
-    margin: 0 1.25rem 0.75rem;
-    height: 240px;
-    border-radius: 14px;
-  }
-
-  .modal-thumbs-strip {
-    margin: 0 1.25rem 1rem;
+    padding: 0.75rem 1rem;
     gap: 0.5rem;
   }
 
+  .modal-header-left {
+    gap: 0.35rem;
+  }
+
+  .modal-tag, .modal-year-tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .modal-nav-arrows {
+    gap: 0.35rem;
+  }
+
+  .modal-nav-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+
+  .modal-counter {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.45rem;
+  }
+
+  .modal-close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.25rem;
+  }
+
+  .modal-title-bar {
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  .modal-hero-pill-row {
+    gap: 0.35rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-pill {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+  }
+
+  .modal-product-title {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  .modal-image-showcase {
+    width: calc(100% - 2rem);
+    margin: 0 1rem 0.75rem;
+    height: 220px;
+    min-height: 220px;
+    border-radius: 12px;
+  }
+
+  .modal-thumbs-strip {
+    margin: 0 1rem 0.85rem;
+    gap: 0.45rem;
+  }
+
   .modal-thumb-item {
-    width: 76px;
-    height: 52px;
+    width: 68px;
+    height: 46px;
+    border-radius: 6px;
   }
   
   .modal-specs-bar {
     grid-template-columns: repeat(2, 1fr);
-    padding: 1rem 1.25rem;
-    gap: 1rem;
+    padding: 0.85rem 1rem;
+    gap: 0.85rem 1rem;
+  }
+
+  .modal-spec-cell .spec-label {
+    font-size: 0.68rem;
+  }
+
+  .modal-spec-cell .spec-val {
+    font-size: 0.92rem;
   }
   
   .modal-body-content {
-    padding: 1.5rem;
+    padding: 1.25rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .modal-desc-heading {
+    font-size: 1.15rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .modal-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .modal-callout-box {
+    padding: 1rem;
+    margin: 1.25rem 0;
+  }
+
+  .modal-callout-title {
+    font-size: 0.85rem;
+  }
+
+  .modal-callout-text {
+    font-size: 0.82rem;
+    line-height: 1.55;
   }
   
   .modal-highlights-grid {
     grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .modal-highlight-item {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .modal-sidebar-card {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+  }
+
+  .modal-sidebar-title {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal-facts-list {
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .modal-facts-list li {
+    font-size: 0.82rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .modal-action-btn-primary {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.88rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-phone-direct {
+    font-size: 0.8rem;
+    margin-top: 0.85rem;
   }
   
   .modal-bottom-bar {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 0.25rem;
+  }
+
+  .modal-card {
+    border-radius: 14px;
+    max-height: 96vh;
+  }
+
+  .modal-header-bar {
+    padding: 0.6rem 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .modal-header-left {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 0.35rem;
+  }
+
+  .modal-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .modal-title-bar {
+    padding: 0.85rem 0.75rem 0.4rem;
+  }
+
+  .modal-product-title {
+    font-size: 1.15rem;
+  }
+
+  .modal-image-showcase {
+    width: calc(100% - 1.5rem);
+    margin: 0 0.75rem 0.65rem;
+    height: 190px;
+    min-height: 190px;
+  }
+
+  .modal-thumbs-strip {
+    margin: 0 0.75rem 0.75rem;
+  }
+
+  .modal-thumb-item {
+    width: 58px;
+    height: 38px;
+  }
+
+  .modal-specs-bar {
+    grid-template-columns: 1fr 1fr;
+    padding: 0.75rem;
+    gap: 0.65rem;
+  }
+
+  .modal-spec-cell .spec-val {
+    font-size: 0.85rem;
+  }
+
+  .modal-body-content {
+    padding: 1rem 0.75rem;
   }
 }
 

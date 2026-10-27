@@ -31,18 +31,10 @@
       <h2 class="modal-product-title" id="modalTitle">Project Title</h2>
     </div>
 
-    <!-- Dedicated Product Image Showcase (100% Uncropped Architecture View + Ambient Atmosphere) -->
+    <!-- Dedicated Product Image Showcase -->
     <div class="modal-image-showcase">
       <img id="modalImageBackdrop" class="modal-ambient-backdrop" src="{{ asset('assets/images/projects/al-jamea-etfe.png') }}" alt="" aria-hidden="true">
       <img id="modalImage" class="modal-product-img" src="{{ asset('assets/images/projects/al-jamea-etfe.png') }}" alt="Product Showcase">
-      <div class="modal-image-badge-wrap">
-        <a id="modalImageExpand" href="{{ asset('assets/images/projects/al-jamea-etfe.png') }}" target="_blank" rel="noopener noreferrer" class="product-verified-badge" title="Open full high-resolution image in new tab">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: -1px; margin-right: 4px;">
-            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-          </svg>
-          <span id="modalImageBadgeText">View Full Resolution ⤢</span>
-        </a>
-      </div>
     </div>
 
     <!-- Interactive Photo Gallery Strip (Allows clicking between multiple angles) -->

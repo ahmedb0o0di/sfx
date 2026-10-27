@@ -716,7 +716,6 @@ function initProjectModals() {
       modalImg.src = imgPath;
       modalImg.alt = data.title;
       modalImg.style.opacity = '1';
-      modalImg.onclick = () => window.open(imgPath, '_blank');
     }
 
     if (modalBackdrop) {
@@ -749,12 +748,8 @@ function initProjectModals() {
           if (targetSrc && modalImg) {
             modalImg.src = targetSrc;
             modalImg.style.opacity = '1';
-            modalImg.onclick = () => window.open(targetSrc, '_blank');
             if (modalBackdrop) {
               modalBackdrop.src = targetSrc;
-            }
-            if (modalExpand) {
-              modalExpand.href = targetSrc;
             }
           }
         });

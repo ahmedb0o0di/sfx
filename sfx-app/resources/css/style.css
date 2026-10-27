@@ -2816,7 +2816,7 @@ button, input, select, textarea {
   position: relative;
   z-index: 2;
   border-radius: 14px;
-  cursor: zoom-in;
+  cursor: default;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

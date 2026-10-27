@@ -179,146 +179,167 @@
 
     <div class="solutions-segmented-grid">
       <!-- Card 1: Architectural Structures -->
-      <article class="solution-hub-card" data-id="sol-architectural" role="button" tabindex="0" aria-label="View Architectural Structures specifications & photos">
-        <div class="solution-img-holder">
+      <article class="solution-hub-card">
+        <a href="{{ route('services.show', 'architectural-tensile') }}" class="solution-img-holder" style="display: block;">
           <img src="{{ asset('assets/images/solutions/architectural.png') }}"
             alt="Architectural Tensile Structures - Al Jamea ETFE" loading="lazy">
           <span class="solution-tag-badge">ETFE & PTFE</span>
-        </div>
+        </a>
         <div class="solution-card-body">
-          <h3>Architectural Structures</h3>
+          <h3>
+            <a href="{{ route('services.show', 'architectural-tensile') }}" style="color: inherit; text-decoration: none;">
+              Architectural Structures
+            </a>
+          </h3>
           <p>Iconic translucent single skin and cushion ETFE daylighting systems, sculptural PTFE envelopes, and
             bespoke building atriums that elevate architectural vision.</p>
           <div class="solution-card-actions">
-            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
-            <a href="{{ route('services.index') }}#architectural" class="solution-card-link">
-              <span>Explore Scope</span>
-              <span>→</span>
+            <a href="{{ route('services.show', 'architectural-tensile') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
+              <span>View Specs &amp; Photos</span>
+              <span>&rarr;</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- Card 2: Sports & Recreation Structures -->
-      <article class="solution-hub-card" data-id="sol-sports" role="button" tabindex="0" aria-label="View Sports & Recreation Structures specifications & photos">
-        <div class="solution-img-holder">
+      <article class="solution-hub-card">
+        <a href="{{ route('services.show', 'sports-canopies') }}" class="solution-img-holder" style="display: block;">
           <img src="{{ asset('assets/images/solutions/sports.jpg') }}" alt="Sports and Recreation Tensile Canopies" loading="lazy">
           <span class="solution-tag-badge">Stadia & Arenas</span>
-        </div>
+        </a>
         <div class="solution-card-body">
-          <h3>Sports & Recreation Structures</h3>
+          <h3>
+            <a href="{{ route('services.show', 'sports-canopies') }}" style="color: inherit; text-decoration: none;">
+              Sports &amp; Recreation Structures
+            </a>
+          </h3>
           <p>Column-free sports court canopies, grandstand stadium roofs, Olympic aquatics shelters, and school
             sports complexes engineered for maximum thermal protection.</p>
           <div class="solution-card-actions">
-            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
-            <a href="{{ route('services.index') }}#sports" class="solution-card-link">
-              <span>Explore Scope</span>
-              <span>→</span>
+            <a href="{{ route('services.show', 'sports-canopies') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
+              <span>View Specs &amp; Photos</span>
+              <span>&rarr;</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- Card 3: Commercial & Retail Structures -->
-      <article class="solution-hub-card" data-id="sol-commercial" role="button" tabindex="0" aria-label="View Commercial & Retail Structures specifications & photos">
-        <div class="solution-img-holder">
+      <article class="solution-hub-card">
+        <a href="{{ route('services.show', 'commercial-atriums') }}" class="solution-img-holder" style="display: block;">
           <img src="{{ asset('assets/images/solutions/commercial.jpg') }}"
             alt="Commercial and Retail Tensile Roofing - Dubai Outlet Mall" loading="lazy">
           <span class="solution-tag-badge">Malls & Atriums</span>
-        </div>
+        </a>
         <div class="solution-card-body">
-          <h3>Commercial & Retail Structures</h3>
+          <h3>
+            <a href="{{ route('services.show', 'commercial-atriums') }}" style="color: inherit; text-decoration: none;">
+              Commercial &amp; Retail Structures
+            </a>
+          </h3>
           <p>Desert-proof shopping center roofs, open-air retail canopies, hotel terraces, and civic bazaar canopies
             providing soft ambient daylight and cool microclimates.</p>
           <div class="solution-card-actions">
-            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
-            <a href="{{ route('services.index') }}#commercial" class="solution-card-link">
-              <span>Explore Scope</span>
-              <span>→</span>
+            <a href="{{ route('services.show', 'commercial-atriums') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
+              <span>View Specs &amp; Photos</span>
+              <span>&rarr;</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- Card 4: Transport & Infrastructure Structures -->
-      <article class="solution-hub-card" data-id="sol-transport" role="button" tabindex="0" aria-label="View Transport & Infrastructure Structures specifications & photos">
-        <div class="solution-img-holder">
+      <article class="solution-hub-card">
+        <a href="{{ route('services.show', 'transport-infrastructure') }}" class="solution-img-holder" style="display: block;">
           <img src="{{ asset('assets/images/solutions/transport.jpg') }}" alt="Transport and Infrastructure Tensile Canopies"
             loading="lazy">
           <span class="solution-tag-badge">Transit Hubs</span>
-        </div>
+        </a>
         <div class="solution-card-body">
-          <h3>Transport & Infrastructure Structures</h3>
+          <h3>
+            <a href="{{ route('services.show', 'transport-infrastructure') }}" style="color: inherit; text-decoration: none;">
+              Transport &amp; Infrastructure Structures
+            </a>
+          </h3>
           <p>RTA marine floating transit hubs, airport concourse canopies, rail terminal tension roofs, and
             pedestrian bridge shades with heavy-duty aerodynamic durability.</p>
           <div class="solution-card-actions">
-            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
-            <a href="{{ route('services.index') }}#transport" class="solution-card-link">
-              <span>Explore Scope</span>
-              <span>→</span>
+            <a href="{{ route('services.show', 'transport-infrastructure') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
+              <span>View Specs &amp; Photos</span>
+              <span>&rarr;</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- Card 5: Industrial & Warehouse Structures -->
-      <article class="solution-hub-card" data-id="sol-industrial" role="button" tabindex="0" aria-label="View Industrial & Warehouse Structures specifications & photos">
-        <div class="solution-img-holder">
+      <article class="solution-hub-card">
+        <a href="{{ route('services.show', 'industrial-logistics') }}" class="solution-img-holder" style="display: block;">
           <img src="{{ asset('assets/images/solutions/industrial.jpg') }}" alt="Industrial and Warehouse Tensile Structures"
             loading="lazy">
           <span class="solution-tag-badge">Bulk Logistics</span>
-        </div>
+        </a>
         <div class="solution-card-body">
-          <h3>Industrial & Warehouse Structures</h3>
+          <h3>
+            <a href="{{ route('services.show', 'industrial-logistics') }}" style="color: inherit; text-decoration: none;">
+              Industrial &amp; Warehouse Structures
+            </a>
+          </h3>
           <p>Wide-span storage enclosures, bulk material protection, agricultural sunscreens, and rapidly deployable
             logistics shelters engineered for harsh Middle Eastern weather.</p>
           <div class="solution-card-actions">
-            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
-            <a href="{{ route('services.index') }}#industrial" class="solution-card-link">
-              <span>Explore Scope</span>
-              <span>→</span>
+            <a href="{{ route('services.show', 'industrial-logistics') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
+              <span>View Specs &amp; Photos</span>
+              <span>&rarr;</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- Card 6: Air-Supported Structures (ASATI) -->
-      <article class="solution-hub-card" id="card-asati" data-id="asati-dome" role="button" tabindex="0" aria-label="View Air-Supported Dome specifications & photos">
-        <div class="solution-img-holder">
+      <article class="solution-hub-card">
+        <a href="{{ route('services.show', 'air-supported-domes') }}" class="solution-img-holder" style="display: block;">
           <img src="{{ asset('assets/images/solutions/air-supported-asati.jpg') }}" alt="ASATI Air-Supported Dome Structures"
             loading="lazy">
           <span class="solution-tag-badge" style="background: #0B5ED7;">ASATI UAE Partner</span>
-        </div>
+        </a>
         <div class="solution-card-body">
-          <h3>Air-Supported Structures (ASATI)</h3>
+          <h3>
+            <a href="{{ route('services.show', 'air-supported-domes') }}" style="color: inherit; text-decoration: none;">
+              Air-Supported Structures (ASATI)
+            </a>
+          </h3>
           <p>State-of-the-art air domes clear-spanning up to 150m+ with automated pressure control, complete thermal
             HVAC, and rapid deployment for indoor sports and warehousing.</p>
           <div class="solution-card-actions">
-            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
-            <a href="{{ route('services.index') }}#air-supported" class="solution-card-link">
-              <span>Explore Scope</span>
-              <span>→</span>
+            <a href="{{ route('services.show', 'air-supported-domes') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
+              <span>View Specs &amp; Photos</span>
+              <span>&rarr;</span>
             </a>
           </div>
         </div>
       </article>
 
       <!-- Card 7: Lifecycle Services (Inspection & AMC) -->
-      <article class="solution-hub-card" data-id="sol-lifecycle" role="button" tabindex="0" aria-label="View Lifecycle Services specifications & photos">
-        <div class="solution-img-holder">
+      <article class="solution-hub-card">
+        <a href="{{ route('services.show', 'lifecycle-maintenance') }}" class="solution-img-holder" style="display: block;">
           <img src="{{ asset('assets/images/solutions/lifecycle-amc.jpg') }}" alt="Lifecycle Services Inspection and AMC"
             loading="lazy">
           <span class="solution-tag-badge">Asset Stewardship</span>
-        </div>
+        </a>
         <div class="solution-card-body">
-          <h3>Lifecycle Services (Inspection & AMC)</h3>
+          <h3>
+            <a href="{{ route('services.show', 'lifecycle-maintenance') }}" style="color: inherit; text-decoration: none;">
+              Lifecycle Services (Inspection &amp; AMC)
+            </a>
+          </h3>
           <p>Comprehensive condition audits, biaxial membrane tension calibration, ultrasonic weld verification,
             specialized cleaning, and certified annual maintenance contracts.</p>
           <div class="solution-card-actions">
-            <span class="solution-quickview-btn">View Specs & Photos ⤢</span>
-            <a href="{{ route('services.index') }}#lifecycle" class="solution-card-link">
-              <span>Explore Scope</span>
-              <span>→</span>
+            <a href="{{ route('services.show', 'lifecycle-maintenance') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
+              <span>View Specs &amp; Photos</span>
+              <span>&rarr;</span>
             </a>
           </div>
         </div>

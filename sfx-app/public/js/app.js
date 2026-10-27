@@ -824,8 +824,8 @@ function initProjectModals() {
 
   projectCards.forEach(card => {
     card.addEventListener('click', (e) => {
-      // If user clicked a direct external link, allow normal navigation
-      if (e.target.closest('.solution-card-link')) return;
+      // If user clicked a direct link or interactive anchor, allow normal navigation
+      if (e.target.closest('a, .solution-card-link')) return;
       const id = card.getAttribute('data-id');
       if (id && projectData[id]) {
         openModal(id);

@@ -448,7 +448,86 @@
 </section>
 @endif
 
-<section class="section section-materials" style="background-color: #F8FAFC; padding: 5.5rem 0;">
+<!-- ==========================================================================
+     SECTION: FEATURED PROJECTS SHOWCASE (EXECUTED LANDMARKS)
+     ========================================================================== -->
+<section class="section" id="projects" style="background-color: #F4F6F9; padding: 5.5rem 0;">
+  <div class="container">
+    <div class="section-header text-center" style="margin-bottom: 2.5rem;">
+      <span class="section-tag"
+        style="background: #e6f6ec; color: #008E38; border: 1px solid rgba(0, 142, 56, 0.3); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">Executed
+        Landmarks</span>
+      <h2 class="section-title"
+        style="font-size: var(--h2-size); font-weight: 800; color: var(--navy-primary); margin: 0.75rem 0 0.5rem; letter-spacing: -0.02em;">
+        FEATURED PROJECTS</h2>
+      <p class="section-subtitle"
+        style="font-size: 1.1rem; color: var(--text-muted); max-width: 650px; margin: 0 auto; line-height: 1.6;">Select iconic tensile
+        and lightweight membrane structures engineered and delivered across the globe.</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="portfolio-filter-bar"
+      style="display: flex; gap: 0.65rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.75rem;">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="architectural">Architectural</button>
+      <button class="filter-btn" data-filter="sports">Sports &amp; Stadia</button>
+      <button class="filter-btn" data-filter="air-supported">Air-Supported Domes</button>
+      <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+    </div>
+
+    <!-- 4-Column Projects Showcase Grid -->
+    <div class="projects-showcase-grid">
+      @forelse($allProjects as $project)
+      <article class="project-showcase-card" data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}" data-id="{{ $project->slug }}">
+        <div class="project-showcase-img">
+          <img src="{{ asset($project->thumbnail_image) }}" alt="{{ $project->title }}" loading="lazy">
+          <span class="project-location-badge">{{ $project->location }}</span>
+        </div>
+        <div class="project-showcase-body">
+          <span class="project-showcase-category">{{ $project->category ? $project->category->name : 'Architectural' }}</span>
+          <h3 class="project-showcase-title">{{ $project->title }}</h3>
+          <div class="project-showcase-meta">
+            <span>{{ $project->membrane_material ?? ($project->client_name ?? 'Tensile Membrane') }}</span>
+            <span>{{ $project->covered_area }}</span>
+          </div>
+        </div>
+      </article>
+      @empty
+      <!-- Fallback project cards from Option-1 -->
+      <article class="project-showcase-card" data-category="architectural" data-id="al-jamea">
+        <div class="project-showcase-img">
+          <img src="{{ asset('assets/images/projects/al-jamea-etfe.png') }}" alt="Al Jamea Tus Saifiyah Single Skin ETFE Membrane" loading="lazy">
+          <span class="project-location-badge">Nairobi, Kenya</span>
+        </div>
+        <div class="project-showcase-body">
+          <span class="project-showcase-category">Architectural ETFE</span>
+          <h3 class="project-showcase-title">Al Jamea Tus Saifiyah ETFE Roof</h3>
+          <div class="project-showcase-meta">
+            <span>Single Skin ETFE</span>
+            <span>4,800 m²</span>
+          </div>
+        </div>
+      </article>
+      @endforelse
+    </div>
+
+    <!-- View All Projects Button -->
+    <div style="text-align: center; margin-top: 3.5rem;">
+      <a href="{{ route('projects.index') }}" class="btn btn-hero-solid"
+        style="background: transparent; color: var(--navy-primary) !important; border: 2px solid var(--navy-primary); text-decoration: none;">
+        <span>VIEW ALL PROJECTS</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     SECTION: INTERACTIVE MATERIALS MATRIX
+     ========================================================================== -->
+<section class="section section-materials" id="materials" style="background-color: #ffffff; padding: 5.5rem 0;">
   <div class="container">
     <div class="section-header text-center" style="margin-bottom: 3.5rem;">
       <span class="section-tag">Engineering Selection Matrix</span>
@@ -495,57 +574,6 @@
 </section>
 
 <!-- ==========================================================================
-     SECTION 4: VERIFIED PROJECT PORTFOLIO
-     ========================================================================== -->
-<section class="section section-portfolio" id="projects" style="background-color: #ffffff; padding: 5.5rem 0;">
-  <div class="container">
-    <div class="section-header text-center" style="margin-bottom: 3rem;">
-      <span class="section-tag">Verified Executed Projects</span>
-      <h2 style="font-size: 2.35rem; font-weight: 800; color: var(--navy-primary); margin-top: 0.75rem;">Landmark Commissions in MENA &amp; Globally</h2>
-      <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto; font-size: 1rem; line-height: 1.6;">
-        Explore verified structures engineered and installed by Structurflex Middle East across UAE, Eastern Africa, and international venues.
-      </p>
-    </div>
-
-    <!-- Category Filter Bar -->
-    <div class="portfolio-filter-bar" style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
-      <button class="filter-btn active" data-filter="all">All Projects</button>
-      @foreach($categories as $category)
-        <button class="filter-btn" data-filter="{{ $category->filter_tag }}">{{ $category->name }}</button>
-      @endforeach
-    </div>
-
-    <!-- Projects Grid -->
-    <div class="projects-showcase-grid">
-      @foreach($allProjects as $project)
-      <article class="project-showcase-card" data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}" data-id="{{ $project->slug }}" style="cursor: pointer;">
-        <div class="project-showcase-img">
-          <img src="{{ asset($project->thumbnail_image) }}" alt="{{ $project->title }}" loading="lazy">
-          <span class="project-location-badge">{{ $project->location }}</span>
-        </div>
-        <div class="project-showcase-body">
-          <span class="project-showcase-category">{{ $project->category ? $project->category->name : 'Architectural' }}</span>
-          <h3 class="project-showcase-title">{{ $project->title }}</h3>
-          <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">{{ $project->short_description }}</p>
-          <div class="project-showcase-meta">
-            <span>{{ $project->client_name ?? 'SFXMEC EPC' }}</span>
-            <span>{{ $project->covered_area }}</span>
-          </div>
-        </div>
-      </article>
-      @endforeach
-    </div>
-
-    <div style="text-align: center; margin-top: 3.5rem;">
-      <a href="{{ route('projects.index') }}" class="btn btn-hero-primary" style="display: inline-flex; padding: 1rem 2.5rem;">
-        <span>View Complete 9,000+ Project Archive</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ==========================================================================
      SECTION 5: DYNAMIC SCOPE ESTIMATOR PROMO BANNER
      ========================================================================== -->
 <section style="background: linear-gradient(135deg, #070B14 0%, #0F1D36 100%); padding: 5rem 0; color: #fff; position: relative; overflow: hidden;">
@@ -569,39 +597,103 @@
 </section>
 
 <!-- ==========================================================================
-     SECTION 6: SOLUTIONS & SYSTEMS
+     SECTION: STRATEGIC CREDENTIALS & PARTNERSHIPS MATRIX
      ========================================================================== -->
-<section class="section section-solutions" id="solutions" style="background-color: #F4F6F9; padding: 5.5rem 0;">
+<section class="credentials-bar" id="credentials">
   <div class="container">
-    <div class="section-header text-center" style="margin-bottom: 3.5rem;">
-      <span class="section-tag">Specialized Systems</span>
-      <h2 style="font-size: 2.35rem; font-weight: 800; color: var(--navy-primary); margin-top: 0.75rem;">Turnkey Architectural &amp; Air Dome Capabilities</h2>
-      <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto; font-size: 1rem; line-height: 1.6;">
-        Comprehensive engineering, manufacturing, and erection across all primary tensioned envelope systems.
-      </p>
+    <!-- Sub-Section A: Clients & Partners -->
+    <div class="section-header text-center" style="margin-bottom: 2.5rem;">
+      <span class="section-tag"
+        style="background: #edf4fd; color: #0B5ED7; border: 1px solid rgba(11, 94, 215, 0.25); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">Trust
+        &amp; Alliances</span>
+      <h2 class="section-title"
+        style="font-size: 1.85rem; font-weight: 800; color: var(--navy-primary); margin: 0.65rem 0 0.35rem;">TRUSTED
+        BY LEADING CLIENTS &amp; PARTNERS</h2>
+      <p class="section-subtitle" style="font-size: 0.95rem; color: var(--text-muted); max-width: 650px; margin: 0 auto;">Collaborating with
+        government ministries, master developers, and international engineering leaders.</p>
     </div>
 
-    <div class="solutions-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-      @foreach($services as $service)
-      <article class="solution-card" style="background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="height: 220px; overflow: hidden;">
-            <img src="{{ asset($service->hero_image) }}" alt="{{ $service->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-          </div>
-          <div style="padding: 1.75rem;">
-            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #0284c7; letter-spacing: 0.8px;">{{ $service->subtitle }}</span>
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-primary); margin: 0.4rem 0 0.75rem;">{{ $service->title }}</h3>
-            <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin-bottom: 1rem;">{{ $service->summary }}</p>
-          </div>
+    <div class="partner-logo-matrix">
+      <div class="partner-badge-item">
+        <strong>ASATI</strong>
+        <span>Air Structures American Technologies</span>
+      </div>
+      <div class="partner-badge-item">
+        <strong>Ministry of Public Works</strong>
+        <span>Strategic Partner (14 Projects)</span>
+      </div>
+      <div class="partner-badge-item">
+        <strong>RTA Dubai</strong>
+        <span>Roads &amp; Transport Authority</span>
+      </div>
+      <div class="partner-badge-item">
+        <strong>Oromia Regional Govt</strong>
+        <span>Unity Park Project</span>
+      </div>
+      <div class="partner-badge-item">
+        <strong>Nakheel &amp; Emaar</strong>
+        <span>Master Developers</span>
+      </div>
+      <div class="partner-badge-item">
+        <strong>Al Ain Municipality</strong>
+        <span>Civic Architectural Projects</span>
+      </div>
+    </div>
+
+    <!-- Sub-Section B: Certifications -->
+    <div class="certifications-row" style="margin-top: 2.5rem;">
+      <div class="cert-card">
+        <div class="cert-icon-box">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
         </div>
-        <div style="padding: 0 1.75rem 1.75rem;">
-          <a href="{{ route('services.show', $service->slug) }}" class="btn btn-hero-white" style="width: 100%; justify-content: center; font-size: 0.88rem;">
-            <span>Explore Technical Specs</span>
-            <span>&rarr;</span>
-          </a>
+        <div class="cert-info">
+          <h4>ISO 9001:2015</h4>
+          <p>Quality Management System Certification across design, fabrication &amp; erection.</p>
         </div>
-      </article>
-      @endforeach
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon-box">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+            <path d="M2 12h20" />
+          </svg>
+        </div>
+        <div class="cert-info">
+          <h4>ISO 14001:2015</h4>
+          <p>Environmental Management System ensuring sustainable lifecycle practices.</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon-box">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+        </div>
+        <div class="cert-info">
+          <h4>ISO 45001:2018</h4>
+          <p>Occupational Health &amp; Safety certified for high-altitude tension rigging.</p>
+        </div>
+      </div>
+
+      <div class="cert-card" style="border-left: 3px solid #D99B26;">
+        <div class="cert-icon-box" style="background: #fef8eb; color: #D99B26;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="8" r="7" />
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+          </svg>
+        </div>
+        <div class="cert-info">
+          <h4>Ministry Award</h4>
+          <p>Special Strategic Partner Award from UAE Ministry of Public Works (14 successful projects).</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

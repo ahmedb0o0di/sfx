@@ -775,6 +775,33 @@
 </section>
 
 <!-- ==========================================================================
+     CAREERS CALLOUT SECTION
+     ========================================================================== -->
+<section class="section" id="careers" style="background-color: #ffffff; padding: 4.5rem 0;">
+  <div class="container">
+    <div
+      style="background: linear-gradient(135deg, #081C38 0%, #041026 100%); border-radius: 12px; padding: 3rem 2.5rem; color: #ffffff; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; box-shadow: 0 12px 30px rgba(8, 28, 56, 0.15);">
+      <div style="max-width: 680px;">
+        <span
+          style="color: #D99B26; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Join
+          Our Engineering Practice</span>
+        <h3 style="font-size: 1.85rem; font-weight: 800; color: #ffffff; margin: 0.5rem 0 0.75rem;">Build
+          Architectural Icons Across MENA &amp; Africa</h3>
+        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.55; margin: 0;">We are consistently seeking
+          visionary structural engineers, parametric computational designers, master riggers, and project managers
+          for landmark commissions.</p>
+      </div>
+      <div>
+        <a href="{{ route('contact.index', ['inquiry' => 'careers']) }}" class="btn btn-hero-white" style="white-space: nowrap;">
+          <span>Explore Careers &amp; Inquire</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
      SECTION 8: DUAL-HUB CONSULTATION & RFP INQUIRY FORM
      ========================================================================== -->
 <section class="section section-contact" id="contact" style="background-color: #F4F6F9; padding: 5.5rem 0;">

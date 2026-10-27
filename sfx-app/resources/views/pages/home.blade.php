@@ -802,103 +802,143 @@
 </section>
 
 <!-- ==========================================================================
-     SECTION 8: DUAL-HUB CONSULTATION & RFP INQUIRY FORM
+     SECTION 8: PROJECT INQUIRIES & CONSULTATION
      ========================================================================== -->
-<section class="section section-contact" id="contact" style="background-color: #F4F6F9; padding: 5.5rem 0;">
+<section class="section" id="contact" style="background-color: #F4F6F9;">
   <div class="container">
-    <div class="section-header text-center" style="margin-bottom: 3.5rem;">
-      <span class="section-tag">Direct Engineering Consultation</span>
-      <h2 style="font-size: 2.35rem; font-weight: 800; color: var(--navy-primary); margin-top: 0.75rem;">Request an Architectural Scope Consultation</h2>
-      <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto; font-size: 1rem; line-height: 1.6;">
-        Connect directly with our senior computational engineering practice in Dubai and Cairo for form-finding, feasibility reviews, and tender submissions.
-      </p>
+    <div class="section-header">
+      <span class="section-tag"
+        style="background: #edf4fd; color: #0B5ED7; border: 1px solid rgba(11, 94, 215, 0.25); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">Project
+        Inquiries</span>
+      <h2 class="section-title"
+        style="font-size: var(--h2-size); font-weight: 800; color: var(--navy-primary); margin: 0.75rem 0 0.5rem; letter-spacing: -0.02em;">
+        REQUEST A CONSULTATION</h2>
+      <p class="section-subtitle"
+        style="font-size: 1.1rem; color: var(--text-muted); max-width: 620px; margin: 0 auto;">Connect directly with
+        our senior engineering practice in Dubai for architectural form-finding, feasibility, and tenders.</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05);" class="contact-main-grid">
-      <!-- Left: Dynamic Form -->
+    @if(session('success'))
+    <div style="background: #e6f6ec; border: 1.5px solid #008e38; color: #00732d; padding: 1.25rem 1.5rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.95rem; font-weight: 700; text-align: center;">
+      {{ session('success') }}
+    </div>
+    @endif
+
+    <div
+      style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05);"
+      class="contact-main-grid">
+      <!-- Left: RFP Form -->
       <div>
-        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 1.5rem;">Project RFP &amp; Feasibility Inquiry</h3>
-        <form action="{{ route('contact.store') }}" method="POST" enctype="multipart/form-data">
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 1.5rem;">Project
+          RFP &amp; Feasibility Inquiry</h3>
+        <form id="contactForm" class="contact-form" action="{{ route('contact.store') }}" method="POST">
           @csrf
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
-            <div>
-              <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Full Name *</label>
-              <input type="text" name="name" required placeholder="Eng. Tariq Al-Mansoor" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;">
+          <div class="form-row-2"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="form-group">
+              <label for="contactName"
+                style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Full
+                Name *</label>
+              <input type="text" id="contactName" name="name" required placeholder="e.g. Eng. Tariq Al-Mansoor"
+                style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;">
             </div>
-            <div>
-              <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Corporate Email *</label>
-              <input type="email" name="email" required placeholder="tariq@developer.ae" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;">
+            <div class="form-group">
+              <label for="contactEmail"
+                style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Corporate
+                Email *</label>
+              <input type="email" id="contactEmail" name="email" required placeholder="tariq@developer.ae"
+                style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;">
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
-            <div>
-              <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Contact Phone *</label>
-              <input type="tel" name="phone" required placeholder="+971 50 000 0000" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;">
+          <div class="form-row-2"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="form-group">
+              <label for="contactPhone"
+                style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Contact
+                Phone *</label>
+              <input type="tel" id="contactPhone" name="phone" required placeholder="+971 50 000 0000"
+                style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;">
             </div>
-            <div>
-              <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Inquiry Subject *</label>
-              <select name="subject" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem; background: #fff;">
-                <option value="Dubai HQ - Architectural Tensile Tender">Dubai HQ — Architectural Tensile Tender</option>
-                <option value="Cairo Branch - Engineering & Execution">Cairo Branch — Engineering &amp; Execution</option>
-                <option value="ASATI Air Dome Regional Inquiry">ASATI Air Dome Regional Inquiry</option>
-                <option value="Lifecycle AMC & Structural Audit">Lifecycle AMC &amp; Structural Audit</option>
-                <option value="General Technical Consultation">General Technical Consultation</option>
+            <div class="form-group">
+              <label for="contactSolution"
+                style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Solution
+                Interest *</label>
+              <select id="contactSolution" name="solution"
+                style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem; background: #fff;">
+                <option value="Architectural Structures (ETFE / PTFE)">Architectural Structures (ETFE / PTFE)</option>
+                <option value="Sports & Recreation Canopies">Sports &amp; Recreation Canopies</option>
+                <option value="Commercial & Retail Atriums">Commercial &amp; Retail Atriums</option>
+                <option value="Transport & Infrastructure">Transport &amp; Infrastructure</option>
+                <option value="Industrial & Bulk Storage">Industrial &amp; Bulk Storage</option>
+                <option value="Air-Supported Structures (ASATI)">Air-Supported Structures (ASATI)</option>
+                <option value="Lifecycle Inspection & AMC">Lifecycle Inspection &amp; AMC</option>
               </select>
             </div>
           </div>
 
-          <div style="margin-bottom: 1.25rem;">
-            <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Project Scope &amp; Structural Requirements *</label>
-            <textarea name="message" rows="4" required placeholder="Describe location, span, target completion timeline, or structural specifications..." style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;"></textarea>
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label for="contactMessage"
+              style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Project
+              Scope &amp; Requirements *</label>
+            <textarea id="contactMessage" name="message" rows="4" required
+              placeholder="Describe location, span, target completion timeline, or structural specifications..."
+              style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;"></textarea>
           </div>
 
-          <div style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--navy-primary); margin-bottom: 0.35rem;">Attach Architectural CAD / RFP Brief (Optional, Max 15MB)</label>
-            <input type="file" name="attachment" style="font-size: 0.85rem; color: #64748b;">
-          </div>
-
-          <button type="submit" class="btn btn-request-consult" style="width: 100%; justify-content: center; padding: 1rem; font-size: 0.95rem;">
+          <button type="submit" class="btn btn-request-consult"
+            style="width: 100%; justify-content: center; padding: 1rem; font-size: 0.95rem;">
             <span>Submit Consultation Request</span>
             <span>&rarr;</span>
           </button>
         </form>
       </div>
 
-      <!-- Right: Official Regional Offices -->
-      <div style="background: #F8FAFC; border-radius: 12px; padding: 2.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between;">
+      <!-- Right: Official Office Credentials -->
+      <div
+        style="background: #F4F6F9; border-radius: 8px; padding: 2rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 0.5rem;">{{ \App\Models\Setting::get('dubai_office_title', 'Dubai Regional Headquarters') }}</h4>
-          <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin-bottom: 1.5rem;">
-            {{ \App\Models\Setting::get('dubai_address') }}
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 1rem;">
+            Regional Headquarters</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+            <strong>Structurflex Middle East Contracting LLC</strong><br>
+            Shed 01 (S-464), Al Ttay Area,<br>
+            Al Khawaneej 2 Industrial Area,<br>
+            Dubai, United Arab Emirates
           </p>
 
-          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 0.5rem;">{{ \App\Models\Setting::get('cairo_office_title', 'Cairo Regional Engineering Branch') }}</h4>
-          <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin-bottom: 1.5rem;">
-            {{ \App\Models\Setting::get('cairo_address') }}
-          </p>
-
-          <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.88rem; color: var(--navy-primary); border-top: 1px solid #e2e8f0; padding-top: 1.5rem;">
+          <div
+            style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.9rem; color: var(--navy-primary);">
             <div style="display: flex; align-items: center; gap: 0.65rem;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5ED7" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-              <span><strong>Dubai Direct:</strong> {{ \App\Models\Setting::get('dubai_phone') }}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5ED7" stroke-width="2">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              <span><strong>Tel:</strong> {{ \App\Models\Setting::get('dubai_phone', '+971 4 238 8455') }}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 0.65rem;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5ED7" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-              <span><strong>Engineering Desk:</strong> {{ \App\Models\Setting::get('general_email') }}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5ED7" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span><strong>Email:</strong> {{ \App\Models\Setting::get('general_email', 'info@structurflex.ae') }}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 0.65rem;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-              <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', \App\Models\Setting::get('whatsapp_number', '971502959942')) }}" target="_blank" style="color: #059669; font-weight: 700; text-decoration: none;">
-                WhatsApp Quick-Connect
-              </a>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5ED7" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span><strong>Hours:</strong> Mon - Fri: 8:00 AM - 5:30 PM (GST)</span>
             </div>
           </div>
         </div>
 
-        <div style="border-top: 1px solid #e2e8f0; padding-top: 1.5rem; margin-top: 1.5rem;">
-          <span style="font-size: 0.72rem; font-weight: 800; color: #059669; text-transform: uppercase; letter-spacing: 0.8px;">Licensed &amp; Accredited</span>
-          <p style="font-size: 0.78rem; color: #64748b; margin-top: 0.25rem;">Dubai Economy Commercial License &amp; UAE Ministry of Public Works Registered EPC Contractor.</p>
+        <div style="border-top: 1px solid #cbd5e1; padding-top: 1.5rem; margin-top: 1.5rem;">
+          <span
+            style="font-size: 0.72rem; font-weight: 800; color: #008E38; text-transform: uppercase; letter-spacing: 0.8px;">Licensed
+            &amp; Accredited</span>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">Dubai Economy Commercial
+            License &amp; UAE Ministry of Public Works Strategic Registered Contractor.</p>
         </div>
       </div>
     </div>

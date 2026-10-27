@@ -15,6 +15,12 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
+        if (!$request->filled('subject') && $request->filled('solution')) {
+            $request->merge(['subject' => $request->input('solution')]);
+        } elseif (!$request->filled('subject')) {
+            $request->merge(['subject' => 'Project RFP & Feasibility Inquiry']);
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|email|max:150',

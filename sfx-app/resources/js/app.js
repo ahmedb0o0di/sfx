@@ -826,10 +826,23 @@ function initProjectModals() {
       // If user clicked a direct link or interactive anchor, allow normal navigation
       if (e.target.closest('a, .solution-card-link')) return;
       const id = card.getAttribute('data-id');
+      const targetUrl = card.getAttribute('data-url') || (id ? `/projects/${id}` : null);
+
+      if (!id && !targetUrl) return;
+
+      // On small screens (<= 768px), navigate directly to the separate project details page
+      if (window.innerWidth <= 768) {
+        if (targetUrl) {
+          window.location.href = targetUrl;
+        }
+        return;
+      }
+
+      // On desktop screens (> 768px), open the pop-up modal if data exists
       if (id && projectData[id]) {
         openModal(id);
-      } else if (id) {
-        window.location.href = `/projects/${id}`;
+      } else if (targetUrl) {
+        window.location.href = targetUrl;
       }
     });
   });

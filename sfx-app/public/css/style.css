@@ -3152,7 +3152,7 @@ button, input, select, textarea {
 
 @media (max-width: 768px) {
   .modal-overlay {
-    padding: 0.5rem;
+    display: none !important;
   }
   
   .modal-card {

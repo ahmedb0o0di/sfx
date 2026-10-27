@@ -478,14 +478,18 @@
     <!-- 4-Column Projects Showcase Grid -->
     <div class="projects-showcase-grid">
       @forelse($allProjects as $project)
-      <article class="project-showcase-card" data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}" data-id="{{ $project->slug }}">
+      <article class="project-showcase-card" data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}" data-id="{{ $project->slug }}" data-url="{{ route('projects.show', $project->slug) }}">
         <div class="project-showcase-img">
           <img src="{{ asset($project->thumbnail_image) }}" alt="{{ $project->title }}" loading="lazy">
           <span class="project-location-badge">{{ $project->location }}</span>
         </div>
         <div class="project-showcase-body">
           <span class="project-showcase-category">{{ $project->category ? $project->category->name : 'Architectural' }}</span>
-          <h3 class="project-showcase-title">{{ $project->title }}</h3>
+          <h3 class="project-showcase-title">
+            <a href="{{ route('projects.show', $project->slug) }}" style="color: inherit; text-decoration: none;">
+              {{ $project->title }}
+            </a>
+          </h3>
           <div class="project-showcase-meta">
             <span>{{ $project->membrane_material ?? ($project->client_name ?? 'Tensile Membrane') }}</span>
             <span>{{ $project->covered_area }}</span>
@@ -494,14 +498,18 @@
       </article>
       @empty
       <!-- Fallback project cards from Option-1 -->
-      <article class="project-showcase-card" data-category="architectural" data-id="al-jamea">
+      <article class="project-showcase-card" data-category="architectural" data-id="al-jamea" data-url="{{ route('projects.show', 'al-jamea') }}">
         <div class="project-showcase-img">
           <img src="{{ asset('assets/images/projects/al-jamea-etfe.png') }}" alt="Al Jamea Tus Saifiyah Single Skin ETFE Membrane" loading="lazy">
           <span class="project-location-badge">Nairobi, Kenya</span>
         </div>
         <div class="project-showcase-body">
           <span class="project-showcase-category">Architectural ETFE</span>
-          <h3 class="project-showcase-title">Al Jamea Tus Saifiyah ETFE Roof</h3>
+          <h3 class="project-showcase-title">
+            <a href="{{ route('projects.show', 'al-jamea') }}" style="color: inherit; text-decoration: none;">
+              Al Jamea Tus Saifiyah ETFE Roof
+            </a>
+          </h3>
           <div class="project-showcase-meta">
             <span>Single Skin ETFE</span>
             <span>4,800 m²</span>

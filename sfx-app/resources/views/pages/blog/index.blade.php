@@ -31,9 +31,9 @@
       @foreach($posts as $post)
       <article class="insight-card" style="background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 25px rgba(0,0,0,0.03);">
         <div>
-          <div style="height: 240px; overflow: hidden;">
-            <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
+          <a href="{{ route('blog.show', $post->slug) }}" style="display: block; height: 240px; overflow: hidden; text-decoration: none;">
+            <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+          </a>
           <div style="padding: 2rem;">
             <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748b; margin-bottom: 0.75rem;">
               <span style="font-weight: 700; color: #f3b90d; text-transform: uppercase;">{{ $post->category }}</span>

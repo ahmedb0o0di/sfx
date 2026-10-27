@@ -686,9 +686,9 @@
     <div class="insights-matrix-grid">
       @forelse($latestPosts as $post)
       <article class="insight-card">
-        <div class="insight-thumb">
+        <a href="{{ route('blog.show', $post->slug) }}" class="insight-thumb" style="display: block; text-decoration: none;">
           <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}" loading="lazy">
-        </div>
+        </a>
         <div class="insight-body">
           <div class="insight-meta">
             <span class="insight-tag">{{ $post->category }}</span>
@@ -714,9 +714,9 @@
       @empty
       <!-- Fallback Option-1 Articles -->
       <article class="insight-card">
-        <div class="insight-thumb">
+        <a href="{{ route('blog.index') }}" class="insight-thumb" style="display: block; text-decoration: none;">
           <img src="{{ asset('assets/images/solutions/architectural.png') }}" alt="Evolution of ETFE Architecture" loading="lazy">
-        </div>
+        </a>
         <div class="insight-body">
           <div class="insight-meta">
             <span class="insight-tag">Whitepaper</span>
@@ -728,9 +728,9 @@
         </div>
       </article>
       <article class="insight-card">
-        <div class="insight-thumb">
+        <a href="{{ route('blog.index') }}" class="insight-thumb" style="display: block; text-decoration: none;">
           <img src="{{ asset('assets/images/solutions/commercial.jpg') }}" alt="Wind & Desert Resilient Tensile Engineering" loading="lazy">
-        </div>
+        </a>
         <div class="insight-body">
           <div class="insight-meta">
             <span class="insight-tag">Engineering Guide</span>
@@ -742,9 +742,9 @@
         </div>
       </article>
       <article class="insight-card">
-        <div class="insight-thumb">
+        <a href="{{ route('blog.index') }}" class="insight-thumb" style="display: block; text-decoration: none;">
           <img src="{{ asset('assets/images/solutions/air-supported-asati.jpg') }}" alt="ASATI Air-Supported Domes" loading="lazy">
-        </div>
+        </a>
         <div class="insight-body">
           <div class="insight-meta">
             <span class="insight-tag">Technology Insight</span>
@@ -756,9 +756,9 @@
         </div>
       </article>
       <article class="insight-card">
-        <div class="insight-thumb">
+        <a href="{{ route('blog.index') }}" class="insight-thumb" style="display: block; text-decoration: none;">
           <img src="{{ asset('assets/images/solutions/lifecycle-amc.jpg') }}" alt="Lifecycle Maintenance and Inspection" loading="lazy">
-        </div>
+        </a>
         <div class="insight-body">
           <div class="insight-meta">
             <span class="insight-tag">Maintenance Protocol</span>

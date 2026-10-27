@@ -5,61 +5,124 @@
 
 @section('content')
 <!-- ==========================================================================
-     SECTION 1: DYNAMIC ARCHITECTURAL HERO
+     SECTION 2: HERO SECTION (DYNAMIC ARCHITECTURAL BANNER)
      ========================================================================== -->
 <section class="hero" id="home" style="position: relative; overflow: hidden; background: #081C38;">
   <div class="hero-background" style="position: absolute; inset: 0; z-index: 1;">
-    <img src="{{ asset('assets/images/hero.jpg') }}" alt="High-Resolution Architectural Tensile Structure at Twilight" class="hero-bg-img" fetchpriority="high" style="width: 100%; height: 100%; object-fit: cover;">
-    <div class="hero-overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(8, 28, 56, 0.92) 0%, rgba(4, 16, 38, 0.82) 55%, rgba(8, 28, 56, 0.94) 100%);"></div>
+    <img src="{{ asset('assets/images/hero.jpg') }}" alt="High-Resolution Architectural Tensile Structure at Twilight"
+      class="hero-bg-img" fetchpriority="high" style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="hero-overlay"
+      style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(8, 28, 56, 0.92) 0%, rgba(4, 16, 38, 0.78) 55%, rgba(8, 28, 56, 0.92) 100%);">
+    </div>
   </div>
 
   <div class="container" style="position: relative; z-index: 2;">
-    <div class="hero-content">
-      <div class="hero-badge-wrap">
-        <span class="hero-badge">
-          <span class="badge-dot"></span>
-          {{ \App\Models\Setting::get('hero_tag', 'Official SFXMEC Regional Entity — UAE & Egypt') }}
-        </span>
+    <div class="hero-blueprint-grid">
+      <!-- Left Column (60%) -->
+      <div class="hero-blueprint-left">
+        <div class="hero-pill"
+          style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.5rem; backdrop-filter: blur(8px);">
+          <span class="hero-pill-badge"
+            style="background: #D99B26; color: #081C38; font-weight: 800; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 999px; text-transform: uppercase;">85+ Years Heritage</span>
+          <span class="hero-pill-text" style="color: #ffffff; font-size: 0.8rem; font-weight: 500;">Specialized Tensile &amp; Lightweight Contractor</span>
+        </div>
+
+        <h1 class="hero-blueprint-h1">
+          Engineering Inspiring Spaces.<br>Delivering Lasting Performance.
+        </h1>
+
+        <p class="hero-blueprint-sub">
+          Specialists in Tensile Membrane, Lightweight and Air-Supported Structures across the Middle East, Africa
+          and beyond. Turnkey design development, non-linear engineering, cleanroom fabrication, and lifetime
+          structural maintenance.
+        </p>
+
+        <div class="hero-blueprint-ctas">
+          <a href="#solutions" class="btn btn-hero-solid">
+            <span>Our Solutions</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="{{ route('projects.index') }}" class="btn btn-hero-white">
+            <span>View Projects</span>
+          </a>
+        </div>
       </div>
 
-      <h1 class="hero-title">
-        Engineering <span class="text-gradient">Inspiring Spaces.</span><br>
-        Delivering Lasting Performance.
-      </h1>
+      <!-- Right Column (40% - Floating ASATI Partnership Card) -->
+      <div class="hero-blueprint-right">
+        <div class="hero-asati-card">
+          <div class="hero-asati-badge">Strategic Regional Alliance</div>
+          <div class="hero-asati-logo-wrap">
+            <img src="{{ asset('assets/images/asati-logo.svg') }}" alt="ASATI United Arab Emirates"
+              style="height: 50px; width: auto; max-width: 100%;">
+          </div>
+          <h3>Delivering Air-Supported Structures Across MENA</h3>
+          <p>
+            In partnership with ASATI (Air Structures American Technologies, Inc.), delivering turnkey air-supported
+            domes for sports arenas, industrial bulk warehousing, seasonal exhibitions, and rapid-deployment
+            facilities.
+          </p>
+          <div class="hero-asati-specs">
+            <div class="hero-asati-spec-item">
+              <strong>150m+</strong>
+              <span>Clear Span</span>
+            </div>
+            <div class="hero-asati-spec-item">
+              <strong>HVAC</strong>
+              <span>Climate Control</span>
+            </div>
+            <div class="hero-asati-spec-item">
+              <strong>Rapid</strong>
+              <span>Turnkey Erection</span>
+            </div>
+          </div>
+          <a href="{{ route('services.index') }}#air-supported" class="hero-asati-link"
+            onclick="const el = document.querySelector('#card-asati'); if (el) { el.scrollIntoView({behavior:'smooth'}); }">
+            <span>Learn More About ASATI Air Domes</span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <p class="hero-subtitle">
-        {{ \App\Models\Setting::get('hero_subtitle', 'Pioneering tensile membrane architecture, ETFE transparent atriums, and ASATI air-supported domes for stadium landmarks, airports, and luxury venues across the Middle East and Africa since 1937.') }}
-      </p>
-
-      <div class="hero-actions">
-        <a href="{{ route('projects.index') }}" class="btn btn-hero-primary">
-          <span>Explore Verified Portfolio</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-        </a>
-        <button type="button" class="btn btn-hero-white" id="btnHeroEstimator" onclick="document.getElementById('estimatorModal').style.display='flex'">
-          <span>Dynamic Cost Estimator</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </button>
+<!-- ==========================================================================
+     SECTION 3: TRUST METRICS & HERITAGE BAR (5-COLUMN MATRIX)
+     ========================================================================== -->
+<section class="trust-stats-bar" id="trust-metrics">
+  <div class="container">
+    <div class="trust-stats-grid">
+      <div class="trust-stat-box">
+        <div class="trust-stat-val" data-target="85" data-suffix="+">85+</div>
+        <div class="trust-stat-label">Years of Heritage</div>
+        <div class="trust-stat-sub">Originated in 1937</div>
       </div>
 
-      <!-- Trust Badges Bar (Statistics Counters) -->
-      <div class="hero-stats-grid">
-        <div class="hero-stat-card">
-          <span class="stat-number">{{ \App\Models\Setting::get('stat_projects', '9,000+') }}</span>
-          <span class="stat-label">{{ \App\Models\Setting::get('stat_projects_label', 'Global Completed Projects') }}</span>
-        </div>
-        <div class="hero-stat-card">
-          <span class="stat-number">{{ \App\Models\Setting::get('stat_experience', '85+') }}</span>
-          <span class="stat-label">{{ \App\Models\Setting::get('stat_experience_label', 'Years Heritage (Since 1937)') }}</span>
-        </div>
-        <div class="hero-stat-card">
-          <span class="stat-number">{{ \App\Models\Setting::get('stat_mena_years', '19+') }}</span>
-          <span class="stat-label">{{ \App\Models\Setting::get('stat_mena_years_label', 'Years in MENA (Since 2005)') }}</span>
-        </div>
-        <div class="hero-stat-card">
-          <span class="stat-number">{{ \App\Models\Setting::get('stat_area', '1.2M m²') }}</span>
-          <span class="stat-label">{{ \App\Models\Setting::get('stat_area_label', 'Fabric Membrane Installed') }}</span>
-        </div>
+      <div class="trust-stat-box">
+        <div class="trust-stat-val" data-target="9000" data-suffix="+">9,000+</div>
+        <div class="trust-stat-label">Projects Delivered</div>
+        <div class="trust-stat-sub">Proven Global Track Record</div>
+      </div>
+
+      <div class="trust-stat-box">
+        <div class="trust-stat-val" data-target="30" data-suffix="+">30+</div>
+        <div class="trust-stat-label">Countries Served</div>
+        <div class="trust-stat-sub">Middle East, Africa &amp; Beyond</div>
+      </div>
+
+      <div class="trust-stat-box">
+        <div class="trust-stat-val" style="font-size: 1.55rem; color: #0B5ED7;">End-to-End</div>
+        <div class="trust-stat-label">Turnkey Solutions</div>
+        <div class="trust-stat-sub">From Design to Lifecycle AMC</div>
+      </div>
+
+      <div class="trust-stat-box">
+        <div class="trust-stat-val" style="font-size: 1.35rem; color: #008E38;">ISO Certified</div>
+        <div class="trust-stat-label">Safety, Quality &amp; Eco</div>
+        <div class="trust-stat-sub">ISO 9001 | 14001 | 45001</div>
       </div>
     </div>
   </div>

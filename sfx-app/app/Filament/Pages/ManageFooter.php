@@ -43,7 +43,7 @@ class ManageFooter extends Page implements HasForms
             
             // Social Media Channels
             'social_linkedin' => Setting::get('social_linkedin', 'https://www.linkedin.com/company/structurflex/'),
-            'social_twitter' => Setting::get('social_twitter', 'https://twitter.com/structurflex'),
+            'social_twitter' => Setting::get('social_twitter', Setting::get('social_x', 'https://x.com/structurflex')),
             'social_facebook' => Setting::get('social_facebook', ''),
             'social_instagram' => Setting::get('social_instagram', ''),
             'social_youtube' => Setting::get('social_youtube', ''),
@@ -319,7 +319,7 @@ class ManageFooter extends Page implements HasForms
                                             ->nullable(),
 
                                         TextInput::make('social_twitter')
-                                            ->label('Twitter / X')
+                                            ->label('X')
                                             ->placeholder('https://x.com/...')
                                             ->url()
                                             ->nullable(),

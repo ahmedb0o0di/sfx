@@ -711,30 +711,34 @@ function initProjectModals() {
     if (currentIndex === -1) currentIndex = 0;
 
     // 1. Immediately display the product image with 100% full uncropped clarity & ambient glow
+    const imgPath = data.image ? (data.image.startsWith('/') || data.image.startsWith('http') ? data.image : '/' + data.image) : '';
     if (modalImg) {
-      modalImg.src = data.image;
+      modalImg.src = imgPath;
       modalImg.alt = data.title;
       modalImg.style.opacity = '1';
-      modalImg.onclick = () => window.open(data.image, '_blank');
+      modalImg.onclick = () => window.open(imgPath, '_blank');
     }
 
     if (modalBackdrop) {
-      modalBackdrop.src = data.image;
+      modalBackdrop.src = imgPath;
     }
 
     if (modalExpand) {
-      modalExpand.href = data.image;
+      modalExpand.href = imgPath;
     }
 
     // 2. Render interactive photo gallery thumbnails strip
     const thumbsStrip = document.getElementById('modalThumbsStrip');
     if (thumbsStrip) {
-      const galleryList = (data.gallery && data.gallery.length) ? data.gallery : [data.image];
-      thumbsStrip.innerHTML = galleryList.map((gImg, idx) => `
-        <button class="modal-thumb-item ${idx === 0 ? 'active' : ''}" data-img="${gImg}" type="button" aria-label="View photo angle ${idx + 1}">
-          <img src="${gImg}" alt="${data.title} photo ${idx + 1}">
+      const galleryList = (data.gallery && data.gallery.length) ? data.gallery : [imgPath];
+      thumbsStrip.innerHTML = galleryList.map((gImg, idx) => {
+        const fullGImg = gImg.startsWith('/') || gImg.startsWith('http') ? gImg : '/' + gImg;
+        return `
+        <button class="modal-thumb-item ${idx === 0 ? 'active' : ''}" data-img="${fullGImg}" type="button" aria-label="View photo angle ${idx + 1}">
+          <img src="${fullGImg}" alt="${data.title} photo ${idx + 1}">
         </button>
-      `).join('');
+      `;
+      }).join('');
 
       thumbsStrip.querySelectorAll('.modal-thumb-item').forEach((btn, bIdx) => {
         btn.addEventListener('click', (e) => {
@@ -800,7 +804,7 @@ function initProjectModals() {
 
     const inquireBtn = document.getElementById('modalInquireBtn');
     if (inquireBtn) {
-      inquireBtn.href = `contact.html?project=${encodeURIComponent(data.title)}`;
+      inquireBtn.href = `/contact?project=${encodeURIComponent(data.title)}`;
     }
 
     modalOverlay.classList.add('open');
@@ -829,13 +833,14 @@ function initProjectModals() {
       const id = card.getAttribute('data-id');
       if (id && projectData[id]) {
         openModal(id);
+      } else if (id) {
+        window.location.href = `/projects/${id}`;
       }
     });
   });
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-  }
+  const closeButtons = modalOverlay.querySelectorAll('.modal-close-btn, #modalCloseBtn');
+  closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
 
   if (nextBtn) {
     nextBtn.addEventListener('click', (e) => {

@@ -155,7 +155,7 @@ class ManageHeader extends Page implements HasForms
 
                         Repeater::make('header_nav_menu')
                             ->label('Navigation Menu Items')
-                            ->description('Reorder, add, or toggle links displayed in the main top header menu.')
+                            ->helperText('Reorder, add, or toggle links displayed in the main top header menu.')
                             ->schema([
                                 Select::make('page')
                                     ->label('Destination Page')

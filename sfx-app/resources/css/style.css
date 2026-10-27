@@ -5859,3 +5859,11 @@ button, input, select, textarea {
     grid-template-columns: 1fr !important;
   }
 }
+
+@media (max-width: 991px) {
+  .about-recognition-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+    text-align: center;
+  }
+}

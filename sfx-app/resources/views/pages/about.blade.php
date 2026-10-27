@@ -103,4 +103,35 @@
     </div>
   </div>
 </section>
+
+<!-- ==========================================================================
+     STRATEGIC RECOGNITION / MINISTRY OF PUBLIC WORKS AWARD
+     ========================================================================== -->
+<section class="section" style="background-color: #ffffff; padding: 5rem 0;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3.5rem; align-items: center;" class="about-recognition-grid">
+      <div style="border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background: #f8fafc; padding: 1.5rem; text-align: center;">
+        <img src="{{ asset('assets/images/credentials/ministry-public-works-award.png') }}" alt="Ministry of Public Works Strategic Partner Award" style="max-height: 320px; width: auto; margin: 0 auto; display: block; border-radius: 8px;">
+        <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem; display: block;">Official UAE Ministry of Public Works Award</span>
+      </div>
+
+      <div>
+        <span class="section-tag" style="background: #fef8eb; color: #D99B26; border: 1px solid rgba(217, 155, 38, 0.3); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">Strategic Recognition</span>
+        <h2 style="font-size: 2.15rem; font-weight: 800; color: var(--navy-primary); margin: 0.75rem 0 1rem; line-height: 1.25;">
+          Ministry of Public Works Strategic Partner Award
+        </h2>
+        <p style="font-size: 1.05rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">
+          Structurflex Middle East Contracting LLC was formally honored by the <strong>United Arab Emirates Ministry of Public Works on Tuesday, 17th June 2014</strong> as one of the strategic partners collaborating in achieving the ministry's national infrastructure vision.
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">
+          Structurflex Middle East has successfully engineered and executed <strong>14 successful projects with the Ministry of Public Works since 2007</strong>, establishing an unblemished record for high-precision tensile engineering, structural safety, and durability.
+        </p>
+        <a href="{{ route('contact.index') }}" class="btn btn-primary" style="background: var(--navy-primary); color: #fff; border: none; padding: 0.85rem 1.75rem; border-radius: 6px; font-weight: 700;">
+          <span>Partner With Our UAE Practice</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 @endsection

@@ -668,39 +668,108 @@
 @endif
 
 <!-- ==========================================================================
-     SECTION 7: TECHNICAL WHITEPAPERS & INSIGHTS
+     SECTION 8: INSIGHTS & RESOURCES HUB (ENGINEERING KNOWLEDGE)
      ========================================================================== -->
-<section class="section" style="background-color: #ffffff; padding: 5.5rem 0;">
+<section class="section" id="resources" style="background-color: #F4F6F9; padding: 5.5rem 0;">
   <div class="container">
     <div class="section-header text-center" style="margin-bottom: 3.5rem;">
-      <span class="section-tag">Knowledge Hub</span>
-      <h2 style="font-size: 2.35rem; font-weight: 800; color: var(--navy-primary); margin-top: 0.75rem;">Engineering Whitepapers &amp; Architectural Insights</h2>
-      <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto; font-size: 1rem; line-height: 1.6;">
-        Technical publications from our computational modeling desk in Dubai.
-      </p>
+      <span class="section-tag"
+        style="background: #edf4fd; color: #0B5ED7; border: 1px solid rgba(11, 94, 215, 0.25); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px;">Engineering Knowledge</span>
+      <h2 class="section-title"
+        style="font-size: var(--h2-size); font-weight: 800; color: var(--navy-primary); margin: 0.75rem 0 0.5rem; letter-spacing: -0.02em;">
+        INSIGHTS &amp; RESOURCES</h2>
+      <p class="section-subtitle"
+        style="font-size: 1.1rem; color: var(--text-muted); max-width: 620px; margin: 0 auto; line-height: 1.6;">Technical
+        whitepapers, tensile engineering case studies, and daylighting research from our MENA technical teams.</p>
     </div>
 
-    <div class="insights-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-      @foreach($latestPosts as $post)
-      <article class="insight-card" style="background: #F8FAFC; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="height: 200px; overflow: hidden;">
-            <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 1.75rem;">
-            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-bottom: 0.75rem;">
-              <span style="font-weight: 700; color: #f3b90d;">{{ $post->category }}</span>
-              <span>{{ $post->reading_time_minutes }} Min Read</span>
-            </div>
-            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 0.75rem; line-height: 1.4;">{{ $post->title }}</h3>
-            <p style="font-size: 0.85rem; color: #64748b; line-height: 1.5; margin: 0;">{{ $post->excerpt }}</p>
-          </div>
+    <div class="insights-matrix-grid">
+      @forelse($latestPosts as $post)
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}" loading="lazy">
         </div>
-        <div style="padding: 0 1.75rem 1.75rem;">
-          <a href="{{ route('blog.show', $post->slug) }}" style="color: #0284c7; font-weight: 700; font-size: 0.88rem; text-decoration: none;">Read Publication &rarr;</a>
+        <div class="insight-body">
+          <div class="insight-meta">
+            <span class="insight-tag">{{ $post->category }}</span>
+            <span>{{ $post->reading_time_minutes ?? 6 }} Min Read</span>
+          </div>
+          <h3 class="insight-title">
+            <a href="{{ route('blog.show', $post->slug) }}" style="color: inherit; text-decoration: none;">
+              {{ $post->title }}
+            </a>
+          </h3>
+          <p class="insight-excerpt">{{ $post->excerpt }}</p>
+          @php
+            $actionWord = match($post->category) {
+              'Whitepaper' => 'Whitepaper',
+              'Engineering Guide' => 'Guide',
+              'Maintenance Protocol' => 'Protocol',
+              default => 'Article',
+            };
+          @endphp
+          <a href="{{ route('blog.show', $post->slug) }}" class="insight-link">Read {{ $actionWord }} &rarr;</a>
         </div>
       </article>
-      @endforeach
+      @empty
+      <!-- Fallback Option-1 Articles -->
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="{{ asset('assets/images/solutions/architectural.png') }}" alt="Evolution of ETFE Architecture" loading="lazy">
+        </div>
+        <div class="insight-body">
+          <div class="insight-meta">
+            <span class="insight-tag">Whitepaper</span>
+            <span>6 Min Read</span>
+          </div>
+          <h3 class="insight-title">The Evolution of ETFE: From Aerospace to Architectural Icons</h3>
+          <p class="insight-excerpt">How single skin and multi-layer pneumatic ETFE cushions revolutionized high-performance daylighting in modern Middle Eastern atriums.</p>
+          <a href="{{ route('blog.index') }}" class="insight-link">Read Whitepaper &rarr;</a>
+        </div>
+      </article>
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="{{ asset('assets/images/solutions/commercial.jpg') }}" alt="Wind & Desert Resilient Tensile Engineering" loading="lazy">
+        </div>
+        <div class="insight-body">
+          <div class="insight-meta">
+            <span class="insight-tag">Engineering Guide</span>
+            <span>8 Min Read</span>
+          </div>
+          <h3 class="insight-title">Engineering High-Wind & Desert Resilient Tensile Membranes</h3>
+          <p class="insight-excerpt">Finite element modeling (FEA) and anti-wicking lacquers engineered to resist sandstorms, solar UV degradation, and thermal expansion in the GCC.</p>
+          <a href="{{ route('blog.index') }}" class="insight-link">Read Guide &rarr;</a>
+        </div>
+      </article>
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="{{ asset('assets/images/solutions/air-supported-asati.jpg') }}" alt="ASATI Air-Supported Domes" loading="lazy">
+        </div>
+        <div class="insight-body">
+          <div class="insight-meta">
+            <span class="insight-tag">Technology Insight</span>
+            <span>5 Min Read</span>
+          </div>
+          <h3 class="insight-title">Air-Supported Dome Structures: The ASATI Partnership Advantage</h3>
+          <p class="insight-excerpt">Evaluating total cost of ownership, clear-span flexibility up to 150m+, and energy savings of modern air-supported domes for athletics and industry.</p>
+          <a href="{{ route('blog.index') }}" class="insight-link">Read Article &rarr;</a>
+        </div>
+      </article>
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="{{ asset('assets/images/solutions/lifecycle-amc.jpg') }}" alt="Lifecycle Maintenance and Inspection" loading="lazy">
+        </div>
+        <div class="insight-body">
+          <div class="insight-meta">
+            <span class="insight-tag">Maintenance Protocol</span>
+            <span>7 Min Read</span>
+          </div>
+          <h3 class="insight-title">Lifecycle Maintenance & Inspection: Preserving Structural Integrity</h3>
+          <p class="insight-excerpt">Laser cable re-tensioning, specialized non-abrasive washing protocols, and structural audits that extend membrane life past 35+ years.</p>
+          <a href="{{ route('blog.index') }}" class="insight-link">Read Protocol &rarr;</a>
+        </div>
+      </article>
+      @endforelse
     </div>
   </div>
 </section>

@@ -30,7 +30,7 @@ class HomeController extends Controller
         $materials = Material::orderBy('sort_order')->get();
         $latestPosts = Post::where('status', 'published')
             ->orderBy('published_at', 'desc')
-            ->take(3)
+            ->take(4)
             ->get();
 
         return view('pages.home', compact(

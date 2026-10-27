@@ -89,7 +89,7 @@
       <a href="{{ $ctaUrl }}" class="btn btn-request-consult" id="btnNavRFP">
         <span class="btn-text-full">{{ $ctaText }}</span>
         <span class="btn-text-mobile">Consult</span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg class="btn-consult-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </a>

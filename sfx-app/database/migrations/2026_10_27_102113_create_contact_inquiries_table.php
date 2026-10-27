@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('subject');
             $table->text('message');
             $table->string('attachment_path')->nullable();
-            $table->string('status')->default('new');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

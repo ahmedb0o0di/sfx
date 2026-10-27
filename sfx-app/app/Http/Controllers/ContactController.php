@@ -36,7 +36,7 @@ class ContactController extends Controller
             'subject' => $validated['subject'],
             'message' => $validated['message'],
             'attachment_path' => $attachmentPath,
-            'status' => 'new',
+            'status' => 'pending',
         ]);
 
         if ($request->wantsJson()) {

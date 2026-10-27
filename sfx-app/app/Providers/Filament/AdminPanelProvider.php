@@ -27,8 +27,25 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Structurflex Middle East')
+            ->brandLogo(fn () => asset('assets/images/logo.png'))
+            ->darkModeBrandLogo(fn () => asset('assets/images/logo-light.png'))
+            ->brandLogoHeight('3.2rem')
+            ->favicon(fn () => asset('assets/images/favicon.svg'))
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => [
+                    50 => '#fffbeb',
+                    100 => '#fef3c7',
+                    200 => '#fde68a',
+                    300 => '#fcd34d',
+                    400 => '#fbbf24',
+                    500 => '#f3b90d',
+                    600 => '#d97706',
+                    700 => '#b45309',
+                    800 => '#92400e',
+                    900 => '#78350f',
+                    950 => '#451a03',
+                ],
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

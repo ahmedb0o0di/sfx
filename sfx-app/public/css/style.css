@@ -2569,10 +2569,10 @@ button, input, select, textarea {
 
 .modal-card {
   background: #ffffff;
-  border-radius: 24px;
-  max-width: 1060px;
+  border-radius: 20px;
+  max-width: 920px;
   width: 100%;
-  max-height: 92vh;
+  max-height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
@@ -2718,15 +2718,15 @@ button, input, select, textarea {
 
 /* Modal Title & Meta Section (Clean, Unobstructed Header) */
 .modal-title-bar {
-  padding: 1.5rem 2.5rem 1rem;
+  padding: 1.25rem 2rem 0.65rem;
   background: #ffffff;
 }
 
 .modal-hero-pill-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.65rem;
+  gap: 0.65rem;
+  margin-bottom: 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -2734,9 +2734,9 @@ button, input, select, textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 0.35rem 0.85rem;
+  padding: 0.3rem 0.75rem;
   border-radius: 999px;
 }
 
@@ -2760,7 +2760,7 @@ button, input, select, textarea {
 
 .modal-product-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
   font-weight: 800;
   color: #081C38;
   line-height: 1.25;
@@ -2768,17 +2768,17 @@ button, input, select, textarea {
   margin: 0;
 }
 
-/* Dedicated Product Image Showcase (100% Clear, No Darkening Gradient) */
+/* Dedicated Product Image Showcase (Friendly View) */
 .modal-image-showcase {
   position: relative;
-  width: calc(100% - 5rem);
-  margin: 0 2.5rem 1.25rem;
-  height: 460px;
+  width: calc(100% - 4rem);
+  margin: 0 2rem 1rem;
+  height: clamp(240px, 34vh, 340px);
   background: #040d1a;
-  border-radius: 18px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(8, 28, 56, 0.15);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2791,32 +2791,31 @@ button, input, select, textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(32px) brightness(0.4);
-  transform: scale(1.2);
+  filter: blur(28px) brightness(0.4);
+  transform: scale(1.15);
   pointer-events: none;
   z-index: 1;
-  opacity: 0.9;
+  opacity: 0.85;
   transition: opacity 0.35s ease;
 }
 
 .modal-product-img {
+  width: 100%;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   display: block;
   position: relative;
   z-index: 2;
-  margin: auto;
-  border-radius: 6px;
+  border-radius: 14px;
   cursor: zoom-in;
-  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.55));
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-image-showcase:hover .modal-product-img {
-  transform: scale(1.025);
+  transform: scale(1.02);
 }
 
 .modal-image-badge-wrap {
@@ -2857,16 +2856,16 @@ button, input, select, textarea {
 .modal-thumbs-strip {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  margin: 0 2.5rem 1.5rem;
+  gap: 0.65rem;
+  margin: 0 2rem 1.15rem;
   overflow-x: auto;
   padding-bottom: 0.25rem;
 }
 
 .modal-thumb-item {
-  width: 92px;
-  height: 62px;
-  border-radius: 10px;
+  width: 78px;
+  height: 52px;
+  border-radius: 8px;
   overflow: hidden;
   border: 2px solid transparent;
   cursor: pointer;
@@ -2893,11 +2892,11 @@ button, input, select, textarea {
 .modal-specs-bar {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 1.25rem;
+  gap: 1.15rem;
   background: #0A1E3C;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.35rem 2.5rem;
+  padding: 1.05rem 2rem;
 }
 
 .modal-spec-cell {
@@ -2925,8 +2924,8 @@ button, input, select, textarea {
 .modal-body-content {
   display: grid;
   grid-template-columns: 1.8fr 1.2fr;
-  gap: 3rem;
-  padding: 2.75rem 2.5rem;
+  gap: 2.25rem;
+  padding: 2rem;
   align-items: flex-start;
   background: #ffffff;
 }
@@ -3164,7 +3163,7 @@ button, input, select, textarea {
   .modal-image-showcase {
     width: calc(100% - 2.5rem);
     margin: 0 1.25rem 0.75rem;
-    height: 300px;
+    height: 240px;
     border-radius: 14px;
   }
 

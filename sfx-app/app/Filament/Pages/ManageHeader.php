@@ -26,9 +26,9 @@ class ManageHeader extends Page implements HasForms
 
     protected static ?string $navigationGroup = 'Site Settings & Branding';
 
-    protected static ?string $navigationLabel = 'Header & Hero';
+    protected static ?string $navigationLabel = 'Header & Homepage';
 
-    protected static ?string $title = 'Header & Homepage Hero Management';
+    protected static ?string $title = 'Header & Homepage Management';
 
     protected static ?int $navigationSort = 1;
 
@@ -90,7 +90,32 @@ class ManageHeader extends Page implements HasForms
             'stat_5_val' => Setting::get('stat_5_val', 'ISO Certified'),
             'stat_5_label' => Setting::get('stat_5_label', 'Safety, Quality & Eco'),
             'stat_5_sub' => Setting::get('stat_5_sub', 'ISO 9001 | 14001 | 45001'),
+
+            // 5. Engineering Realization Process
+            'process_section_visible' => (bool) Setting::get('process_section_visible', true),
+            'process_section_tag' => Setting::get('process_section_tag', 'Engineering Realization Process'),
+            'process_section_title' => Setting::get('process_section_title', 'From 3D Computational Model to Laser-Rigged Structure'),
+            'process_section_subtitle' => Setting::get('process_section_subtitle', 'Our integrated EPC delivery model minimizes risk through non-linear FEA analysis, cleanroom CNC pattern welding, and millimeter-level pre-stressing.'),
+            'process_steps' => $this->getInitialProcessSteps(),
         ]);
+    }
+
+    protected function getInitialProcessSteps(): array
+    {
+        $saved = Setting::get('process_steps');
+        if ($saved) {
+            $decoded = json_decode($saved, true);
+            if (is_array($decoded) && count($decoded) > 0) {
+                return $decoded;
+            }
+        }
+
+        return [
+            ['step_number' => '01', 'title' => 'Form Finding & Equilibrium', 'description' => '3D non-linear dynamic relaxation algorithms determining optimal equilibrium shapes under minimal strain.', 'is_visible' => true],
+            ['step_number' => '02', 'title' => 'Non-Linear FEA Simulation', 'description' => 'Computational wind tunnel simulation and aero-elastic deflection analysis calibrated to GCC meteorological codes.', 'is_visible' => true],
+            ['step_number' => '03', 'title' => 'CNC Cutting & HF Welding', 'description' => 'Automated vacuum table CNC pattern cutting and high-frequency thermal welding ensuring seamless gas-tight joints.', 'is_visible' => true],
+            ['step_number' => '04', 'title' => 'Laser-Aligned Pre-Stressing', 'description' => 'Hydraulic tension jacking with laser survey verification to calibrate exact bi-axial pre-stress across boundary cables.', 'is_visible' => true],
+        ];
     }
 
     protected function getInitialNavMenu(): array
@@ -371,6 +396,71 @@ class ManageHeader extends Page implements HasForms
                             ]),
                     ])
                     ->collapsible(),
+
+                // 5. Engineering Realization Process Timeline
+                Section::make('Engineering Realization Process (Timeline Section)')
+                    ->description('Configure the sequential engineering delivery pipeline section displayed below the trust metrics on the homepage.')
+                    ->schema([
+                        Grid::make(3)
+                            ->schema([
+                                TextInput::make('process_section_tag')
+                                    ->label('Section Badge / Tag')
+                                    ->placeholder('Engineering Realization Process')
+                                    ->required()
+                                    ->columnSpan(2),
+
+                                Toggle::make('process_section_visible')
+                                    ->label('Show Section')
+                                    ->default(true),
+                            ]),
+
+                        TextInput::make('process_section_title')
+                            ->label('Section Headline (H2)')
+                            ->placeholder('From 3D Computational Model to Laser-Rigged Structure')
+                            ->required(),
+
+                        Textarea::make('process_section_subtitle')
+                            ->label('Section Description')
+                            ->rows(2)
+                            ->required(),
+
+                        Repeater::make('process_steps')
+                            ->label('Process Stages & Steps')
+                            ->helperText('Manage each sequential phase of the EPC delivery process (reorder, add, or customize text).')
+                            ->schema([
+                                Grid::make(12)
+                                    ->schema([
+                                        TextInput::make('step_number')
+                                            ->label('Step Number')
+                                            ->placeholder('01')
+                                            ->required()
+                                            ->columnSpan(2),
+
+                                        TextInput::make('title')
+                                            ->label('Stage Title')
+                                            ->placeholder('e.g. Form Finding & Equilibrium')
+                                            ->required()
+                                            ->columnSpan(8),
+
+                                        Toggle::make('is_visible')
+                                            ->label('Visible')
+                                            ->default(true)
+                                            ->columnSpan(2),
+
+                                        Textarea::make('description')
+                                            ->label('Technical Description')
+                                            ->rows(2)
+                                            ->placeholder('Enter detailed technical overview of this stage...')
+                                            ->required()
+                                            ->columnSpan(12),
+                                    ]),
+                            ])
+                            ->collapsible()
+                            ->itemLabel(fn (array $state): ?string => ($state['step_number'] ?? '') . ' - ' . ($state['title'] ?? 'Stage'))
+                            ->addActionLabel('Add Process Stage')
+                            ->reorderableWithButtons(),
+                    ])
+                    ->collapsible(),
             ])
             ->statePath('data');
     }
@@ -379,7 +469,7 @@ class ManageHeader extends Page implements HasForms
     {
         return [
             Action::make('save')
-                ->label('Save Header & Hero Settings')
+                ->label('Save Header & Homepage Settings')
                 ->submit('save')
                 ->icon('heroicon-o-check-circle')
                 ->color('primary'),
@@ -442,9 +532,16 @@ class ManageHeader extends Page implements HasForms
         Setting::set('stat_5_label', $state['stat_5_label'] ?? '');
         Setting::set('stat_5_sub', $state['stat_5_sub'] ?? '');
 
+        // 5. Engineering Realization Process
+        Setting::set('process_section_visible', $state['process_section_visible'] ?? true);
+        Setting::set('process_section_tag', $state['process_section_tag'] ?? '');
+        Setting::set('process_section_title', $state['process_section_title'] ?? '');
+        Setting::set('process_section_subtitle', $state['process_section_subtitle'] ?? '');
+        Setting::set('process_steps', json_encode(array_values($state['process_steps'] ?? [])));
+
         Notification::make()
-            ->title('Header & Hero settings saved successfully')
-            ->body('The public website header and hero banner have been updated with your latest changes.')
+            ->title('Header & Homepage settings saved successfully')
+            ->body('The website navigation header, hero banner, trust metrics, and realization process have been updated with your latest changes.')
             ->success()
             ->send();
     }

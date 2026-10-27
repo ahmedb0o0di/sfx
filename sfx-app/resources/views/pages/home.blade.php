@@ -160,44 +160,50 @@
   </div>
 </section>
 
+@php
+  $processVisible = (bool) \App\Models\Setting::get('process_section_visible', true);
+  $processTag = \App\Models\Setting::get('process_section_tag', 'Engineering Realization Process');
+  $processTitle = \App\Models\Setting::get('process_section_title', 'From 3D Computational Model to Laser-Rigged Structure');
+  $processSubtitle = \App\Models\Setting::get('process_section_subtitle', 'Our integrated EPC delivery model minimizes risk through non-linear FEA analysis, cleanroom CNC pattern welding, and millimeter-level pre-stressing.');
+
+  $processStepsRaw = \App\Models\Setting::get('process_steps');
+  if ($processStepsRaw) {
+      $processSteps = json_decode($processStepsRaw, true);
+  } else {
+      $processSteps = [
+          ['step_number' => '01', 'title' => 'Form Finding & Equilibrium', 'description' => '3D non-linear dynamic relaxation algorithms determining optimal equilibrium shapes under minimal strain.', 'is_visible' => true],
+          ['step_number' => '02', 'title' => 'Non-Linear FEA Simulation', 'description' => 'Computational wind tunnel simulation and aero-elastic deflection analysis calibrated to GCC meteorological codes.', 'is_visible' => true],
+          ['step_number' => '03', 'title' => 'CNC Cutting & HF Welding', 'description' => 'Automated vacuum table CNC pattern cutting and high-frequency thermal welding ensuring seamless gas-tight joints.', 'is_visible' => true],
+          ['step_number' => '04', 'title' => 'Laser-Aligned Pre-Stressing', 'description' => 'Hydraulic tension jacking with laser survey verification to calibrate exact bi-axial pre-stress across boundary cables.', 'is_visible' => true],
+      ];
+  }
+  $visibleSteps = array_filter($processSteps ?? [], fn($s) => !isset($s['is_visible']) || $s['is_visible']);
+@endphp
+
+@if($processVisible)
 <!-- ==========================================================================
      SECTION 2: REALIZATION PROCESS TIMELINE
      ========================================================================== -->
 <section class="section section-timeline" style="background-color: #041026; color: #fff; padding: 5rem 0;">
   <div class="container">
     <div class="section-header text-center" style="margin-bottom: 3.5rem;">
-      <span class="section-tag" style="background: rgba(255, 255, 255, 0.08); color: #f3b90d; border: 1px solid rgba(255, 255, 255, 0.15);">Engineering Realization Process</span>
-      <h2 style="color: #fff; font-size: 2.25rem; font-weight: 800; margin-top: 0.75rem;">From 3D Computational Model to Laser-Rigged Structure</h2>
-      <p style="color: #cbd5e1; max-width: 650px; margin: 0 auto; font-size: 1rem; line-height: 1.6;">Our integrated EPC delivery model minimizes risk through non-linear FEA analysis, cleanroom CNC pattern welding, and millimeter-level pre-stressing.</p>
+      <span class="section-tag" style="background: rgba(255, 255, 255, 0.08); color: #f3b90d; border: 1px solid rgba(255, 255, 255, 0.15);">{{ $processTag }}</span>
+      <h2 style="color: #fff; font-size: 2.25rem; font-weight: 800; margin-top: 0.75rem;">{{ $processTitle }}</h2>
+      <p style="color: #cbd5e1; max-width: 650px; margin: 0 auto; font-size: 1rem; line-height: 1.6;">{{ $processSubtitle }}</p>
     </div>
 
-    <div class="timeline-stages-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+    <div class="timeline-stages-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+      @foreach($visibleSteps as $step)
       <div class="timeline-stage-card" style="background: #081C38; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem; position: relative;">
-        <span style="font-size: 2.5rem; font-weight: 800; color: #f3b90d; opacity: 0.35; position: absolute; top: 1rem; right: 1.5rem;">01</span>
-        <h4 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Form Finding &amp; Equilibrium</h4>
-        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6;">3D non-linear dynamic relaxation algorithms determining optimal equilibrium shapes under minimal strain.</p>
+        <span style="font-size: 2.5rem; font-weight: 800; color: #f3b90d; opacity: 0.35; position: absolute; top: 1rem; right: 1.5rem;">{{ $step['step_number'] ?? sprintf('%02d', $loop->iteration) }}</span>
+        <h4 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">{{ $step['title'] ?? '' }}</h4>
+        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6;">{{ $step['description'] ?? '' }}</p>
       </div>
-
-      <div class="timeline-stage-card" style="background: #081C38; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem; position: relative;">
-        <span style="font-size: 2.5rem; font-weight: 800; color: #f3b90d; opacity: 0.35; position: absolute; top: 1rem; right: 1.5rem;">02</span>
-        <h4 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Non-Linear FEA Simulation</h4>
-        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6;">Computational wind tunnel simulation and aero-elastic deflection analysis calibrated to GCC meteorological codes.</p>
-      </div>
-
-      <div class="timeline-stage-card" style="background: #081C38; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem; position: relative;">
-        <span style="font-size: 2.5rem; font-weight: 800; color: #f3b90d; opacity: 0.35; position: absolute; top: 1rem; right: 1.5rem;">03</span>
-        <h4 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">CNC Cutting &amp; HF Welding</h4>
-        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6;">Automated vacuum table CNC pattern cutting and high-frequency thermal welding ensuring seamless gas-tight joints.</p>
-      </div>
-
-      <div class="timeline-stage-card" style="background: #081C38; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem; position: relative;">
-        <span style="font-size: 2.5rem; font-weight: 800; color: #f3b90d; opacity: 0.35; position: absolute; top: 1rem; right: 1.5rem;">04</span>
-        <h4 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Laser-Aligned Pre-Stressing</h4>
-        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6;">Hydraulic tension jacking with laser survey verification to calibrate exact bi-axial pre-stress across boundary cables.</p>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>
+@endif
 
 <!-- ==========================================================================
      SECTION 3: INTERACTIVE MATERIALS MATRIX

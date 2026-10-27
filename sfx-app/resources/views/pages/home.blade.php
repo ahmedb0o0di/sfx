@@ -148,7 +148,7 @@
       @foreach($stats as $st)
         @if(!empty(trim($st['val'] ?? '')))
         <div class="trust-stat-box">
-          <div class="trust-stat-val" data-target="{{ preg_replace('/[^0-9]/', '', $st['val']) }}" data-suffix="{{ preg_replace('/[0-9]/', '', $st['val']) }}" @if($st['color']) style="font-size: 1.45rem; color: {{ $st['color'] }};" @endif>
+          <div class="trust-stat-val @if($st['color']) trust-stat-val-text @endif" data-target="{{ preg_replace('/[^0-9]/', '', $st['val']) }}" data-suffix="{{ preg_replace('/[0-9]/', '', $st['val']) }}" @if($st['color']) style="color: {{ $st['color'] }};" @endif>
             {{ $st['val'] }}
           </div>
           <div class="trust-stat-label">{{ $st['label'] }}</div>

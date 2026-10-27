@@ -30,14 +30,14 @@
 <!-- Content Section -->
 <section class="section" style="background-color: #F8FAFC; padding: 5rem 0;">
   <div class="container">
-    <div style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 3rem; align-items: start;">
+    <div class="service-detail-grid">
       <div>
         <div style="border-radius: 12px; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.06);">
           <img src="{{ asset($service->hero_image) }}" alt="{{ $service->title }}" style="width: 100%; height: auto; display: block;">
         </div>
 
-        <div style="background: #fff; border-radius: 12px; padding: 2.5rem; border: 1px solid #e2e8f0;">
-          <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 1rem;">
+        <div style="background: #fff; border-radius: 12px; padding: 2.5rem; border: 1px solid #e2e8f0;" class="service-detail-body">
+          <h2 style="font-size: clamp(1.4rem, 3.5vw, 1.75rem); font-weight: 800; color: var(--navy-primary); margin-bottom: 1rem;">
             System Overview &amp; Architectural Engineering
           </h2>
           <p style="font-size: 1rem; color: #475569; line-height: 1.8; margin-bottom: 1.5rem;">
@@ -48,7 +48,7 @@
           <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--navy-primary); margin: 2rem 0 1rem;">
             Technical Performance Standards
           </h3>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="service-specs-grid">
             @foreach($service->technical_specs as $key => $val)
             <div style="background: #F8FAFC; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.25rem;">
               <span style="font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 0.35rem;">{{ $key }}</span>

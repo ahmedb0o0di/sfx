@@ -438,9 +438,11 @@
           </svg>
           @endif
         </div>
-        <div class="capability-step-num">{{ $step['step_num'] ?? ('Step ' . sprintf('%02d', $loop->iteration)) }}</div>
-        <h3 class="capability-step-title">{{ $step['title'] ?? '' }}</h3>
-        <p class="capability-step-desc">{{ $step['description'] ?? '' }}</p>
+        <div class="capability-step-content">
+          <div class="capability-step-num">{{ $step['step_num'] ?? ('Step ' . sprintf('%02d', $loop->iteration)) }}</div>
+          <h3 class="capability-step-title">{{ $step['title'] ?? '' }}</h3>
+          <p class="capability-step-desc">{{ $step['description'] ?? '' }}</p>
+        </div>
       </div>
       @endforeach
     </div>

@@ -27,7 +27,7 @@
 <!-- Solutions Grid -->
 <section class="section" style="background-color: #F4F6F9; padding: 5.5rem 0;">
   <div class="container">
-    <div class="solutions-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+    <div class="solutions-grid">
       @foreach($services as $service)
       <article class="solution-card" style="background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
         <div>
@@ -70,32 +70,32 @@
 </section>
 
 <!-- Capabilities Anchor -->
-<section id="capabilities" style="background-color: #081C38; color: #fff; padding: 5.5rem 0;">
+<section id="capabilities" class="services-capabilities-section">
   <div class="container">
     <div class="section-header text-center" style="margin-bottom: 3.5rem;">
       <span class="section-tag" style="background: rgba(255, 255, 255, 0.12); color: #f3b90d; border: 1px solid rgba(255, 255, 255, 0.2);">In-House Capabilities</span>
-      <h2 style="font-size: 2.35rem; font-weight: 800; color: #ffffff; margin-top: 0.75rem;">Turnkey EPC Engineering Stewardship</h2>
-      <p style="color: #cbd5e1; max-width: 650px; margin: 0 auto; font-size: 1rem; line-height: 1.6;">
+      <h2 style="font-size: clamp(1.6rem, 4vw, 2.35rem); font-weight: 800; color: #ffffff; margin-top: 0.75rem;">Turnkey EPC Engineering Stewardship</h2>
+      <p style="color: #cbd5e1; max-width: 650px; margin: 0 auto; font-size: clamp(0.92rem, 2vw, 1rem); line-height: 1.6;">
         From parametric form-finding to crane rigging, all phases are controlled in-house to guarantee structural safety and handover milestones.
       </p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
-      <div style="background: #041026; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem;">
-        <h4 style="color: #f3b90d; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem;">3D Form Finding</h4>
-        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin: 0;">Parametric non-linear relaxation models to achieve minimal surface tension and aerodynamic stability.</p>
+    <div class="services-capabilities-grid">
+      <div class="services-capability-card">
+        <h4 class="services-capability-title">3D Form Finding</h4>
+        <p class="services-capability-desc">Parametric non-linear relaxation models to achieve minimal surface tension and aerodynamic stability.</p>
       </div>
-      <div style="background: #041026; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem;">
-        <h4 style="color: #f3b90d; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem;">Structural FEA</h4>
-        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin: 0;">Wind tunnel computational dynamics and ASCE 55-16 stress simulation for severe desert thermal gusts.</p>
+      <div class="services-capability-card">
+        <h4 class="services-capability-title">Structural FEA</h4>
+        <p class="services-capability-desc">Wind tunnel computational dynamics and ASCE 55-16 stress simulation for severe desert thermal gusts.</p>
       </div>
-      <div style="background: #041026; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem;">
-        <h4 style="color: #f3b90d; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem;">CNC Fabrication</h4>
-        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin: 0;">Computerized vacuum-bed cutting and high-frequency thermal welding ensuring gas-tight tolerances.</p>
+      <div class="services-capability-card">
+        <h4 class="services-capability-title">CNC Fabrication</h4>
+        <p class="services-capability-desc">Computerized vacuum-bed cutting and high-frequency thermal welding ensuring gas-tight tolerances.</p>
       </div>
-      <div style="background: #041026; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem;">
-        <h4 style="color: #f3b90d; font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem;">Laser Pre-Stressing</h4>
-        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin: 0;">Hydraulic cable tensioning and total-station optical survey verification ensuring zero sag or ponding.</p>
+      <div class="services-capability-card">
+        <h4 class="services-capability-title">Laser Pre-Stressing</h4>
+        <p class="services-capability-desc">Hydraulic cable tensioning and total-station optical survey verification ensuring zero sag or ponding.</p>
       </div>
     </div>
   </div>

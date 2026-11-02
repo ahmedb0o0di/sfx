@@ -17,14 +17,17 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="{{ asset('assets/images/favicon.svg') }}">
 
-  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <!-- Google Fonts: Bricolage Grotesque, Instrument Sans, Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ file_exists(public_path('css/style.css')) ? filemtime(public_path('css/style.css')) : time() }}">
   @stack('styles')
+
+  <!-- GSAP Animation Library (for brand preloader & smooth transitions) -->
+  <script src="{{ asset('js/vendor/gsap.min.js') }}"></script>
 
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -50,6 +53,8 @@
   </script>
 </head>
 <body>
+  @include('components.preloader')
+
   @include('components.header')
 
   <main>

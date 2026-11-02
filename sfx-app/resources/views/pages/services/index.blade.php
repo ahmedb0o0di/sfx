@@ -70,34 +70,5 @@
 </section>
 
 <!-- Capabilities Anchor -->
-<section id="capabilities" class="services-capabilities-section">
-  <div class="container">
-    <div class="section-header text-center" style="margin-bottom: 3.5rem;">
-      <span class="section-tag" style="background: rgba(255, 255, 255, 0.12); color: #f3b90d; border: 1px solid rgba(255, 255, 255, 0.2);">In-House Capabilities</span>
-      <h2 style="font-size: clamp(1.6rem, 4vw, 2.35rem); font-weight: 800; color: #ffffff; margin-top: 0.75rem;">Turnkey EPC Engineering Stewardship</h2>
-      <p style="color: #cbd5e1; max-width: 650px; margin: 0 auto; font-size: clamp(0.92rem, 2vw, 1rem); line-height: 1.6;">
-        From parametric form-finding to crane rigging, all phases are controlled in-house to guarantee structural safety and handover milestones.
-      </p>
-    </div>
-
-    <div class="services-capabilities-grid">
-      <div class="services-capability-card">
-        <h4 class="services-capability-title">3D Form Finding</h4>
-        <p class="services-capability-desc">Parametric non-linear relaxation models to achieve minimal surface tension and aerodynamic stability.</p>
-      </div>
-      <div class="services-capability-card">
-        <h4 class="services-capability-title">Structural FEA</h4>
-        <p class="services-capability-desc">Wind tunnel computational dynamics and ASCE 55-16 stress simulation for severe desert thermal gusts.</p>
-      </div>
-      <div class="services-capability-card">
-        <h4 class="services-capability-title">CNC Fabrication</h4>
-        <p class="services-capability-desc">Computerized vacuum-bed cutting and high-frequency thermal welding ensuring gas-tight tolerances.</p>
-      </div>
-      <div class="services-capability-card">
-        <h4 class="services-capability-title">Laser Pre-Stressing</h4>
-        <p class="services-capability-desc">Hydraulic cable tensioning and total-station optical survey verification ensuring zero sag or ponding.</p>
-      </div>
-    </div>
-  </div>
-</section>
+@include('components.capabilities-section')
 @endsection

@@ -19,7 +19,7 @@ class ProjectController extends Controller
             });
         }
 
-        $projects = $query->get();
+        $projects = $query->paginate(12)->withQueryString();
         $categories = ProjectCategory::orderBy('sort_order')->get();
 
         return view('pages.projects.index', compact('projects', 'categories', 'selectedCategory'));

@@ -60,9 +60,9 @@
         </div>
       </div>
 
-      <!-- Right Column: Consultation Card & Estimator -->
+      <!-- Right Column: Consultation Card -->
       <div>
-        <div style="background: #fff; border-radius: 12px; padding: 2rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.04); margin-bottom: 2rem;">
+        <div style="background: #fff; border-radius: 12px; padding: 2rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.04);">
           <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 1rem;">
             Request Feasibility Review
           </h3>
@@ -73,16 +73,6 @@
             <span>Consult Our Engineers</span>
             <span>&rarr;</span>
           </a>
-        </div>
-
-        <div style="background: #081C38; border-radius: 12px; padding: 2rem; color: #fff; text-align: center;">
-          <h4 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Model Scope &amp; Budget</h4>
-          <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 1.5rem;">
-            Test different materials and area footprints with our interactive calculator.
-          </p>
-          <button type="button" class="btn btn-hero-white" style="width: 100%; justify-content: center;" onclick="document.getElementById('estimatorModal').style.display='flex'">
-            <span>Launch Estimator</span>
-          </button>
         </div>
       </div>
     </div>

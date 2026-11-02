@@ -14,6 +14,7 @@ class CareerApplication extends Model
     protected $guarded = [];
 
     protected $casts = [
+        'interview_date' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

@@ -6,6 +6,7 @@ use App\Filament\Resources\CareerApplicationResource\Pages;
 use App\Models\Career;
 use App\Models\CareerApplication;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
@@ -89,8 +90,44 @@ class CareerApplicationResource extends Resource
 
                             Textarea::make('admin_notes')
                                 ->label('Internal Recruiter Notes')
-                                ->placeholder('Add comments from interview, salary expectations, structural feedback...')
+                                ->placeholder('Add comments from screening, candidate correspondence, salary expectations...')
                                 ->rows(3)
+                                ->columnSpanFull(),
+                        ]),
+                    ]),
+
+                Section::make('Interviewer Feedback & Technical Assessment')
+                    ->description('Record interview evaluation, structural engineering competency, panel observations, and hiring recommendation.')
+                    ->icon('heroicon-o-chat-bubble-left-right')
+                    ->schema([
+                        Grid::make(12)->schema([
+                            TextInput::make('interviewer_name')
+                                ->label('Interviewer / Panel Lead')
+                                ->placeholder('e.g., Eng. Tariq Mansoor (Senior Structural Lead)')
+                                ->columnSpan(4),
+
+                            DatePicker::make('interview_date')
+                                ->label('Interview Date')
+                                ->native(false)
+                                ->displayFormat('M d, Y')
+                                ->columnSpan(4),
+
+                            Select::make('interview_rating')
+                                ->label('Interview Recommendation')
+                                ->options([
+                                    'strongly_recommended' => '⭐ Strongly Recommended',
+                                    'recommended' => '✓ Recommended for Hire',
+                                    'neutral' => '⏳ Under Consideration / Backup',
+                                    'not_recommended' => '✕ Not Recommended',
+                                ])
+                                ->placeholder('Select hiring recommendation...')
+                                ->native(false)
+                                ->columnSpan(4),
+
+                            Textarea::make('interviewer_feedback')
+                                ->label('Interviewer Feedback & Technical Evaluation')
+                                ->placeholder('Document comprehensive interview evaluation: technical membrane form-finding assessment, structural analysis software proficiency (Easy, ANSYS, Rhino/Grasshopper), design problem-solving, communication & cultural fit...')
+                                ->rows(6)
                                 ->columnSpanFull(),
                         ]),
                     ]),
@@ -207,6 +244,14 @@ class CareerApplicationResource extends Resource
                     ->label('Response Preview')
                     ->limit(45)
                     ->tooltip(fn (CareerApplication $record): ?string => $record->cover_letter),
+
+                TextColumn::make('interviewer_feedback')
+                    ->label('Interviewer Feedback')
+                    ->limit(35)
+                    ->tooltip(fn (CareerApplication $record): ?string => $record->interviewer_feedback)
+                    ->placeholder('Pending interview')
+                    ->icon(fn (?string $state) => $state ? 'heroicon-m-chat-bubble-bottom-center-text' : null)
+                    ->color(fn (?string $state) => $state ? 'info' : 'gray'),
 
                 SelectColumn::make('status')
                     ->label('Status')

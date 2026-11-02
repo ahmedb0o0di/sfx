@@ -4,15 +4,21 @@ namespace App\Filament\Pages;
 
 use App\Models\Setting;
 use Filament\Actions\Action;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\HtmlString;
 
 class ManageAbout extends Page implements HasForms
 {
@@ -69,6 +75,7 @@ class ManageAbout extends Page implements HasForms
 
             // 4. Strategic Recognition / Award
             'about_award_image' => Setting::get('about_award_image', 'assets/images/credentials/ministry-public-works-award.png'),
+            'about_award_image_file' => Storage::disk('public')->exists(Setting::get('about_award_image', '')) ? Setting::get('about_award_image') : null,
             'about_award_caption' => Setting::get('about_award_caption', 'Official UAE Ministry of Public Works Award'),
             'about_award_tag' => Setting::get('about_award_tag', 'Strategic Recognition'),
             'about_award_title' => Setting::get('about_award_title', 'Ministry of Public Works Strategic Partner Award'),
@@ -238,9 +245,69 @@ class ManageAbout extends Page implements HasForms
                     ->collapsible()
                     ->schema([
                         Grid::make(12)->schema([
+                            FileUpload::make('about_award_image_file')
+                                ->label('Upload Award Photo')
+                                ->image()
+                                ->disk('public')
+                                ->directory('about')
+                                ->visibility('public')
+                                ->maxSize(5120)
+                                ->live()
+                                ->afterStateUpdated(function ($state, Set $set) {
+                                    if ($state) {
+                                        $path = is_array($state) ? reset($state) : $state;
+                                        if (is_string($path)) {
+                                            $set('about_award_image', $path);
+                                        }
+                                    }
+                                })
+                                ->helperText('Upload an award photo directly from your device (PNG, JPG, WebP).')
+                                ->columnSpan(6),
+
+                            Placeholder::make('about_award_image_preview')
+                                ->label('Current Award Photo Preview')
+                                ->content(function (Get $get) {
+                                    $image = $get('about_award_image_file') ?? $get('about_award_image') ?? Setting::get('about_award_image');
+                                    if (is_array($image)) {
+                                        $image = reset($image);
+                                    }
+                                    if (empty($image)) {
+                                        return new HtmlString('<div class="p-4 text-xs text-gray-400 italic border border-dashed rounded-lg text-center">No image selected or uploaded yet.</div>');
+                                    }
+
+                                    // Resolve URL
+                                    $url = '';
+                                    if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {
+                                        $url = $image;
+                                    } elseif (str_starts_with($image, 'storage/') || str_starts_with($image, 'assets/')) {
+                                        $url = asset($image);
+                                    } elseif (Storage::disk('public')->exists($image)) {
+                                        $url = Storage::disk('public')->url($image);
+                                    } else {
+                                        $url = asset($image);
+                                    }
+
+                                    return new HtmlString('
+                                        <div class="p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center gap-2">
+                                            <div class="relative max-h-44 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-600 bg-white shadow-sm flex items-center justify-center p-1">
+                                                <img src="' . e($url) . '" alt="Current Award Photo" class="max-h-40 max-w-full object-contain block mx-auto rounded" onerror="this.src=\'' . asset('assets/images/credentials/ministry-public-works-award.png') . '\'" />
+                                            </div>
+                                            <div class="w-full flex items-center justify-between text-[11px] text-gray-500 pt-1 border-t border-gray-200/60 dark:border-gray-700">
+                                                <span class="font-mono truncate max-w-[200px]" title="' . e($image) . '">' . e(basename($image)) . '</span>
+                                                <a href="' . e($url) . '" target="_blank" class="text-primary-600 dark:text-primary-400 font-semibold hover:underline flex items-center gap-1">
+                                                    View Full &rarr;
+                                                </a>
+                                            </div>
+                                        </div>
+                                    ');
+                                })
+                                ->columnSpan(6),
+
                             TextInput::make('about_award_image')
                                 ->label('Award Photo Path or URL')
+                                ->helperText('Automatically populated upon file upload, or specify a custom asset path / URL.')
                                 ->required()
+                                ->live(onBlur: true)
                                 ->columnSpan(6),
 
                             TextInput::make('about_award_caption')
@@ -299,6 +366,13 @@ class ManageAbout extends Page implements HasForms
     public function save(): void
     {
         $state = $this->form->getState();
+
+        if (!empty($state['about_award_image_file'])) {
+            $uploadedPath = is_array($state['about_award_image_file']) ? reset($state['about_award_image_file']) : $state['about_award_image_file'];
+            if (is_string($uploadedPath) && !empty($uploadedPath)) {
+                $state['about_award_image'] = $uploadedPath;
+            }
+        }
 
         foreach ($state as $key => $value) {
             Setting::set($key, $value);

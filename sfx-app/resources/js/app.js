@@ -1392,6 +1392,105 @@ function initDynamicEstimatorModal() {
   updateCalculations();
 }
 
+function initCareerPagination() {
+  const container = document.getElementById('career-rows-container');
+  if (!container || container.dataset.paginationInit === 'true') return;
+
+  const items = Array.from(container.querySelectorAll('.career-item'));
+  const totalItems = items.length;
+  const itemsPerPage = 3;
+
+  const paginationNav = document.getElementById('career-pagination');
+  const prevBtn = document.getElementById('career-prev-btn');
+  const nextBtn = document.getElementById('career-next-btn');
+  const numbersContainer = document.getElementById('career-page-numbers');
+
+  if (totalItems <= itemsPerPage) {
+    if (paginationNav) {
+      paginationNav.style.display = 'none';
+    }
+    items.forEach(item => {
+      item.style.display = '';
+    });
+    return;
+  }
+
+  if (!paginationNav || !prevBtn || !nextBtn || !numbersContainer) return;
+  container.dataset.paginationInit = 'true';
+
+  paginationNav.style.display = 'flex';
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  let currentPage = 1;
+
+  function renderPage(page, shouldScroll) {
+    currentPage = page;
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    items.forEach((item, index) => {
+      if (index >= startIndex && index < endIndex) {
+        item.style.display = '';
+        item.classList.remove('animating-in');
+        void item.offsetWidth;
+        item.classList.add('animating-in');
+      } else {
+        item.style.display = 'none';
+        item.classList.remove('animating-in');
+      }
+    });
+
+    prevBtn.disabled = (currentPage === 1);
+    nextBtn.disabled = (currentPage === totalPages);
+
+    renderPageNumbers();
+
+    if (shouldScroll) {
+      const careersSection = document.getElementById('careers');
+      if (careersSection) {
+        const rect = careersSection.getBoundingClientRect();
+        if (rect.top < 0 || rect.top > window.innerHeight * 0.4) {
+          careersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+  }
+
+  function renderPageNumbers() {
+    numbersContainer.innerHTML = '';
+    for (let p = 1; p <= totalPages; p++) {
+      const numBtn = document.createElement('button');
+      numBtn.type = 'button';
+      numBtn.className = 'career-page-num' + (p === currentPage ? ' active' : '');
+      numBtn.setAttribute('aria-label', 'Go to page ' + p);
+      if (p === currentPage) {
+        numBtn.setAttribute('aria-current', 'page');
+      }
+      numBtn.textContent = p;
+      numBtn.addEventListener('click', () => {
+        if (p !== currentPage) {
+          renderPage(p, true);
+        }
+      });
+      numbersContainer.appendChild(numBtn);
+    }
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      renderPage(currentPage - 1, true);
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      renderPage(currentPage + 1, true);
+    }
+  });
+
+  renderPage(1, false);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initDynamicEstimatorModal();
+  initCareerPagination();
 });

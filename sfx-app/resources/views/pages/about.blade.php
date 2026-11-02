@@ -131,7 +131,19 @@
   <div class="container">
     <div class="about-recognition-grid">
       <div class="about-award-card">
-        <img src="{{ asset(\App\Models\Setting::get('about_award_image', 'assets/images/credentials/ministry-public-works-award.png')) }}" alt="{{ \App\Models\Setting::get('about_award_title', 'Ministry of Public Works Strategic Partner Award') }}" style="max-height: 320px; width: auto; margin: 0 auto; display: block; border-radius: 8px;" loading="lazy">
+        @php
+          $awardImgRaw = \App\Models\Setting::get('about_award_image', 'assets/images/credentials/ministry-public-works-award.png');
+          if (str_starts_with($awardImgRaw, 'http://') || str_starts_with($awardImgRaw, 'https://')) {
+              $awardImgUrl = $awardImgRaw;
+          } elseif (str_starts_with($awardImgRaw, 'storage/') || str_starts_with($awardImgRaw, 'assets/')) {
+              $awardImgUrl = asset($awardImgRaw);
+          } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($awardImgRaw)) {
+              $awardImgUrl = \Illuminate\Support\Facades\Storage::disk('public')->url($awardImgRaw);
+          } else {
+              $awardImgUrl = asset($awardImgRaw);
+          }
+        @endphp
+        <img src="{{ $awardImgUrl }}" alt="{{ \App\Models\Setting::get('about_award_title', 'Ministry of Public Works Strategic Partner Award') }}" style="max-height: 320px; width: auto; margin: 0 auto; display: block; border-radius: 8px;" loading="lazy">
         <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem; display: block;">
           {{ \App\Models\Setting::get('about_award_caption', 'Official UAE Ministry of Public Works Award') }}
         </span>

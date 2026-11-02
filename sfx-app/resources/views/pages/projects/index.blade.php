@@ -71,18 +71,13 @@
       </div>
       @endforelse
     </div>
-  </div>
-</section>
 
-<!-- Bottom Scope Estimator CTA -->
-<section style="background: #081C38; color: #fff; padding: 4.5rem 0; text-align: center;">
-  <div class="container">
-    <h2 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem;">Planning a Tensile or Air Dome Project?</h2>
-    <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto 2rem; font-size: 1rem;">Our computational engineers can review your preliminary drawings, analyze span parameters, and provide budget estimations.</p>
-    <button type="button" class="btn btn-request-consult" style="padding: 1rem 2.25rem;" onclick="document.getElementById('estimatorModal').style.display='flex'">
-      <span>Open Scope &amp; Cost Estimator</span>
-      <span>&rarr;</span>
-    </button>
+    <!-- Pagination -->
+    @if($projects->hasPages())
+    <div style="margin-top: 3.5rem; display: flex; justify-content: center;">
+      {{ $projects->links() }}
+    </div>
+    @endif
   </div>
 </section>
 @endsection

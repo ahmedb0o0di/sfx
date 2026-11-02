@@ -185,18 +185,6 @@
           </div>
         </div>
 
-        <!-- Estimator Widget Card -->
-        <div style="background: #081C38; border-radius: 14px; padding: clamp(1.5rem, 3vw, 2rem); color: #fff; text-align: center; box-shadow: 0 10px 25px rgba(8, 28, 56, 0.15);">
-          <span style="font-size: 1.75rem; display: block; margin-bottom: 0.5rem;">📐</span>
-          <h4 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Estimate Similar Structure</h4>
-          <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 1.5rem;">
-            Calculate membrane tonnage and turnaround timeline for your footprint.
-          </p>
-          <button type="button" class="btn btn-hero-white" style="width: 100%; justify-content: center;" onclick="document.getElementById('estimatorModal').style.display='flex'">
-            <span>Launch Estimator</span>
-          </button>
-        </div>
-
       </div>
 
     </div>

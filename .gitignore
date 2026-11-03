@@ -2,6 +2,8 @@
 __MACOSX/
 node_modules/
 vendor/
+!sfx-app/public/js/vendor/
+!sfx-app/resources/js/vendor/
 .env
 *.sqlite
 .vercel

@@ -366,6 +366,11 @@
   </div>
 </section>
 
+<!-- ==========================================================================
+     SECTION: ASATI AIR DOME MOTION GRAPHIC ("A roof held up by air")
+     ========================================================================== -->
+@include('components.dome-section')
+
 @include('components.capabilities-section')
 
 <!-- ==========================================================================

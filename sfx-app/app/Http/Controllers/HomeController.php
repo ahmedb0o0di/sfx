@@ -17,12 +17,12 @@ class HomeController extends Controller
         $featuredProjects = Project::with('category')
             ->where('is_featured', true)
             ->orderBy('sort_order')
-            ->take(6)
+            ->take(8)
             ->get();
 
         $allProjects = Project::with('category')
             ->orderBy('sort_order')
-            ->take(12)
+            ->take(18)
             ->get();
 
         $categories = ProjectCategory::orderBy('sort_order')->get();

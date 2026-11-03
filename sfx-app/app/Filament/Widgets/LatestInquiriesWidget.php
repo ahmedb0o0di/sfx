@@ -52,3 +52,4 @@ class LatestInquiriesWidget extends BaseWidget
             ->paginated(false);
     }
 }
+

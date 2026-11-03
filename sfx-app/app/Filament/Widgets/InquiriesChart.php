@@ -48,3 +48,4 @@ class InquiriesChart extends ChartWidget
         return 'line';
     }
 }
+

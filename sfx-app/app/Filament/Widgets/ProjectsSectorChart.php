@@ -50,3 +50,4 @@ class ProjectsSectorChart extends ChartWidget
         return 'doughnut';
     }
 }
+

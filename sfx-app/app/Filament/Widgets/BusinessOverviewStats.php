@@ -60,3 +60,4 @@ class BusinessOverviewStats extends BaseWidget
         ];
     }
 }
+

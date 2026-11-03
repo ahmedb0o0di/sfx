@@ -4,6 +4,7 @@ node_modules/
 vendor/
 !sfx-app/public/js/vendor/
 !sfx-app/resources/js/vendor/
+!sfx-app/resources/views/vendor/
 .env
 *.sqlite
 .vercel

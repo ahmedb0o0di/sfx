@@ -47,6 +47,9 @@
             var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             window.SFX.dome3d.init(reduced);
         }
+        window.addEventListener('load', function () {
+            if (window.ScrollTrigger) ScrollTrigger.refresh();
+        });
     });
 </script>
 @endpush

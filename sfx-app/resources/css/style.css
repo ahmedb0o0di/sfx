@@ -145,7 +145,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
 }
@@ -155,7 +155,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
   position: relative;
@@ -7454,13 +7454,15 @@ h6,
    ========================================================================== */
 .dome {
   position: relative;
-  height: 320vh;
+  height: 220vh;
   background: #e9e2d4;
+  overflow: clip;
 }
 
 .dome-stage {
   position: sticky;
   top: 0;
+  width: 100%;
   height: 100vh;
   height: 100svh;
   overflow: hidden;
@@ -7624,7 +7626,7 @@ h6,
 
 @media (max-width: 860px) {
   .dome {
-    height: 280vh;
+    height: 190vh;
   }
   .dome-card {
     top: auto;

@@ -111,13 +111,25 @@ SFX.dome3d = (function () {
     camera.position.copy(cp); camera.lookAt(ct);
   }
 
+  function renderScene() {
+    updateMembrane(clock);
+    cameraAt(state.p);
+    if (ui.photo) {
+      ui.photo.style.opacity = state.photo.toFixed(3);
+      ui.photo.style.pointerEvents = state.photo > 0.6 ? 'auto' : 'none';
+    }
+    if (ui.note) {
+      ui.note.style.opacity = (1 - state.photo).toFixed(3);
+    }
+    if (state.photo < 0.999 && renderer && scene && camera) {
+      renderer.render(scene, camera);
+    }
+  }
+
   function frame(now) {
     raf = 0; if (!running) return; raf = requestAnimationFrame(frame);
     var dt = Math.min(0.05, (now - (lastT || now)) / 1000); lastT = now; clock += dt;
-    updateMembrane(clock); cameraAt(state.p);
-    ui.photo.style.opacity = state.photo.toFixed(3);
-    ui.note.style.opacity = (1 - state.photo).toFixed(3);
-    if (state.photo < 0.999) renderer.render(scene, camera);
+    renderScene();
   }
   function setRunning() {
     var should = started && visible && routeActive && !document.hidden;
@@ -137,32 +149,67 @@ SFX.dome3d = (function () {
     camera = new THREE.PerspectiveCamera(36, 1, 1, 2000);
     buildScene(); resize();
     updateMembrane(0); cameraAt(0); K.precompile(renderer, scene, camera);
-    var tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
+    var tl = gsap.timeline({
+      paused: true,
+      defaults: { ease: 'none' },
+      onUpdate: renderScene
+    });
     tl.to(state, { p: 1, duration: 1 }, 0)
       .to(state, { lay: 1, duration: 0.12 }, 0.06)
       .to(state, { inflate: 1, duration: 0.6, ease: 'power1.inOut' }, 0.18)
-      .to(state, { photo: 1, duration: 0.12 }, 0.86);
-    st = ScrollTrigger.create({ trigger: document.getElementById('dome'), start: 'top top', end: 'bottom bottom', scrub: 0.8, animation: tl });
+      .to(state, { photo: 1, duration: 0.16 }, 0.82);
+
+    var sec = document.getElementById('dome');
+    st = ScrollTrigger.create({
+      trigger: sec,
+      pin: stage,
+      pinSpacing: false,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0.6,
+      animation: tl,
+      onUpdate: function () {
+        renderScene();
+      }
+    });
     window.addEventListener('resize', resize);
-    started = true; setRunning();
+    started = true;
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    setRunning();
   }
   function staticMode() {
     var sec = document.getElementById('dome');
-    sec.classList.add('is-static'); canvas.hidden = true; ui.photo.style.opacity = 1; ui.note.hidden = true;
+    if (sec) sec.classList.add('is-static');
+    if (canvas) canvas.hidden = true;
+    if (ui.photo) ui.photo.style.opacity = 1;
+    if (ui.note) ui.note.hidden = true;
   }
 
   function init(reduced) {
-    stage = document.querySelector('.dome-stage'); canvas = document.getElementById('domeCanvas');
+    stage = document.querySelector('.dome-stage');
+    canvas = document.getElementById('domeCanvas');
     ui = { photo: document.getElementById('domePhoto'), note: document.getElementById('domeNote') };
+    if (!stage || !canvas) return;
+
     mobile = Math.min(window.innerWidth, window.innerHeight) < 700 || /Mobi|Android/i.test(navigator.userAgent);
     if (mobile) { NT = 80; NR = 22; }
     if (reduced || !(THREE && K && K.webgl())) { staticMode(); return; }
-    ui.photo.style.opacity = 0;
-    // Build lazily when the section comes within a screen of the viewport
+    if (ui.photo) ui.photo.style.opacity = 0;
+
+    start();
+
     var sec = document.getElementById('dome');
-    new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) start(); visible = e.isIntersecting; setRunning(); });
-    }, { rootMargin: '100% 0px 100% 0px' }).observe(sec);
+    if (sec && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          visible = e.isIntersecting;
+          setRunning();
+        });
+      }, { rootMargin: '50% 0px 50% 0px' }).observe(sec);
+    } else {
+      visible = true;
+      setRunning();
+    }
     document.addEventListener('visibilitychange', setRunning);
   }
   return { init: init, setRouteActive: function (on) { routeActive = on; if (st) { on ? st.enable() : st.disable(false); } setRunning(); } };

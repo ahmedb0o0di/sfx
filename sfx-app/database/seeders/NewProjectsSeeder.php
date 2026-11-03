@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\ProjectCategory;
 use App\Models\ProjectImage;
 use Illuminate\Database\Seeder;
 
@@ -10,10 +11,31 @@ class NewProjectsSeeder extends Seeder
 {
     public function run(): void
     {
+        // Ensure categories exist
+        $archCat = ProjectCategory::firstOrCreate(
+            ['slug' => 'architectural'],
+            ['name' => 'Architectural ETFE/PTFE', 'filter_tag' => 'architectural', 'sort_order' => 1]
+        );
+
+        $sportsCat = ProjectCategory::firstOrCreate(
+            ['slug' => 'sports'],
+            ['name' => 'Sports & Stadia', 'filter_tag' => 'sports', 'sort_order' => 2]
+        );
+
+        ProjectCategory::firstOrCreate(
+            ['slug' => 'air-supported'],
+            ['name' => 'Air-Supported Domes', 'filter_tag' => 'air-supported', 'sort_order' => 3]
+        );
+
+        ProjectCategory::firstOrCreate(
+            ['slug' => 'infrastructure'],
+            ['name' => 'Infrastructure & Transit', 'filter_tag' => 'infrastructure', 'sort_order' => 4]
+        );
+
         $projects = [
             [
                 'slug' => 'childhood-development-centre-rak',
-                'category_id' => 1, // Architectural ETFE/PTFE
+                'category_id' => $archCat->id,
                 'title' => 'Childhood Development Centre Ras Al Khaimah',
                 'location' => 'Ras Al Khaimah, UAE',
                 'client_name' => 'Ministry of Community Development',
@@ -37,7 +59,7 @@ class NewProjectsSeeder extends Seeder
             ],
             [
                 'slug' => 'abu-dhabi-shooting-club',
-                'category_id' => 2, // Sports & Stadia
+                'category_id' => $sportsCat->id,
                 'title' => 'Abu Dhabi Shooting Club Tensile Roof',
                 'location' => 'Abu Dhabi, UAE',
                 'client_name' => 'Atkins / Armed Forces Officers\' Club',
@@ -63,7 +85,7 @@ class NewProjectsSeeder extends Seeder
             ],
             [
                 'slug' => 'al-ain-kindergartens',
-                'category_id' => 1, // Architectural ETFE/PTFE
+                'category_id' => $archCat->id,
                 'title' => 'Al Ain Educational Kindergartens',
                 'location' => 'Al Ain, UAE',
                 'client_name' => 'Parsons',
@@ -92,7 +114,7 @@ class NewProjectsSeeder extends Seeder
             ],
             [
                 'slug' => 'desert-palm-polo-estate',
-                'category_id' => 2, // Sports & Stadia
+                'category_id' => $sportsCat->id,
                 'title' => 'Desert Palm Polo Estate Canopies',
                 'location' => 'Dubai, UAE',
                 'client_name' => 'Al Bawardi Group',
@@ -117,7 +139,7 @@ class NewProjectsSeeder extends Seeder
             ],
             [
                 'slug' => 'dubai-outlet-mall',
-                'category_id' => 1, // Architectural ETFE/PTFE
+                'category_id' => $archCat->id,
                 'title' => 'Dubai Outlet Mall Central Dome',
                 'location' => 'Dubai, UAE',
                 'client_name' => 'Al Ahli Holding Group',
@@ -162,4 +184,3 @@ class NewProjectsSeeder extends Seeder
         }
     }
 }
-

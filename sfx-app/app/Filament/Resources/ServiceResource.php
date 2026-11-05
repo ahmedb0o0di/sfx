@@ -32,9 +32,20 @@ class ServiceResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required(),
                 Forms\Components\TextInput::make('subtitle'),
+                Forms\Components\TextInput::make('badge')
+                    ->label('Card Badge / Tag')
+                    ->placeholder('e.g. ETFE & PTFE, Stadia & Arenas'),
                 Forms\Components\FileUpload::make('hero_image')
-                    ->image(),
+                    ->image()
+                    ->directory('services'),
                 Forms\Components\TextInput::make('icon_name'),
+                Forms\Components\TextInput::make('sort_order')
+                    ->required()
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\Toggle::make('is_active')
+                    ->label('Active on Website')
+                    ->default(true),
                 Forms\Components\Textarea::make('summary')
                     ->required()
                     ->columnSpanFull(),
@@ -42,10 +53,6 @@ class ServiceResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('technical_specs')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('sort_order')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
             ]);
     }
 
@@ -53,15 +60,16 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->label('Active'),
                 Tables\Columns\TextColumn::make('title')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('badge')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('subtitle')
-                    ->searchable(),
                 Tables\Columns\ImageColumn::make('hero_image'),
-                Tables\Columns\TextColumn::make('icon_name')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('sort_order')
                     ->numeric()
                     ->sortable(),

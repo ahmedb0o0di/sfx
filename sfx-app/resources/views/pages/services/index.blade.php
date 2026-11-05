@@ -29,15 +29,20 @@
   <div class="container">
     <div class="solutions-grid">
       @foreach($services as $service)
-      <article class="solution-card">
+      <article class="solution-card" id="{{ $service->slug }}">
         <div>
-          <div class="solution-card-media">
+          <div class="solution-card-media" style="position: relative;">
             <a href="{{ route('services.show', $service->slug) }}" title="View {{ $service->title }} details">
-              <img src="{{ asset($service->hero_image) }}" alt="{{ $service->title }}" loading="lazy">
+              <img src="{{ $service->image_url }}" alt="{{ $service->title }}" loading="lazy">
             </a>
+            @if(!empty($service->badge_text))
+            <span class="solution-tag-badge" style="position: absolute; top: 12px; left: 12px; @if(str_contains(strtolower($service->badge_text), 'asati')) background: #0B5ED7; @endif">{{ $service->badge_text }}</span>
+            @endif
           </div>
           <div class="solution-card-body">
+            @if($service->subtitle)
             <span class="solution-card-subtitle">{{ $service->subtitle }}</span>
+            @endif
             <h3 class="solution-card-title">
               <a href="{{ route('services.show', $service->slug) }}">
                 {{ $service->title }}

@@ -26,7 +26,7 @@ class HomeController extends Controller
             ->get();
 
         $categories = ProjectCategory::orderBy('sort_order')->get();
-        $services = Service::orderBy('sort_order')->get();
+        $services = Service::where('is_active', true)->orderBy('sort_order')->get();
         $latestPosts = Post::where('status', 'published')
             ->orderBy('published_at', 'desc')
             ->take(4)

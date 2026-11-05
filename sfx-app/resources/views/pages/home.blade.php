@@ -178,174 +178,33 @@
     </div>
 
     <div class="solutions-segmented-grid">
-      <!-- Card 1: Architectural Structures -->
-      <article class="solution-hub-card">
-        <a href="{{ route('services.show', 'architectural-tensile') }}" class="solution-img-holder" style="display: block;">
-          <img src="{{ asset('assets/images/solutions/architectural.png') }}"
-            alt="Architectural Tensile Structures - Al Jamea ETFE" loading="lazy">
-          <span class="solution-tag-badge">ETFE & PTFE</span>
+      @foreach($services as $service)
+      <article class="solution-hub-card" id="solution-{{ $service->slug }}">
+        <a href="{{ route('services.show', $service->slug) }}" class="solution-img-holder" style="display: block;">
+          <img src="{{ $service->image_url }}"
+            alt="{{ $service->title }}" loading="lazy">
+          @if(!empty($service->badge_text))
+          <span class="solution-tag-badge" @if(str_contains(strtolower($service->badge_text), 'asati')) style="background: #0B5ED7;" @endif>{{ $service->badge_text }}</span>
+          @endif
         </a>
         <div class="solution-card-body">
           <h3>
-            <a href="{{ route('services.show', 'architectural-tensile') }}" style="color: inherit; text-decoration: none;">
-              Architectural Structures
+            <a href="{{ route('services.show', $service->slug) }}" style="color: inherit; text-decoration: none;">
+              {{ $service->title }}
             </a>
           </h3>
-          <p>Iconic translucent single skin and cushion ETFE daylighting systems, sculptural PTFE envelopes, and
-            bespoke building atriums that elevate architectural vision.</p>
+          <p>{{ $service->summary }}</p>
           <div class="solution-card-actions">
-            <a href="{{ route('services.show', 'architectural-tensile') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
+            <a href="{{ route('services.show', $service->slug) }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
               <span>View Specs &amp; Photos</span>
               <span>&rarr;</span>
             </a>
           </div>
         </div>
       </article>
+      @endforeach
 
-      <!-- Card 2: Sports & Recreation Structures -->
-      <article class="solution-hub-card">
-        <a href="{{ route('services.show', 'sports-canopies') }}" class="solution-img-holder" style="display: block;">
-          <img src="{{ asset('assets/images/solutions/sports.jpg') }}" alt="Sports and Recreation Tensile Canopies" loading="lazy">
-          <span class="solution-tag-badge">Stadia & Arenas</span>
-        </a>
-        <div class="solution-card-body">
-          <h3>
-            <a href="{{ route('services.show', 'sports-canopies') }}" style="color: inherit; text-decoration: none;">
-              Sports &amp; Recreation Structures
-            </a>
-          </h3>
-          <p>Column-free sports court canopies, grandstand stadium roofs, Olympic aquatics shelters, and school
-            sports complexes engineered for maximum thermal protection.</p>
-          <div class="solution-card-actions">
-            <a href="{{ route('services.show', 'sports-canopies') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
-              <span>View Specs &amp; Photos</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 3: Commercial & Retail Structures -->
-      <article class="solution-hub-card">
-        <a href="{{ route('services.show', 'commercial-atriums') }}" class="solution-img-holder" style="display: block;">
-          <img src="{{ asset('assets/images/solutions/commercial.jpg') }}"
-            alt="Commercial and Retail Tensile Roofing - Dubai Outlet Mall" loading="lazy">
-          <span class="solution-tag-badge">Malls & Atriums</span>
-        </a>
-        <div class="solution-card-body">
-          <h3>
-            <a href="{{ route('services.show', 'commercial-atriums') }}" style="color: inherit; text-decoration: none;">
-              Commercial &amp; Retail Structures
-            </a>
-          </h3>
-          <p>Desert-proof shopping center roofs, open-air retail canopies, hotel terraces, and civic bazaar canopies
-            providing soft ambient daylight and cool microclimates.</p>
-          <div class="solution-card-actions">
-            <a href="{{ route('services.show', 'commercial-atriums') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
-              <span>View Specs &amp; Photos</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 4: Transport & Infrastructure Structures -->
-      <article class="solution-hub-card">
-        <a href="{{ route('services.show', 'transport-infrastructure') }}" class="solution-img-holder" style="display: block;">
-          <img src="{{ asset('assets/images/solutions/transport.jpg') }}" alt="Transport and Infrastructure Tensile Canopies"
-            loading="lazy">
-          <span class="solution-tag-badge">Transit Hubs</span>
-        </a>
-        <div class="solution-card-body">
-          <h3>
-            <a href="{{ route('services.show', 'transport-infrastructure') }}" style="color: inherit; text-decoration: none;">
-              Transport &amp; Infrastructure Structures
-            </a>
-          </h3>
-          <p>RTA marine floating transit hubs, airport concourse canopies, rail terminal tension roofs, and
-            pedestrian bridge shades with heavy-duty aerodynamic durability.</p>
-          <div class="solution-card-actions">
-            <a href="{{ route('services.show', 'transport-infrastructure') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
-              <span>View Specs &amp; Photos</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 5: Industrial & Warehouse Structures -->
-      <article class="solution-hub-card">
-        <a href="{{ route('services.show', 'industrial-logistics') }}" class="solution-img-holder" style="display: block;">
-          <img src="{{ asset('assets/images/solutions/industrial.jpg') }}" alt="Industrial and Warehouse Tensile Structures"
-            loading="lazy">
-          <span class="solution-tag-badge">Bulk Logistics</span>
-        </a>
-        <div class="solution-card-body">
-          <h3>
-            <a href="{{ route('services.show', 'industrial-logistics') }}" style="color: inherit; text-decoration: none;">
-              Industrial &amp; Warehouse Structures
-            </a>
-          </h3>
-          <p>Wide-span storage enclosures, bulk material protection, agricultural sunscreens, and rapidly deployable
-            logistics shelters engineered for harsh Middle Eastern weather.</p>
-          <div class="solution-card-actions">
-            <a href="{{ route('services.show', 'industrial-logistics') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
-              <span>View Specs &amp; Photos</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 6: Air-Supported Structures (ASATI) -->
-      <article class="solution-hub-card">
-        <a href="{{ route('services.show', 'air-supported-domes') }}" class="solution-img-holder" style="display: block;">
-          <img src="{{ asset('assets/images/solutions/air-supported-asati.jpg') }}" alt="ASATI Air-Supported Dome Structures"
-            loading="lazy">
-          <span class="solution-tag-badge" style="background: #0B5ED7;">ASATI UAE Partner</span>
-        </a>
-        <div class="solution-card-body">
-          <h3>
-            <a href="{{ route('services.show', 'air-supported-domes') }}" style="color: inherit; text-decoration: none;">
-              Air-Supported Structures (ASATI)
-            </a>
-          </h3>
-          <p>State-of-the-art air domes clear-spanning up to 150m+ with automated pressure control, complete thermal
-            HVAC, and rapid deployment for indoor sports and warehousing.</p>
-          <div class="solution-card-actions">
-            <a href="{{ route('services.show', 'air-supported-domes') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
-              <span>View Specs &amp; Photos</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 7: Lifecycle Services (Inspection & AMC) -->
-      <article class="solution-hub-card">
-        <a href="{{ route('services.show', 'lifecycle-maintenance') }}" class="solution-img-holder" style="display: block;">
-          <img src="{{ asset('assets/images/solutions/lifecycle-amc.jpg') }}" alt="Lifecycle Services Inspection and AMC"
-            loading="lazy">
-          <span class="solution-tag-badge">Asset Stewardship</span>
-        </a>
-        <div class="solution-card-body">
-          <h3>
-            <a href="{{ route('services.show', 'lifecycle-maintenance') }}" style="color: inherit; text-decoration: none;">
-              Lifecycle Services (Inspection &amp; AMC)
-            </a>
-          </h3>
-          <p>Comprehensive condition audits, biaxial membrane tension calibration, ultrasonic weld verification,
-            specialized cleaning, and certified annual maintenance contracts.</p>
-          <div class="solution-card-actions">
-            <a href="{{ route('services.show', 'lifecycle-maintenance') }}" class="solution-card-link" style="width: 100%; justify-content: space-between; text-decoration: none;">
-              <span>View Specs &amp; Photos</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 8: Lead Gen Action Card -->
+      <!-- Lead Gen Action Card -->
       <div class="solution-lead-cta-card">
         <div>
           <span class="lead-cta-badge">Ready To Build?</span>
@@ -358,7 +217,7 @@
         <div>
           <a href="{{ route('contact.index') }}" class="btn btn-lead-white">
             <span>GET IN TOUCH</span>
-            <span>→</span>
+            <span>&rarr;</span>
           </a>
         </div>
       </div>
@@ -861,13 +720,10 @@
                 Interest *</label>
               <select id="contactSolution" name="solution"
                 style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem; background: #fff;">
-                <option value="Architectural Structures (ETFE / PTFE)">Architectural Structures (ETFE / PTFE)</option>
-                <option value="Sports & Recreation Canopies">Sports &amp; Recreation Canopies</option>
-                <option value="Commercial & Retail Atriums">Commercial &amp; Retail Atriums</option>
-                <option value="Transport & Infrastructure">Transport &amp; Infrastructure</option>
-                <option value="Industrial & Bulk Storage">Industrial &amp; Bulk Storage</option>
-                <option value="Air-Supported Structures (ASATI)">Air-Supported Structures (ASATI)</option>
-                <option value="Lifecycle Inspection & AMC">Lifecycle Inspection &amp; AMC</option>
+                @foreach($services as $srvItem)
+                <option value="{{ $srvItem->title }}">{{ $srvItem->title }}</option>
+                @endforeach
+                <option value="Custom Engineering / Other">Custom Engineering / Other</option>
               </select>
             </div>
           </div>

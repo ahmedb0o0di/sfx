@@ -5,15 +5,18 @@
   $rawSolutions = \App\Models\Setting::get('footer_solutions');
   $solutions = $rawSolutions ? json_decode($rawSolutions, true) : null;
   if (!is_array($solutions) || empty($solutions)) {
-      $solutions = [
-          ['link_type' => 'custom', 'label' => 'Architectural Structures', 'custom_url' => route('services.index') . '#architectural'],
-          ['link_type' => 'custom', 'label' => 'Sports & Recreation', 'custom_url' => route('services.index') . '#sports'],
-          ['link_type' => 'custom', 'label' => 'Commercial & Retail', 'custom_url' => route('services.index') . '#commercial'],
-          ['link_type' => 'custom', 'label' => 'Transport & Infrastructure', 'custom_url' => route('services.index') . '#transport'],
-          ['link_type' => 'custom', 'label' => 'Industrial & Warehouse', 'custom_url' => route('services.index') . '#industrial'],
-          ['link_type' => 'custom', 'label' => 'Air-Supported Domes (ASATI)', 'custom_url' => route('services.index') . '#air-supported'],
-          ['link_type' => 'custom', 'label' => 'Lifecycle Services (AMC)', 'custom_url' => route('services.index') . '#lifecycle'],
-      ];
+      $dbServices = \App\Models\Service::where('is_active', true)->orderBy('sort_order')->get();
+      if ($dbServices->isNotEmpty()) {
+          $solutions = $dbServices->map(function ($s) {
+              return [
+                  'link_type' => 'custom',
+                  'label' => $s->title,
+                  'custom_url' => route('services.show', $s->slug),
+              ];
+          })->toArray();
+      } else {
+          $solutions = [];
+      }
   }
   $activeSolutions = array_filter($solutions, fn($item) => !empty(trim($item['label'] ?? '')));
 

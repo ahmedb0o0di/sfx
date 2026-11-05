@@ -10,13 +10,13 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::orderBy('sort_order')->get();
+        $services = Service::where('is_active', true)->orderBy('sort_order')->get();
         return view('pages.services.index', compact('services'));
     }
 
     public function show($slug)
     {
-        $service = Service::where('slug', $slug)->firstOrFail();
+        $service = Service::where('slug', $slug)->where('is_active', true)->firstOrFail();
         $relatedProjects = Project::take(3)->get();
         return view('pages.services.show', compact('service', 'relatedProjects'));
     }

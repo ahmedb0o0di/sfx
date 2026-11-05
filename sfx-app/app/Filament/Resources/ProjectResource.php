@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 
 class ProjectResource extends Resource
 {
@@ -49,12 +50,30 @@ class ProjectResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('engineering_solution')
                     ->columnSpanFull(),
+
+                Forms\Components\Placeholder::make('current_thumbnail_preview')
+                    ->label('Current Thumbnail')
+                    ->content(fn ($record) => $record && $record->image_url
+                        ? new HtmlString('<div style="display:flex;align-items:center;gap:14px;padding:6px 0;"><img src="' . $record->image_url . '" alt="Current Thumbnail" style="max-height: 120px; max-width: 220px; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 6px rgba(0,0,0,0.1); object-fit: cover;"><span style="color:#64748b;font-size:0.875rem;">Currently saved image. Will be retained if no new file is uploaded below.</span></div>')
+                        : 'No thumbnail set yet')
+                    ->visible(fn ($record) => !empty($record?->thumbnail_image))
+                    ->columnSpanFull(),
+
                 Forms\Components\FileUpload::make('thumbnail_image')
+                    ->label(fn ($record) => $record && $record->thumbnail_image ? 'Replace Thumbnail Image' : 'Thumbnail Image')
                     ->image()
-                    ->required(),
+                    ->directory('projects')
+                    ->visibility('public')
+                    ->nullable()
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->helperText('Upload a new image to replace the current one. Leave empty to keep the current image intact.')
+                    ->columnSpanFull(),
+
                 Forms\Components\Toggle::make('is_featured')
                     ->required(),
                 Forms\Components\TextInput::make('status')
+                    ->default('completed')
                     ->required(),
                 Forms\Components\TextInput::make('sort_order')
                     ->required()
@@ -67,13 +86,14 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\ImageColumn::make('thumbnail_image')
+                    ->label('Thumbnail')
+                    ->getStateUsing(fn ($record) => $record->image_url),
                 Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('client_name')
@@ -85,7 +105,6 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('year_completed')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('thumbnail_image'),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('status')

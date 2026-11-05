@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 
 class PostResource extends Resource
 {
@@ -39,8 +40,25 @@ class PostResource extends Resource
                 Forms\Components\Textarea::make('content')
                     ->required()
                     ->columnSpanFull(),
+
+                Forms\Components\Placeholder::make('current_featured_image_preview')
+                    ->label('Current Featured Image')
+                    ->content(fn ($record) => $record && $record->image_url
+                        ? new HtmlString('<div style="display:flex;align-items:center;gap:14px;padding:6px 0;"><img src="' . $record->image_url . '" alt="Current Featured Image" style="max-height: 120px; max-width: 220px; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 6px rgba(0,0,0,0.1); object-fit: cover;"><span style="color:#64748b;font-size:0.875rem;">Currently saved image. Will be retained if no new file is uploaded below.</span></div>')
+                        : 'No image set yet')
+                    ->visible(fn ($record) => !empty($record?->featured_image))
+                    ->columnSpanFull(),
+
                 Forms\Components\FileUpload::make('featured_image')
-                    ->image(),
+                    ->label(fn ($record) => $record && $record->featured_image ? 'Replace Featured Image' : 'Featured Image')
+                    ->image()
+                    ->directory('posts')
+                    ->visibility('public')
+                    ->nullable()
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->helperText('Upload a new image to replace the current one. Leave empty to keep the current image intact.')
+                    ->columnSpanFull(),
+
                 Forms\Components\TextInput::make('author')
                     ->required(),
                 Forms\Components\TextInput::make('reading_time_minutes')
@@ -57,13 +75,15 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('featured_image')
+                    ->label('Image')
+                    ->getStateUsing(fn ($record) => $record->image_url),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('featured_image'),
                 Tables\Columns\TextColumn::make('author')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('reading_time_minutes')

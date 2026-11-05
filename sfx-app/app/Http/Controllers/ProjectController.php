@@ -55,9 +55,9 @@ class ProjectController extends Controller
             'year' => (string) $project->year_completed,
             'client' => $project->client_name,
             'span' => $project->engineering_solution,
-            'image' => $project->thumbnail_image,
+            'image' => $project->image_url,
             'description' => $project->full_overview ?? $project->short_description,
-            'gallery' => $project->images->pluck('image_path')->toArray(),
+            'gallery' => $project->images->map(fn($img) => $img->image_url)->toArray(),
         ]);
     }
 }

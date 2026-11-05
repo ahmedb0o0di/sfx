@@ -53,7 +53,7 @@
         
         <!-- Main Lead Photo Showcase -->
         <div class="project-lead-showcase">
-          <img id="projectLeadImg" src="{{ asset($project->thumbnail_image) }}" alt="{{ $project->title }}" loading="eager">
+          <img id="projectLeadImg" src="{{ $project->image_url }}" alt="{{ $project->title }}" loading="eager">
           <span class="project-location-badge" style="position: absolute; bottom: 1rem; left: 1rem; z-index: 2; font-size: 0.82rem; padding: 0.4rem 0.85rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
             📍 {{ $project->location }}
           </span>
@@ -61,17 +61,20 @@
 
         <!-- Interactive Photo Gallery Strip (Allows switching lead image on touch/click) -->
         @php
-          $allImages = collect([$project->thumbnail_image]);
+          $allImages = collect([$project->image_url]);
           if ($project->images && $project->images->count() > 0) {
-              $allImages = $allImages->merge($project->images->pluck('image_path'))->unique();
+              foreach($project->images as $pImg) {
+                  $allImages->push($pImg->image_url);
+              }
           }
+          $allImages = $allImages->unique();
         @endphp
 
         @if($allImages->count() > 1)
         <div class="project-gallery-strip" id="projectGalleryStrip">
-          @foreach($allImages as $idx => $imgPath)
-          <button type="button" class="project-gallery-thumb {{ $idx === 0 ? 'active' : '' }}" onclick="switchProjectImage('{{ asset($imgPath) }}', this)" aria-label="View photo {{ $idx + 1 }}">
-            <img src="{{ asset($imgPath) }}" alt="{{ $project->title }} angle {{ $idx + 1 }}" loading="lazy">
+          @foreach($allImages as $idx => $imgUrl)
+          <button type="button" class="project-gallery-thumb {{ $idx === 0 ? 'active' : '' }}" onclick="switchProjectImage('{{ $imgUrl }}', this)" aria-label="View photo {{ $idx + 1 }}">
+            <img src="{{ $imgUrl }}" alt="{{ $project->title }} angle {{ $idx + 1 }}" loading="lazy">
           </button>
           @endforeach
         </div>
@@ -210,7 +213,7 @@
           style="cursor: pointer;"
           onclick="window.location.href = '{{ route('projects.show', $rel->slug) }}';">
           <div class="project-showcase-img">
-            <img src="{{ asset($rel->thumbnail_image) }}" alt="{{ $rel->title }}" loading="lazy">
+            <img src="{{ $rel->image_url }}" alt="{{ $rel->title }}" loading="lazy">
             <span class="project-location-badge">{{ $rel->location }}</span>
           </div>
           <div class="project-showcase-body">

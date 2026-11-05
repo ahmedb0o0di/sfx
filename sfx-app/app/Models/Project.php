@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Project extends Model
 {
@@ -25,5 +26,22 @@ class Project extends Model
     public function images(): HasMany
     {
         return $this->hasMany(ProjectImage::class)->orderBy('sort_order');
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        if (empty($this->thumbnail_image)) {
+            return asset('assets/images/placeholder.jpg');
+        }
+
+        if (Str::startsWith($this->thumbnail_image, ['http://', 'https://'])) {
+            return $this->thumbnail_image;
+        }
+
+        if (Str::startsWith($this->thumbnail_image, ['assets/', 'storage/'])) {
+            return asset($this->thumbnail_image);
+        }
+
+        return asset('storage/' . $this->thumbnail_image);
     }
 }

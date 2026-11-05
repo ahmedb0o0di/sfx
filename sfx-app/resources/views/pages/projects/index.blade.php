@@ -45,7 +45,7 @@
         style="cursor: pointer;"
         onclick="if (window.innerWidth <= 992) { window.location.href = '{{ route('projects.show', $project->slug) }}'; }">
         <div class="project-showcase-img">
-          <img src="{{ asset($project->thumbnail_image) }}" alt="{{ $project->title }}" loading="lazy">
+          <img src="{{ $project->image_url }}" alt="{{ $project->title }}" loading="lazy">
           <span class="project-location-badge">{{ $project->location }}</span>
         </div>
         <div class="project-showcase-body">

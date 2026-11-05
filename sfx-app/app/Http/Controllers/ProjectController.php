@@ -11,7 +11,9 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $selectedCategory = $request->query('category');
-        $query = Project::with(['category', 'images'])->orderBy('sort_order');
+        $query = Project::with(['category', 'images'])
+            ->where('status', 'published')
+            ->orderBy('sort_order');
 
         if ($selectedCategory && $selectedCategory !== 'all') {
             $query->whereHas('category', function ($q) use ($selectedCategory) {
@@ -27,8 +29,13 @@ class ProjectController extends Controller
 
     public function show($slug)
     {
-        $project = Project::with(['category', 'images'])->where('slug', $slug)->firstOrFail();
+        $project = Project::with(['category', 'images'])
+            ->where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
+
         $relatedProjects = Project::where('id', '!=', $project->id)
+            ->where('status', 'published')
             ->where('category_id', $project->category_id)
             ->take(3)
             ->get();
@@ -38,7 +45,10 @@ class ProjectController extends Controller
 
     public function apiDetails($slug)
     {
-        $project = Project::with(['category', 'images'])->where('slug', $slug)->first();
+        $project = Project::with(['category', 'images'])
+            ->where('slug', $slug)
+            ->where('status', 'published')
+            ->first();
 
         if (!$project) {
             return response()->json(['error' => 'Project not found'], 404);

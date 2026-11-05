@@ -72,9 +72,12 @@ class ProjectResource extends Resource
 
                 Forms\Components\Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\TextInput::make('status')
-                    ->default('completed')
-                    ->required(),
+                Forms\Components\Checkbox::make('status')
+                    ->label('Published')
+                    ->helperText('Check to publish on website, or uncheck for draft.')
+                    ->formatStateUsing(fn ($state): bool => $state === 'published')
+                    ->dehydrateStateUsing(fn ($state): string => !empty($state) ? 'published' : 'draft')
+                    ->default(true),
                 Forms\Components\TextInput::make('sort_order')
                     ->required()
                     ->numeric()
@@ -107,8 +110,14 @@ class ProjectResource extends Resource
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                Tables\Columns\ToggleColumn::make('status')
+                    ->label('Published')
+                    ->getStateUsing(fn ($record): bool => $record->status === 'published')
+                    ->updateStateUsing(function ($record, $state) {
+                        $record->status = !empty($state) ? 'published' : 'draft';
+                        $record->save();
+                        return $record->status;
+                    }),
                 Tables\Columns\TextColumn::make('sort_order')
                     ->numeric()
                     ->sortable(),
@@ -122,7 +131,11 @@ class ProjectResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'published' => 'Published',
+                        'draft' => 'Draft',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

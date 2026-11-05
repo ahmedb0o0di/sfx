@@ -7650,3 +7650,286 @@ h6,
     min-height: 760px;
   }
 }
+
+/* ==========================================================================
+   SECTION: 3D STADIUM MOTION GRAPHIC ("Tensile roofs, built for real places")
+   Scroll-Scrubbed Tensile Roof Construction & Dusk Illumination
+   ========================================================================== */
+.stadium {
+  position: relative;
+  height: 450vh;
+  background: #e9e2d4;
+  overflow: clip;
+}
+
+.stadium-stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.stadium-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stadium-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: var(--scrim, 0);
+  background: linear-gradient(180deg, rgba(8, 28, 56, 0) 35%, rgba(8, 28, 56, 0.35) 65%, rgba(8, 28, 56, 0.85) 100%);
+  transition: opacity 0.3s ease;
+}
+
+/* Opening statement card */
+.stadium-intro {
+  position: absolute;
+  z-index: 3;
+  inset-inline-start: clamp(16px, 4vw, 48px);
+  top: clamp(24px, 10vh, 100px);
+  max-width: min(560px, calc(100% - 2 * clamp(16px, 4vw, 48px)));
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: clamp(20px, 3vw, 36px);
+  box-shadow: 0 16px 36px rgba(8, 28, 56, 0.12);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.stadium-intro-title {
+  font-family: var(--font-heading, 'Bricolage', 'Bricolage Grotesque', sans-serif);
+  font-size: clamp(1.8rem, 3.6vw, 2.75rem);
+  font-weight: 800;
+  color: var(--navy-primary, #081C38);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.45em;
+}
+
+.stadium-intro-sub {
+  margin: 0;
+  color: var(--text-muted, #556987);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* Stage captions */
+.stadium-caption {
+  position: absolute;
+  z-index: 3;
+  inset-inline-start: clamp(16px, 4vw, 48px);
+  bottom: clamp(24px, 6vh, 56px);
+  width: min(440px, calc(100% - 2 * clamp(16px, 4vw, 48px)));
+  min-height: 74px;
+  pointer-events: none;
+}
+
+.stadium-caption p {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  margin: 0;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(8, 28, 56, 0.1);
+  color: var(--navy-primary, #081C38);
+  font-size: 1.02rem;
+  line-height: 1.45;
+  font-weight: 600;
+  border-inline-start: 4px solid #008E38;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stadium-caption p.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scroll prompt */
+.stadium-scroll {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy-primary, #081C38);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 16px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(8, 28, 56, 0.08);
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.stadium-scroll i {
+  width: 2px;
+  height: 28px;
+  background: linear-gradient(#008E38, transparent);
+  animation: stadiumDrip 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  transform-origin: top;
+}
+
+@keyframes stadiumDrip {
+  0% { transform: scaleY(0); }
+  60% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+.stadium-scroll.is-gone {
+  opacity: 0;
+}
+
+/* Note badge */
+.stadium-note {
+  position: absolute;
+  z-index: 3;
+  inset-inline-end: clamp(16px, 4vw, 48px);
+  bottom: 18px;
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--navy-primary, #081C38);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(8, 28, 56, 0.08);
+  pointer-events: none;
+}
+
+/* Final headline */
+.stadium-final {
+  position: absolute;
+  z-index: 4;
+  inset-inline: clamp(16px, 4vw, 48px);
+  bottom: clamp(56px, 11vh, 120px);
+  max-width: 1180px;
+  pointer-events: none;
+}
+
+.stadium-final.is-on {
+  pointer-events: auto;
+}
+
+.stadium-title {
+  font-family: var(--font-heading, 'Bricolage', 'Bricolage Grotesque', sans-serif);
+  font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 30px rgba(8, 28, 56, 0.6);
+  margin-bottom: 0.3em;
+  line-height: 1.1;
+}
+
+.stadium-sub {
+  max-width: 48ch;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.55;
+  text-shadow: 0 2px 16px rgba(8, 28, 56, 0.7);
+  margin-bottom: 0;
+}
+
+.stadium-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 1.5rem;
+}
+
+/* Fallback still */
+.stadium-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.stadium-fallback img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.stadium.is-static {
+  height: auto;
+}
+
+.stadium.is-static .stadium-stage {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  --scrim: 1;
+}
+
+.stadium.is-static .stadium-caption,
+.stadium.is-static .stadium-scroll {
+  display: none;
+}
+
+.stadium.is-static .stadium-final {
+  pointer-events: auto;
+}
+
+.stadium.is-static .stadium-intro {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .stadium {
+    height: 350vh;
+  }
+  .stadium-intro {
+    top: 20px;
+    padding: 18px 20px;
+  }
+  .stadium-caption {
+    bottom: 52px;
+  }
+  .stadium-caption p {
+    font-size: 0.92rem;
+    padding: 12px 14px;
+  }
+  .stadium-scroll {
+    display: none;
+  }
+  .stadium-note {
+    inset-inline: 16px;
+    bottom: 12px;
+    text-align: center;
+  }
+  .stadium-final {
+    bottom: 40px;
+  }
+  .stadium-ctas .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}

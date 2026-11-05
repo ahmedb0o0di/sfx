@@ -367,9 +367,9 @@
 </section>
 
 <!-- ==========================================================================
-     SECTION: ASATI AIR DOME MOTION GRAPHIC ("A roof held up by air")
+     SECTION: 3D MOTION GRAPHIC STADIUM ("Tensile roofs, built for real places")
      ========================================================================== -->
-@include('components.dome-section')
+@include('components.stadium-section')
 
 @include('components.capabilities-section')
 

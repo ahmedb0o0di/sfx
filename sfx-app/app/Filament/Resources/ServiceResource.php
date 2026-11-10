@@ -68,8 +68,16 @@ class ServiceResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('technical_specs')
-                    ->columnSpanFull(),
+                Forms\Components\KeyValue::make('technical_specs')
+                    ->label('Technical Specifications')
+                    ->keyLabel('Specification Property')
+                    ->valueLabel('Specification Value / Detail')
+                    ->keyPlaceholder('e.g. Clear Span, Materials, Lifespan')
+                    ->valuePlaceholder('e.g. Up to 150m+, Architectural ETFE Foil')
+                    ->addActionLabel('Add Technical Specification')
+                    ->reorderable()
+                    ->columnSpanFull()
+                    ->helperText('Manage key-value technical specifications displayed on frontend solution cards and detail pages.'),
             ]);
     }
 

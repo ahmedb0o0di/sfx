@@ -50,7 +50,7 @@
             </h3>
             <p class="solution-card-summary">{{ $service->summary }}</p>
             
-            @if($service->technical_specs)
+            @if(!empty($service->technical_specs) && is_array($service->technical_specs))
             <div class="solution-card-specs">
               @foreach($service->technical_specs as $key => $val)
                 <div class="solution-spec-item">

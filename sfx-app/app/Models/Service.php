@@ -18,6 +18,47 @@ class Service extends Model
         'is_active' => 'boolean',
     ];
 
+    public function getTechnicalSpecsAttribute($value): array
+    {
+        if (empty($value)) {
+            return [];
+        }
+
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value)) {
+            if (trim($value) === '[object Object]') {
+                return [];
+            }
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    public function setTechnicalSpecsAttribute($value): void
+    {
+        if (is_array($value)) {
+            $this->attributes['technical_specs'] = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        } elseif (is_string($value)) {
+            if (trim($value) === '[object Object]') {
+                $this->attributes['technical_specs'] = json_encode([]);
+            } else {
+                $decoded = json_decode($value, true);
+                $this->attributes['technical_specs'] = is_array($decoded)
+                    ? json_encode($decoded, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                    : $value;
+            }
+        } else {
+            $this->attributes['technical_specs'] = json_encode([]);
+        }
+    }
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);

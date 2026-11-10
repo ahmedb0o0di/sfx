@@ -44,7 +44,7 @@
             {{ $service->description }}
           </p>
 
-          @if($service->technical_specs)
+          @if(!empty($service->technical_specs) && is_array($service->technical_specs))
           <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--navy-primary); margin: 2rem 0 1rem;">
             Technical Performance Standards
           </h3>

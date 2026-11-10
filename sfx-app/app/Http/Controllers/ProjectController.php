@@ -29,6 +29,10 @@ class ProjectController extends Controller
 
     public function show($slug)
     {
+        if ($slug === 'abu-dhabi-shooting') {
+            return redirect()->route('projects.show', 'abu-dhabi-shooting-club', 301);
+        }
+
         $project = Project::with(['category', 'images'])
             ->where('slug', $slug)
             ->where('status', 'published')
@@ -45,6 +49,10 @@ class ProjectController extends Controller
 
     public function apiDetails($slug)
     {
+        if ($slug === 'abu-dhabi-shooting') {
+            $slug = 'abu-dhabi-shooting-club';
+        }
+
         $project = Project::with(['category', 'images'])
             ->where('slug', $slug)
             ->where('status', 'published')

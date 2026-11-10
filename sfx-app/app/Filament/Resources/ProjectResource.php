@@ -144,7 +144,9 @@ class ProjectResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultPaginationPageOption(25)
+            ->paginationPageOptions([10, 25, 50, 'all']);
     }
 
     public static function getRelations(): array

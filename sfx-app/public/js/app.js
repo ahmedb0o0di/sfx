@@ -506,6 +506,19 @@ const projectData = {
     image: 'assets/images/projects/ethiopia-unity-park.jpg',
     description: 'A breathtaking pavilion seamlessly integrated into the historic Unity Park in Addis Ababa. Structurflex Middle East executed the full engineering, fabrication, and on-site installation, delivering solar protection and an iconic civic landmark.'
   },
+  'abu-dhabi-ladies-club': {
+    title: 'Abu Dhabi Ladies Club Tensile Roofs',
+    category: 'sports',
+    categoryLabel: 'Sports & Stadia',
+    location: 'Abu Dhabi, UAE',
+    area: '4,500 m²',
+    material: 'High-Performance Architectural PVC / PVDF Membrane',
+    year: '2012',
+    client: 'Musanada / Abu Dhabi Sports Council (ADSC)',
+    span: 'Multi-Feature Roofing Structures',
+    image: 'assets/images/projects/abu-dhabi-ladies-club/thumb.jpg',
+    description: 'Commissioned under Abu Dhabi General Services Company (Musanada) for the Abu Dhabi Sports Council, the Abu Dhabi Ladies Club stands as a world-class sports, wellness, and recreational facility located on Al Khaleej Al Arabi Street in Abu Dhabi. Structurflex Middle East was contracted to deliver turnkey engineering, fabrication, and installation of over 4,500 m² of multi-feature tensile membrane roofs spanning across swimming pools, tennis and squash courts, entrance pavilions, and privacy-shielded recreation courtyards.'
+  },
   'abu-dhabi-shooting': {
     title: 'Abu Dhabi Shooting Club Tensile Roof',
     category: 'sports',

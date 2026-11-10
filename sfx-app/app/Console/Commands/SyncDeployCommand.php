@@ -166,3 +166,4 @@ class SyncDeployCommand extends Command
         return self::SUCCESS;
     }
 }
+

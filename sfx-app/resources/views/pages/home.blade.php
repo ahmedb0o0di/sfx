@@ -474,8 +474,13 @@
     <div class="insights-matrix-grid">
       @forelse($latestPosts as $post)
       <article class="insight-card">
-        <a href="{{ route('blog.show', $post->slug) }}" class="insight-thumb" style="display: block; text-decoration: none;">
-          <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}" loading="lazy">
+        <a href="{{ route('blog.show', $post->slug) }}" class="insight-thumb" style="display: block; text-decoration: none; position: relative;">
+          <img src="{{ $post->image_url }}" alt="{{ $post->title }}" loading="lazy">
+          @if(!empty($post->video_path))
+          <span style="position: absolute; bottom: 12px; right: 12px; background: rgba(8, 28, 56, 0.88); color: #f3b90d; border-radius: 999px; padding: 4px 10px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Video
+          </span>
+          @endif
         </a>
         <div class="insight-body">
           <div class="insight-meta">

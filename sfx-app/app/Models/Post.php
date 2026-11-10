@@ -32,4 +32,21 @@ class Post extends Model
 
         return asset('storage/' . $this->featured_image);
     }
+
+    public function getVideoUrlAttribute(): ?string
+    {
+        if (empty($this->video_path)) {
+            return null;
+        }
+
+        if (Str::startsWith($this->video_path, ['http://', 'https://'])) {
+            return $this->video_path;
+        }
+
+        if (Str::startsWith($this->video_path, ['assets/', 'storage/'])) {
+            return asset($this->video_path);
+        }
+
+        return asset('storage/' . $this->video_path);
+    }
 }

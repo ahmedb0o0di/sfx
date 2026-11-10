@@ -36,9 +36,16 @@
 <!-- Article Body -->
 <section class="section" style="background-color: #F8FAFC; padding: clamp(3rem, 6vw, 5rem) 0;">
   <div class="container" style="max-width: 860px;">
-    @if($post->featured_image)
+    @if(!empty($post->video_url))
     <div style="border-radius: 14px; overflow: hidden; margin-bottom: 2.5rem; box-shadow: 0 12px 30px rgba(0,0,0,0.08); background: #081C38;">
-      <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}" style="width: 100%; height: auto; display: block;">
+      <video controls preload="metadata" poster="{{ $post->image_url }}" style="width: 100%; height: auto; max-height: 520px; display: block; background: #000; margin: 0 auto;">
+        <source src="{{ $post->video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    @elseif(!empty($post->featured_image))
+    <div style="border-radius: 14px; overflow: hidden; margin-bottom: 2.5rem; box-shadow: 0 12px 30px rgba(0,0,0,0.08); background: #081C38;">
+      <img src="{{ $post->image_url }}" alt="{{ $post->title }}" style="width: 100%; height: auto; display: block;">
     </div>
     @endif
 

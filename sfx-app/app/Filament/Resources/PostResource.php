@@ -59,6 +59,25 @@ class PostResource extends Resource
                     ->helperText('Upload a new image to replace the current one. Leave empty to keep the current image intact.')
                     ->columnSpanFull(),
 
+                Forms\Components\Placeholder::make('current_video_preview')
+                    ->label('Current Video')
+                    ->content(fn ($record) => $record && $record->video_url
+                        ? new HtmlString('<div style="display:flex;flex-direction:column;gap:8px;padding:6px 0;"><video src="' . $record->video_url . '" controls style="max-height: 200px; max-width: 360px; border-radius: 8px; border: 1px solid #cbd5e1; background: #000;"></video><span style="color:#64748b;font-size:0.875rem;">Currently saved video. Leave empty below to keep this video intact.</span></div>')
+                        : 'No video uploaded')
+                    ->visible(fn ($record) => !empty($record?->video_path))
+                    ->columnSpanFull(),
+
+                Forms\Components\FileUpload::make('video_path')
+                    ->label(fn ($record) => $record && $record->video_path ? 'Replace Video (Optional)' : 'Video (Optional)')
+                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'])
+                    ->maxSize(102400) // 100MB
+                    ->directory('posts/videos')
+                    ->visibility('public')
+                    ->nullable()
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->helperText('Upload an MP4 or WebM video for this post (optional). Not mandatory. Max size: 100MB.')
+                    ->columnSpanFull(),
+
                 Forms\Components\TextInput::make('author')
                     ->required(),
                 Forms\Components\TextInput::make('reading_time_minutes')
@@ -82,6 +101,10 @@ class PostResource extends Resource
                 Tables\Columns\ImageColumn::make('featured_image')
                     ->label('Image')
                     ->getStateUsing(fn ($record) => $record->image_url),
+                Tables\Columns\IconColumn::make('video_path')
+                    ->label('Video')
+                    ->boolean()
+                    ->getStateUsing(fn ($record): bool => !empty($record->video_path)),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')

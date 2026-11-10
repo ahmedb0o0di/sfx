@@ -9,16 +9,11 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $selectedCategory = $request->query('category');
+        $selectedCategory = $request->query('category') ?? 'all';
 
-        $query = Post::where('status', 'published')
-            ->orderBy('published_at', 'desc');
-
-        if ($selectedCategory) {
-            $query->where('category', $selectedCategory);
-        }
-
-        $posts = $query->paginate(9)->withQueryString();
+        $posts = Post::where('status', 'published')
+            ->orderBy('published_at', 'desc')
+            ->get();
         $categories = Post::where('status', 'published')->distinct()->pluck('category')->filter();
 
         return view('pages.blog.index', compact('posts', 'categories', 'selectedCategory'));

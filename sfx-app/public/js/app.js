@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStatCounters();
   initMaterialTabs();
   initPortfolioFilters();
+  initInsightsFilters();
   initProjectModals();
   initConversationalEstimator();
   initContactForm();
@@ -374,6 +375,82 @@ function initPortfolioFilters() {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const cat = urlParams.get('category') || urlParams.get('cat');
+      if (cat) {
+        const targetBtn = Array.from(filterBtns).find(btn => btn.getAttribute('data-filter') === cat);
+        if (targetBtn) {
+          applyFilter(cat, false);
+        }
+      }
+    } catch (e) {
+      // Ignore URL parse error
+    }
+  });
+}
+
+/* ==========================================================================
+   4B. INSIGHTS / RESOURCES FILTERING (CLIENT-SIDE ZERO REFRESH)
+   ========================================================================== */
+function initInsightsFilters() {
+  const filterBars = document.querySelectorAll('.insights-filter-bar');
+  if (!filterBars.length) return;
+
+  filterBars.forEach(bar => {
+    const filterBtns = bar.querySelectorAll('.insights-filter-btn');
+    const section = bar.closest('section') || document;
+    const cards = section.querySelectorAll('.insight-card');
+    const emptyState = section.querySelector('.insights-empty-state');
+
+    const applyFilter = (filter, updateUrl = true) => {
+      filterBtns.forEach(b => {
+        const isActive = (b.getAttribute('data-filter') || 'all') === filter;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'flex';
+          card.style.animation = 'fadeIn 0.3s ease forwards';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      if (updateUrl && window.history && window.history.replaceState) {
+        try {
+          const url = new URL(window.location.href);
+          if (filter === 'all') {
+            url.searchParams.delete('category');
+          } else {
+            url.searchParams.set('category', filter);
+          }
+          window.history.replaceState(null, '', url.toString());
+        } catch (e) {
+          // Ignore
+        }
+      }
+    };
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const filter = btn.getAttribute('data-filter') || 'all';
+        applyFilter(filter, true);
+      });
+    });
+
+    // Deep linking via URL parameter (e.g. ?category=Whitepaper)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cat = urlParams.get('category');
       if (cat) {
         const targetBtn = Array.from(filterBtns).find(btn => btn.getAttribute('data-filter') === cat);
         if (targetBtn) {

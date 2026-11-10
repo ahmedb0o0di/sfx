@@ -34,13 +34,13 @@
     <!-- Category Filter Bar (Touch-scrollable on mobile) -->
     @if(isset($categories) && count($categories) > 0)
     <div class="insights-filter-bar">
-      <a href="{{ route('blog.index') }}" class="insights-filter-btn {{ empty($selectedCategory) ? 'active' : '' }}">
+      <button type="button" class="insights-filter-btn {{ empty($selectedCategory) || $selectedCategory === 'all' ? 'active' : '' }}" data-filter="all">
         All Publications
-      </a>
+      </button>
       @foreach($categories as $category)
-      <a href="{{ route('blog.index', ['category' => $category]) }}" class="insights-filter-btn {{ $selectedCategory === $category ? 'active' : '' }}">
+      <button type="button" class="insights-filter-btn {{ $selectedCategory === $category ? 'active' : '' }}" data-filter="{{ $category }}">
         {{ $category }}
-      </a>
+      </button>
       @endforeach
     </div>
     @endif
@@ -48,7 +48,7 @@
     <!-- Publications Matrix Grid (1 column on mobile, 2 columns on desktop) -->
     <div class="insights-matrix-grid">
       @forelse($posts as $post)
-      <article class="insight-card">
+      <article class="insight-card" data-category="{{ $post->category }}">
         <div>
           <!-- Article Cover Media -->
           <a href="{{ route('blog.show', $post->slug) }}" class="insight-card-media" style="position: relative;">
@@ -96,21 +96,27 @@
           No Publications Found
         </h3>
         <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem;">
-          There are currently no whitepapers listed under the selected category.
+          There are currently no whitepapers listed.
         </p>
         <a href="{{ route('blog.index') }}" class="btn btn-primary" style="padding: 0.75rem 1.5rem;">
           <span>View All Publications &rarr;</span>
         </a>
       </div>
       @endforelse
-    </div>
 
-    <!-- Pagination -->
-    @if($posts->hasPages())
-    <div style="margin-top: 3.5rem; display: flex; justify-content: center;">
-      {{ $posts->links() }}
+      <!-- Client-Side Empty State for Filters -->
+      <div class="insights-empty-state" style="display: none; grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: #ffffff; border-radius: 14px; border: 1px dashed #cbd5e1;">
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--navy-primary); margin-bottom: 0.5rem;">
+          No Publications Found
+        </h3>
+        <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem;">
+          There are currently no whitepapers or articles listed under this category.
+        </p>
+        <button type="button" class="btn btn-hero-solid" style="background: transparent; color: var(--navy-primary) !important; border: 2px solid var(--navy-primary);" onclick="document.querySelector('.insights-filter-bar .insights-filter-btn[data-filter=\'all\']').click();">
+          View All Publications &rarr;
+        </button>
+      </div>
     </div>
-    @endif
 
   </div>
 </section>

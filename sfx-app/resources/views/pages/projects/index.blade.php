@@ -27,11 +27,11 @@
   <div class="container">
     <!-- Filter Controls -->
     <div class="portfolio-filter-bar">
-      <a href="{{ route('projects.index') }}" class="filter-btn {{ !$selectedCategory || $selectedCategory == 'all' ? 'active' : '' }}" style="text-decoration: none;">All Projects</a>
+      <button type="button" class="filter-btn {{ !$selectedCategory || $selectedCategory == 'all' ? 'active' : '' }}" data-filter="all">All Projects</button>
       @foreach($categories as $cat)
-        <a href="{{ route('projects.index', ['category' => $cat->filter_tag]) }}" class="filter-btn {{ $selectedCategory == $cat->filter_tag ? 'active' : '' }}" style="text-decoration: none;">
+        <button type="button" class="filter-btn {{ $selectedCategory == $cat->filter_tag ? 'active' : '' }}" data-filter="{{ $cat->filter_tag }}">
           {{ $cat->name }}
-        </a>
+        </button>
       @endforeach
     </div>
 
@@ -66,18 +66,17 @@
       </article>
       @empty
       <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: #fff; border-radius: 12px;">
-        <p style="font-size: 1.1rem; color: #64748b;">No projects found for this category.</p>
+        <p style="font-size: 1.1rem; color: #64748b;">No projects found.</p>
         <a href="{{ route('projects.index') }}" class="btn btn-hero-white" style="margin-top: 1rem;">View All Projects</a>
       </div>
       @endforelse
-    </div>
 
-    <!-- Pagination -->
-    @if($projects->hasPages())
-    <div style="margin-top: 3.5rem; display: flex; justify-content: center;">
-      {{ $projects->links() }}
+      <!-- Client-Side Empty State for Filters -->
+      <div class="portfolio-empty-state" style="display: none; grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: #fff; border-radius: 12px; border: 1px dashed #cbd5e1;">
+        <p style="font-size: 1.1rem; color: #64748b; margin-bottom: 1rem;">No projects found for this category.</p>
+        <button type="button" class="btn btn-hero-solid" style="background: transparent; color: var(--navy-primary) !important; border: 2px solid var(--navy-primary);" onclick="document.querySelector('.portfolio-filter-bar .filter-btn[data-filter=\'all\']').click();">View All Projects</button>
+      </div>
     </div>
-    @endif
   </div>
 </section>
 @endsection

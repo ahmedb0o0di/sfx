@@ -251,11 +251,10 @@
 
     <!-- Filter Tabs -->
     <div class="portfolio-filter-bar">
-      <button class="filter-btn active" data-filter="all">All Projects</button>
-      <button class="filter-btn" data-filter="architectural">Architectural</button>
-      <button class="filter-btn" data-filter="sports">Sports &amp; Stadia</button>
-      <button class="filter-btn" data-filter="air-supported">Air-Supported Domes</button>
-      <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+      <button type="button" class="filter-btn active" data-filter="all">All Projects</button>
+      @foreach($categories as $cat)
+        <button type="button" class="filter-btn" data-filter="{{ $cat->filter_tag }}">{{ $cat->name }}</button>
+      @endforeach
     </div>
 
     <!-- 4-Column Projects Showcase Grid -->
@@ -310,6 +309,12 @@
         </div>
       </article>
       @endforelse
+
+      <!-- Client-Side Empty State for Filters -->
+      <div class="portfolio-empty-state" style="display: none; grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: #fff; border-radius: 12px; border: 1px dashed #cbd5e1;">
+        <p style="font-size: 1.1rem; color: #64748b; margin-bottom: 1rem;">No projects found for this category.</p>
+        <button type="button" class="btn btn-hero-solid" style="background: transparent; color: var(--navy-primary) !important; border: 2px solid var(--navy-primary);" onclick="document.querySelector('.portfolio-filter-bar .filter-btn[data-filter=\'all\']').click();">View All Projects</button>
+      </div>
     </div>
 
     <!-- View All Projects Button -->

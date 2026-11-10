@@ -61,3 +61,4 @@ return new class extends Migration
         Service::whereIn('slug', ['al-gharafa-beach-court', 'al-ain-kindergartens'])->delete();
     }
 };
+

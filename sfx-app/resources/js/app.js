@@ -310,44 +310,80 @@ function initMaterialTabs() {
 }
 
 /* ==========================================================================
-   4. PORTFOLIO FILTERING
+   4. PORTFOLIO FILTERING (CLIENT-SIDE ZERO REFRESH)
    ========================================================================== */
 function initPortfolioFilters() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card, .project-showcase-card');
+  const filterBars = document.querySelectorAll('.portfolio-filter-bar');
+  if (!filterBars.length) return;
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  filterBars.forEach(bar => {
+    const filterBtns = bar.querySelectorAll('.filter-btn');
+    const section = bar.closest('section') || document;
+    const projectCards = section.querySelectorAll('.project-card, .project-showcase-card');
+    const emptyState = section.querySelector('.portfolio-empty-state');
 
-      const filter = btn.getAttribute('data-filter');
+    const applyFilter = (filter, updateUrl = true) => {
+      filterBtns.forEach(b => {
+        const isActive = (b.getAttribute('data-filter') || 'all') === filter;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
 
+      let visibleCount = 0;
       projectCards.forEach(card => {
         const category = card.getAttribute('data-category');
         if (filter === 'all' || category === filter) {
           card.style.display = 'flex';
-          card.style.animation = 'fadeIn 0.35s ease forwards';
+          card.style.animation = 'fadeIn 0.3s ease forwards';
+          visibleCount++;
         } else {
           card.style.display = 'none';
         }
       });
-    });
-  });
 
-  // Deep linking via URL parameter (e.g. projects.html?cat=education)
-  try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const cat = urlParams.get('cat');
-    if (cat) {
-      const targetBtn = Array.from(filterBtns).find(btn => btn.getAttribute('data-filter') === cat);
-      if (targetBtn) {
-        targetBtn.click();
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
       }
+
+      if (updateUrl && window.history && window.history.replaceState) {
+        try {
+          const url = new URL(window.location.href);
+          if (filter === 'all') {
+            url.searchParams.delete('category');
+            url.searchParams.delete('cat');
+          } else {
+            url.searchParams.set('category', filter);
+          }
+          window.history.replaceState(null, '', url.toString());
+        } catch (e) {
+          // Ignore
+        }
+      }
+    };
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const filter = btn.getAttribute('data-filter') || 'all';
+        applyFilter(filter, true);
+      });
+    });
+
+    // Deep linking via URL parameter (e.g. ?category=sports or ?cat=sports)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cat = urlParams.get('category') || urlParams.get('cat');
+      if (cat) {
+        const targetBtn = Array.from(filterBtns).find(btn => btn.getAttribute('data-filter') === cat);
+        if (targetBtn) {
+          applyFilter(cat, false);
+        }
+      }
+    } catch (e) {
+      // Ignore URL parse error
     }
-  } catch (e) {
-    // Ignore URL parse error
-  }
+  });
 }
 
 /* ==========================================================================

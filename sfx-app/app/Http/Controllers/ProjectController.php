@@ -10,18 +10,11 @@ class ProjectController extends Controller
 {
     public function index(Request $request)
     {
-        $selectedCategory = $request->query('category');
-        $query = Project::with(['category', 'images'])
+        $selectedCategory = $request->query('category') ?? 'all';
+        $projects = Project::with(['category', 'images'])
             ->where('status', 'published')
-            ->orderBy('sort_order');
-
-        if ($selectedCategory && $selectedCategory !== 'all') {
-            $query->whereHas('category', function ($q) use ($selectedCategory) {
-                $q->where('filter_tag', $selectedCategory)->orWhere('slug', $selectedCategory);
-            });
-        }
-
-        $projects = $query->paginate(12)->withQueryString();
+            ->orderBy('sort_order')
+            ->get();
         $categories = ProjectCategory::orderBy('sort_order')->get();
 
         return view('pages.projects.index', compact('projects', 'categories', 'selectedCategory'));

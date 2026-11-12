@@ -50,7 +50,7 @@
         data-material="{{ $project->membrane_material }}"
         data-year="{{ $project->year_completed }}"
         data-image="{{ $project->image_url }}"
-        data-gallery="{{ json_encode($project->images->map(fn($img) => $img->image_url)->prepend($project->image_url)->unique()->values()) }}"
+        data-gallery="{{ json_encode($project->gallery_urls) }}"
         style="cursor: pointer;"
         onclick="if (window.innerWidth <= 992) { window.location.href = '{{ route('projects.show', $project->slug) }}'; }">
         <div class="project-showcase-img">

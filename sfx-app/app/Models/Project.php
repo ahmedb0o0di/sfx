@@ -44,4 +44,36 @@ class Project extends Model
 
         return asset('storage/' . $this->thumbnail_image);
     }
+
+    /**
+     * Get unique gallery image URLs including the hero/thumbnail image.
+     * Guaranteed to return a plain PHP array of string URLs.
+     *
+     * @return array<int, string>
+     */
+    public function getGalleryUrlsAttribute(): array
+    {
+        $gallery = [];
+
+        $mainImg = $this->image_url;
+        if (!empty($mainImg)) {
+            $gallery[] = $mainImg;
+        }
+
+        if ($this->relationLoaded('images')) {
+            foreach ($this->images as $img) {
+                if (!empty($img->image_url)) {
+                    $gallery[] = $img->image_url;
+                }
+            }
+        } elseif ($this->images()->exists()) {
+            foreach ($this->images as $img) {
+                if (!empty($img->image_url)) {
+                    $gallery[] = $img->image_url;
+                }
+            }
+        }
+
+        return array_values(array_unique(array_filter($gallery)));
+    }
 }

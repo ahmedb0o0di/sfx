@@ -61,18 +61,12 @@
 
         <!-- Interactive Photo Gallery Strip (Allows switching lead image on touch/click) -->
         @php
-          $allImages = collect([$project->image_url]);
-          if ($project->images && $project->images->count() > 0) {
-              foreach($project->images as $pImg) {
-                  $allImages->push($pImg->image_url);
-              }
-          }
-          $allImages = $allImages->unique();
+          $galleryUrls = $project->gallery_urls;
         @endphp
 
-        @if($allImages->count() > 1)
+        @if(count($galleryUrls) > 1)
         <div class="project-gallery-strip" id="projectGalleryStrip">
-          @foreach($allImages as $idx => $imgUrl)
+          @foreach($galleryUrls as $idx => $imgUrl)
           <button type="button" class="project-gallery-thumb {{ $idx === 0 ? 'active' : '' }}" onclick="switchProjectImage('{{ $imgUrl }}', this)" aria-label="View photo {{ $idx + 1 }}">
             <img src="{{ $imgUrl }}" alt="{{ $project->title }} angle {{ $idx + 1 }}" loading="lazy">
           </button>

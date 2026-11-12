@@ -878,30 +878,36 @@ function initProjectModals() {
       // Remove duplicates while preserving order
       galleryList = [...new Set(galleryList.filter(Boolean))];
 
-      thumbsStrip.innerHTML = galleryList.map((gImg, idx) => {
-        const fullGImg = gImg.startsWith('/') || gImg.startsWith('http') ? gImg : '/' + gImg;
-        return `
-        <button class="modal-thumb-item ${idx === 0 ? 'active' : ''}" data-img="${fullGImg}" type="button" aria-label="View photo angle ${idx + 1}">
-          <img src="${fullGImg}" alt="${(data.title || 'Project')} photo ${idx + 1}">
-        </button>
-      `;
-      }).join('');
+      if (galleryList.length <= 1) {
+        thumbsStrip.style.display = 'none';
+        thumbsStrip.innerHTML = '';
+      } else {
+        thumbsStrip.style.display = 'flex';
+        thumbsStrip.innerHTML = galleryList.map((gImg, idx) => {
+          const fullGImg = gImg.startsWith('/') || gImg.startsWith('http') ? gImg : '/' + gImg;
+          return `
+          <button class="modal-thumb-item ${idx === 0 ? 'active' : ''}" data-img="${fullGImg}" type="button" aria-label="View photo angle ${idx + 1}">
+            <img src="${fullGImg}" alt="${(data.title || 'Project')} photo ${idx + 1}">
+          </button>
+        `;
+        }).join('');
 
-      thumbsStrip.querySelectorAll('.modal-thumb-item').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          thumbsStrip.querySelectorAll('.modal-thumb-item').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const targetSrc = btn.getAttribute('data-img');
-          if (targetSrc && modalImg) {
-            modalImg.src = targetSrc;
-            modalImg.style.opacity = '1';
-            if (modalBackdrop) {
-              modalBackdrop.src = targetSrc;
+        thumbsStrip.querySelectorAll('.modal-thumb-item').forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            thumbsStrip.querySelectorAll('.modal-thumb-item').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const targetSrc = btn.getAttribute('data-img');
+            if (targetSrc && modalImg) {
+              modalImg.src = targetSrc;
+              modalImg.style.opacity = '1';
+              if (modalBackdrop) {
+                modalBackdrop.src = targetSrc;
+              }
             }
-          }
+          });
         });
-      });
+      }
     }
 
     // 3. Populate textual and technical spec details

@@ -3,7 +3,14 @@
   $heritageLine2 = \App\Models\Setting::get('header_heritage_line2', '(Since 1937)');
 
   $ctaText = \App\Models\Setting::get('header_cta_text', 'Request a Consultation');
-  $ctaUrl = \App\Models\Setting::get('header_cta_url', route('contact.index'));
+  $rawCta = \App\Models\Setting::get('header_cta_url', '/contact');
+  if (empty($rawCta) || \Illuminate\Support\Str::contains($rawCta, ['72.62.176.78', 'localhost', '127.0.0.1'])) {
+      $parsedPath = parse_url($rawCta, PHP_URL_PATH);
+      $parsedQuery = parse_url($rawCta, PHP_URL_QUERY);
+      $ctaUrl = (!empty($parsedPath) ? $parsedPath : '/contact') . ($parsedQuery ? '?' . $parsedQuery : '');
+  } else {
+      $ctaUrl = $rawCta;
+  }
   $ctaVisible = (bool) \App\Models\Setting::get('header_cta_visible', true);
 
   $rawNav = \App\Models\Setting::get('header_nav_menu');

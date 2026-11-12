@@ -50,7 +50,13 @@
             $btn1Text = \App\Models\Setting::get('hero_btn1_text', 'Our Solutions');
             $btn1Url = \App\Models\Setting::get('hero_btn1_url', '#solutions');
             $btn2Text = \App\Models\Setting::get('hero_btn2_text', 'View Projects');
-            $btn2Url = \App\Models\Setting::get('hero_btn2_url', route('projects.index'));
+            $rawBtn2 = \App\Models\Setting::get('hero_btn2_url', '/projects');
+            if (empty($rawBtn2) || \Illuminate\Support\Str::contains($rawBtn2, ['72.62.176.78', 'localhost', '127.0.0.1'])) {
+                $parsedPath = parse_url($rawBtn2, PHP_URL_PATH);
+                $btn2Url = !empty($parsedPath) ? $parsedPath : '/projects';
+            } else {
+                $btn2Url = $rawBtn2;
+            }
           @endphp
           @if(!empty(trim($btn1Text ?? '')))
           <a href="{{ $btn1Url }}" class="btn btn-hero-solid">

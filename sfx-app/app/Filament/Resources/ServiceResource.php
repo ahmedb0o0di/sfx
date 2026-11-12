@@ -93,6 +93,12 @@ class ServiceResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('media_count')
+                    ->counts('media')
+                    ->label('Media Gallery')
+                    ->badge()
+                    ->color('info')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('badge')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
@@ -125,7 +131,7 @@ class ServiceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\MediaRelationManager::class,
         ];
     }
 

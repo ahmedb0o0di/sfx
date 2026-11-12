@@ -98,4 +98,62 @@ class Service extends Model
             default => Str::limit($this->subtitle ?? 'Specialized System', 22),
         };
     }
+
+    public function media(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ServiceMedia::class)->orderBy('sort_order');
+    }
+
+    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->media();
+    }
+
+    /**
+     * Get unique gallery items including hero image and all media items.
+     * Guaranteed to return a plain PHP array with type, url, thumbnail, and caption.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function getGalleryItemsAttribute(): array
+    {
+        $items = [];
+
+        // 1. Primary Hero Image
+        if (!empty($this->image_url)) {
+            $items[] = [
+                'type' => 'image',
+                'url' => $this->image_url,
+                'thumbnail' => $this->image_url,
+                'caption' => $this->title . ' — Overview',
+                'is_video' => false,
+            ];
+        }
+
+        // 2. Additional Media Gallery Items (Photos & Videos)
+        $mediaRecords = $this->relationLoaded('media') ? $this->media : $this->media()->get();
+        foreach ($mediaRecords as $m) {
+            $mediaUrl = $m->media_url;
+            if (empty($mediaUrl)) {
+                continue;
+            }
+
+            // Avoid adding duplicate hero image
+            if ($mediaUrl === $this->image_url) {
+                continue;
+            }
+
+            $items[] = [
+                'id' => $m->id,
+                'type' => $m->is_video ? 'video' : 'image',
+                'url' => $mediaUrl,
+                'embed_url' => $m->embed_url,
+                'thumbnail' => $m->thumbnail_url,
+                'caption' => $m->caption ?? ($m->is_video ? $this->title . ' — Video Case Study' : $this->title . ' — Technical Detail'),
+                'is_video' => $m->is_video,
+            ];
+        }
+
+        return $items;
+    }
 }

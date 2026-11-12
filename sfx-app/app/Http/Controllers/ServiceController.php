@@ -24,7 +24,7 @@ class ServiceController extends Controller
             return redirect()->route('services.show', 'lifecycle-maintenance');
         }
 
-        $service = Service::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        $service = Service::with('media')->where('slug', $slug)->where('is_active', true)->firstOrFail();
         $relatedProjects = Project::take(3)->get();
         return view('pages.services.show', compact('service', 'relatedProjects'));
     }

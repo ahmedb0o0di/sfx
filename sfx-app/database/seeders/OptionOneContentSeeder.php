@@ -35,7 +35,7 @@ class OptionOneContentSeeder extends Seeder
             // Cairo Regional Hub
             'cairo_office_title' => 'Cairo Regional Engineering Branch (Egypt)',
             'cairo_address' => 'Villa 18, Street 254, Degla, Maadi, Cairo, Egypt',
-            'cairo_phone' => '+20 2 2519 4488',
+            'cairo_phone' => '+971 4 238 8499',
             'cairo_email' => 'cairo@structurflex.ae',
             
             'general_email' => 'info@structurflex.ae',

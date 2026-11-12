@@ -99,7 +99,7 @@ class ManageContact extends Page implements HasForms
 
                 // DUBAI HEADQUARTERS
                 Section::make('Dubai Regional Headquarters')
-                    ->description('Primary operating address, direct hotline, inquiry emails, and working hours.')
+                    ->description('Primary operating address, telephone, inquiry emails, and working hours.')
                     ->icon('heroicon-o-building-office-2')
                     ->collapsible()
                     ->schema([
@@ -122,7 +122,7 @@ class ManageContact extends Page implements HasForms
                                 ->columnSpan(12),
 
                             TextInput::make('dubai_phone')
-                                ->label('Telephone / Hotline')
+                                ->label('Telephone')
                                 ->placeholder('+971 4 238 8455')
                                 ->required()
                                 ->columnSpan(4),
@@ -154,8 +154,8 @@ class ManageContact extends Page implements HasForms
                                 ->columnSpan(6),
 
                             TextInput::make('cairo_phone')
-                                ->label('Telephone / Direct Hotline')
-                                ->placeholder('+20 10 0000 0000')
+                                ->label('Fax')
+                                ->placeholder('+971 4 238 8499')
                                 ->required()
                                 ->columnSpan(6),
 

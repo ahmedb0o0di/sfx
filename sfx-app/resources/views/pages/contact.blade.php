@@ -112,7 +112,7 @@
           </p>
           <div style="font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.65rem; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.25rem;">
-              <span style="color: #64748b;">Direct Hotline:</span>
+              <span style="color: #64748b;">Telephone:</span>
               <a href="tel:{{ preg_replace('/[^0-9+]/', '', \App\Models\Setting::get('dubai_phone', '+97142388455')) }}" class="contact-hub-link">
                 📞 {{ \App\Models\Setting::get('dubai_phone', '+971 4 238 8455') }}
               </a>
@@ -139,9 +139,9 @@
           </p>
           <div style="font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.65rem; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.25rem;">
-              <span style="color: #64748b;">Cairo Direct:</span>
-              <a href="tel:{{ preg_replace('/[^0-9+]/', '', \App\Models\Setting::get('cairo_phone', '+201000000000')) }}" class="contact-hub-link">
-                📞 {{ \App\Models\Setting::get('cairo_phone', '+20 10 0000 0000') }}
+              <span style="color: #64748b;">Fax:</span>
+              <a href="tel:{{ preg_replace('/[^0-9+]/', '', \App\Models\Setting::get('cairo_phone', '+97142388499')) }}" class="contact-hub-link">
+                📠 {{ \App\Models\Setting::get('cairo_phone', '+971 4 238 8499') }}
               </a>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.25rem;">

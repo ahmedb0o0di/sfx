@@ -126,6 +126,11 @@
           <span>&rarr;</span>
         </a>
 
+        <a href="#" id="modalCaseStudyLink" class="btn" style="width:100%;margin-top:0.6rem;background:#f8fafc;color:var(--navy-primary);border:1.5px solid #cbd5e1;padding:0.75rem 1rem;border-radius:8px;font-weight:700;font-size:0.86rem;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:0.4rem;box-sizing:border-box;transition:all 0.2s ease;">
+          <span>View Dedicated Case Study Page</span>
+          <span>&rarr;</span>
+        </a>
+
         <div class="modal-phone-direct">
           <span>Direct Engineering Line:</span>
           <strong>+971 4 238 8455</strong>

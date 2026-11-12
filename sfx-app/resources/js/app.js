@@ -844,7 +844,8 @@ function initProjectModals() {
   const modalBackdrop = document.getElementById('modalImageBackdrop');
   const modalExpand = document.getElementById('modalImageExpand');
   const projectCards = document.querySelectorAll('.project-card, .project-showcase-card');
-  const projectIds = Object.keys(projectData);
+  const allCardIds = Array.from(projectCards).map(c => c.getAttribute('data-id')).filter(Boolean);
+  const projectIds = allCardIds.length ? [...new Set(allCardIds)] : Object.keys(projectData);
   let currentIndex = 0;
 
   const isSmallScreen = () => {
@@ -947,6 +948,11 @@ function initProjectModals() {
     const inquireBtn = document.getElementById('modalInquireBtn');
     if (inquireBtn) {
       inquireBtn.href = `/contact?project=${encodeURIComponent(data.title || '')}`;
+    }
+
+    const caseStudyLink = document.getElementById('modalCaseStudyLink');
+    if (caseStudyLink) {
+      caseStudyLink.href = data.url || (data.id ? `/projects/${data.id}` : (targetUrl || '#'));
     }
   };
 
@@ -1052,9 +1058,8 @@ function initProjectModals() {
         return;
       }
 
-      // If user clicked a direct link or interactive anchor on desktop, allow normal navigation
-      if (e.target.closest('a, button, input, select, textarea')) return;
-
+      // On desktop (> 992px), prevent default anchor jump and open modal
+      e.preventDefault();
       openModal(id, targetUrl, card);
     });
   });

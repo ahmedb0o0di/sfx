@@ -844,7 +844,8 @@ function initProjectModals() {
   const modalBackdrop = document.getElementById('modalImageBackdrop');
   const modalExpand = document.getElementById('modalImageExpand');
   const projectCards = document.querySelectorAll('.project-card, .project-showcase-card');
-  const projectIds = Object.keys(projectData);
+  const allCardIds = Array.from(projectCards).map(c => c.getAttribute('data-id')).filter(Boolean);
+  const projectIds = allCardIds.length ? [...new Set(allCardIds)] : Object.keys(projectData);
   let currentIndex = 0;
 
   const isSmallScreen = () => {
@@ -948,6 +949,11 @@ function initProjectModals() {
     if (inquireBtn) {
       inquireBtn.href = `/contact?project=${encodeURIComponent(data.title || '')}`;
     }
+
+    const caseStudyLink = document.getElementById('modalCaseStudyLink');
+    if (caseStudyLink) {
+      caseStudyLink.href = data.url || (data.id ? `/projects/${data.id}` : (targetUrl || '#'));
+    }
   };
 
   const openModal = (id, targetUrl, cardElement) => {
@@ -1036,7 +1042,6 @@ function initProjectModals() {
 
   projectCards.forEach(card => {
     card.addEventListener('click', (e) => {
-      if (e.target.closest('a')) return;
       const id = card.getAttribute('data-id');
       const targetUrl = card.getAttribute('data-url') || (id ? `/projects/${id}` : null);
 
@@ -1051,21 +1056,9 @@ function initProjectModals() {
         return;
       }
 
+      // On desktop (> 992px), prevent default link anchor jump and open modal
+      e.preventDefault();
       openModal(id, targetUrl, card);
-    });
-  });
-        return;
-      }
-
-      // If user clicked a direct link or interactive anchor on desktop, allow normal navigation
-      if (e.target.closest('a, button, input, select, textarea')) return;
-
-      // On desktop screens (> 992px), open the pop-up modal if data exists
-      if (id && projectData[id]) {
-        openModal(id, targetUrl);
-      } else if (targetUrl) {
-        window.location.href = targetUrl;
-      }
     });
   });
 

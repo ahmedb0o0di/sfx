@@ -42,6 +42,15 @@
         data-category="{{ $project->category ? $project->category->filter_tag : 'architectural' }}"
         data-id="{{ $project->slug }}"
         data-url="{{ route('projects.show', $project->slug) }}"
+        data-title="{{ $project->title }}"
+        data-category-label="{{ $project->category ? $project->category->name : 'Architectural' }}"
+        data-location="{{ $project->location }}"
+        data-client="{{ $project->client_name ?? 'SFXMEC EPC' }}"
+        data-area="{{ $project->covered_area }}"
+        data-material="{{ $project->membrane_material }}"
+        data-year="{{ $project->year_completed }}"
+        data-image="{{ $project->image_url }}"
+        data-gallery="{{ json_encode($project->images->map(fn($img) => $img->image_url)->prepend($project->image_url)->unique()->values()) }}"
         style="cursor: pointer;"
         onclick="if (window.innerWidth <= 992) { window.location.href = '{{ route('projects.show', $project->slug) }}'; }">
         <div class="project-showcase-img">

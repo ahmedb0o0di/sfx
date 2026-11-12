@@ -68,7 +68,7 @@ class ProjectController extends Controller
             'span' => $project->engineering_solution,
             'image' => $project->image_url,
             'description' => $project->full_overview ?? $project->short_description,
-            'gallery' => $project->images->map(fn($img) => $img->image_url)->toArray(),
+            'gallery' => $project->images->map(fn($img) => $img->image_url)->prepend($project->image_url)->unique()->values()->toArray(),
         ]);
     }
 }

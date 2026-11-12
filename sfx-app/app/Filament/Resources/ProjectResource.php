@@ -82,6 +82,35 @@ class ProjectResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
+
+                Forms\Components\Section::make('Project Photo Gallery')
+                    ->description('Current gallery photos for this project. Manage, upload, and reorder photos in the Gallery Images table below.')
+                    ->schema([
+                        Forms\Components\Placeholder::make('gallery_preview')
+                            ->label('Current Gallery Photos')
+                            ->content(function ($record) {
+                                if (!$record || $record->images()->count() === 0) {
+                                    return new HtmlString('<div style="color:#64748b;font-size:0.875rem;padding:6px 0;">No gallery photos added yet. Use the <strong>Project Photo Gallery</strong> section below to upload individual or multiple photos.</div>');
+                                }
+                                $images = $record->images()->orderBy('sort_order')->get();
+                                $html = '<div style="display:flex;flex-wrap:wrap;gap:12px;padding:8px 0;">';
+                                foreach ($images as $img) {
+                                    $html .= '<div style="text-align:center;display:flex;flex-direction:column;align-items:center;width:105px;">';
+                                    $html .= '<img src="' . $img->image_url . '" alt="' . e($img->caption ?? 'Gallery Image') . '" style="width:100px;height:75px;object-fit:cover;border-radius:8px;border:1px solid #cbd5e1;box-shadow:0 2px 5px rgba(0,0,0,0.08);">';
+                                    if ($img->caption) {
+                                        $html .= '<span style="font-size:0.7rem;color:#475569;margin-top:4px;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' . e($img->caption) . '">' . e($img->caption) . '</span>';
+                                    }
+                                    $html .= '<span style="font-size:0.68rem;color:#94a3b8;">Order: ' . $img->sort_order . '</span>';
+                                    $html .= '</div>';
+                                }
+                                $html .= '</div>';
+                                $html .= '<p style="font-size:0.82rem;color:#0B5ED7;font-weight:600;margin-top:8px;">Total ' . $images->count() . ' photo(s). Scroll below to add, edit, or delete photos with captions.</p>';
+                                return new HtmlString($html);
+                            })
+                            ->columnSpanFull(),
+                    ])
+                    ->collapsible()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -110,6 +139,12 @@ class ProjectResource extends Resource
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean(),
+                Tables\Columns\TextColumn::make('images_count')
+                    ->counts('images')
+                    ->label('Gallery')
+                    ->badge()
+                    ->color('info')
+                    ->sortable(),
                 Tables\Columns\ToggleColumn::make('status')
                     ->label('Published')
                     ->getStateUsing(fn ($record): bool => $record->status === 'published')
@@ -152,7 +187,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ImagesRelationManager::class,
         ];
     }
 

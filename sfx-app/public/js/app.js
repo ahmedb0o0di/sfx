@@ -851,32 +851,14 @@ function initProjectModals() {
     return window.innerWidth <= 992 || (window.matchMedia && window.matchMedia('(max-width: 992px)').matches);
   };
 
-  const openModal = (id, targetUrl) => {
-    // If on small screens (mobile / tablet <= 992px), never open modal and never freeze scroll
-    if (isSmallScreen()) {
-      const dest = targetUrl || (id ? `/projects/${id}` : null);
-      if (dest) {
-        window.location.href = dest;
-      }
-      return;
-    }
+  const populateModalData = (data, targetUrl) => {
+    if (!data) return;
 
-    const data = projectData[id];
-    if (!data) {
-      if (targetUrl) {
-        window.location.href = targetUrl;
-      }
-      return;
-    }
-
-    currentIndex = projectIds.indexOf(id);
-    if (currentIndex === -1) currentIndex = 0;
-
-    // 1. Immediately display the product image with 100% full uncropped clarity & ambient glow
+    // 1. Image
     const imgPath = data.image ? (data.image.startsWith('/') || data.image.startsWith('http') ? data.image : '/' + data.image) : '';
     if (modalImg) {
       modalImg.src = imgPath;
-      modalImg.alt = data.title;
+      modalImg.alt = data.title || 'Project image';
       modalImg.style.opacity = '1';
     }
 
@@ -888,20 +870,23 @@ function initProjectModals() {
       modalExpand.href = imgPath;
     }
 
-    // 2. Render interactive photo gallery thumbnails strip
+    // 2. Render interactive photo gallery thumbnails strip directly from database gallery
     const thumbsStrip = document.getElementById('modalThumbsStrip');
     if (thumbsStrip) {
-      const galleryList = (data.gallery && data.gallery.length) ? data.gallery : [imgPath];
+      let galleryList = Array.isArray(data.gallery) && data.gallery.length ? data.gallery : (imgPath ? [imgPath] : []);
+      // Remove duplicates while preserving order
+      galleryList = [...new Set(galleryList.filter(Boolean))];
+
       thumbsStrip.innerHTML = galleryList.map((gImg, idx) => {
         const fullGImg = gImg.startsWith('/') || gImg.startsWith('http') ? gImg : '/' + gImg;
         return `
         <button class="modal-thumb-item ${idx === 0 ? 'active' : ''}" data-img="${fullGImg}" type="button" aria-label="View photo angle ${idx + 1}">
-          <img src="${fullGImg}" alt="${data.title} photo ${idx + 1}">
+          <img src="${fullGImg}" alt="${(data.title || 'Project')} photo ${idx + 1}">
         </button>
       `;
       }).join('');
 
-      thumbsStrip.querySelectorAll('.modal-thumb-item').forEach((btn, bIdx) => {
+      thumbsStrip.querySelectorAll('.modal-thumb-item').forEach((btn) => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           thumbsStrip.querySelectorAll('.modal-thumb-item').forEach(b => b.classList.remove('active'));
@@ -920,52 +905,118 @@ function initProjectModals() {
 
     // 3. Populate textual and technical spec details
     const titleEl = document.getElementById('modalTitle');
-    if (titleEl) titleEl.textContent = data.title;
+    if (titleEl) titleEl.textContent = data.title || '';
 
     const catEl = document.getElementById('modalCategory');
-    if (catEl) catEl.textContent = data.categoryLabel || data.category;
+    if (catEl) catEl.textContent = data.categoryLabel || data.category || 'Architectural';
 
     const yrEl = document.getElementById('modalYear');
-    if (yrEl) yrEl.textContent = 'Handover: ' + (data.year || '2022');
+    if (yrEl) yrEl.textContent = 'Handover: ' + (data.year || 'Verified Record');
 
     const heroLoc = document.getElementById('modalHeroLocation');
-    if (heroLoc) heroLoc.textContent = '📍 ' + data.location;
+    if (heroLoc) heroLoc.textContent = data.location ? '📍 ' + data.location : '';
 
     const heroClient = document.getElementById('modalHeroClient');
-    if (heroClient) heroClient.textContent = '🏢 ' + (data.client || 'Turnkey Client');
+    if (heroClient) heroClient.textContent = data.client ? '🏢 ' + data.client : '';
 
     const areaEl = document.getElementById('modalArea');
-    if (areaEl) areaEl.textContent = data.area;
+    if (areaEl) areaEl.textContent = data.area || 'Specialized Cover';
 
     const matEl = document.getElementById('modalMaterial');
-    if (matEl) matEl.textContent = data.material;
+    if (matEl) matEl.textContent = data.material || 'Tensile Membrane';
 
     const locEl = document.getElementById('modalLocation');
-    if (locEl) locEl.textContent = data.location;
+    if (locEl) locEl.textContent = data.location || '';
 
     const spanEl = document.getElementById('modalSpan');
-    if (spanEl) spanEl.textContent = data.span;
+    if (spanEl) spanEl.textContent = data.span || data.engineering_solution || 'Turnkey EPC Scope';
 
     const yrSpecEl = document.getElementById('modalYearSpec');
-    if (yrSpecEl) yrSpecEl.textContent = data.year || '2022';
+    if (yrSpecEl) yrSpecEl.textContent = data.year || 'Verified';
 
     const clientSpecEl = document.getElementById('modalClientSpec');
-    if (clientSpecEl) clientSpecEl.textContent = data.client || 'Authority Client';
+    if (clientSpecEl) clientSpecEl.textContent = data.client || 'SFXMEC EPC';
 
     const descEl = document.getElementById('modalDesc');
-    if (descEl) descEl.textContent = data.description;
+    if (descEl) descEl.textContent = data.description || '';
 
     if (counterEl) {
-      counterEl.textContent = `${currentIndex + 1} / ${projectIds.length}`;
+      counterEl.textContent = `${currentIndex + 1} / ${projectIds.length || 1}`;
     }
 
     const inquireBtn = document.getElementById('modalInquireBtn');
     if (inquireBtn) {
-      inquireBtn.href = `/contact?project=${encodeURIComponent(data.title)}`;
+      inquireBtn.href = `/contact?project=${encodeURIComponent(data.title || '')}`;
+    }
+  };
+
+  const openModal = (id, targetUrl, cardElement) => {
+    // If on small screens (mobile / tablet <= 992px), never open modal and never freeze scroll
+    if (isSmallScreen()) {
+      const dest = targetUrl || (id ? `/projects/${id}` : null);
+      if (dest) {
+        window.location.href = dest;
+      }
+      return;
     }
 
-    modalOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    // 1. Attempt to read database data directly from the DOM card
+    const card = cardElement || document.querySelector(`.project-showcase-card[data-id="${id}"]`) || document.querySelector(`.project-card[data-id="${id}"]`);
+    let data = null;
+
+    if (card && card.getAttribute('data-title')) {
+      let cardGallery = [];
+      try {
+        const rawGal = card.getAttribute('data-gallery');
+        if (rawGal) cardGallery = JSON.parse(rawGal);
+      } catch (err) {}
+
+      data = {
+        id: id,
+        title: card.getAttribute('data-title'),
+        category: card.getAttribute('data-category'),
+        categoryLabel: card.getAttribute('data-category-label'),
+        location: card.getAttribute('data-location'),
+        client: card.getAttribute('data-client'),
+        area: card.getAttribute('data-area'),
+        material: card.getAttribute('data-material'),
+        year: card.getAttribute('data-year'),
+        image: card.getAttribute('data-image'),
+        gallery: cardGallery,
+        description: projectData[id] ? projectData[id].description : '',
+        span: projectData[id] ? projectData[id].span : '',
+      };
+    } else if (projectData[id]) {
+      data = projectData[id];
+    }
+
+    if (projectIds.includes(id)) {
+      currentIndex = projectIds.indexOf(id);
+    }
+
+    if (data) {
+      populateModalData(data, targetUrl);
+      modalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // 2. Always asynchronously fetch latest dynamic database data via /api/projects/{slug} to guarantee fresh DB gallery
+    fetch(`/api/projects/${id}`)
+      .then(res => res.ok ? res.json() : null)
+      .then(apiData => {
+        if (apiData && apiData.title) {
+          populateModalData(apiData, targetUrl);
+          if (!modalOverlay.classList.contains('open')) {
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          }
+        }
+      })
+      .catch(() => {
+        if (!data && targetUrl) {
+          window.location.href = targetUrl;
+        }
+      });
   };
 
   const closeModal = () => {
@@ -985,6 +1036,7 @@ function initProjectModals() {
 
   projectCards.forEach(card => {
     card.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
       const id = card.getAttribute('data-id');
       const targetUrl = card.getAttribute('data-url') || (id ? `/projects/${id}` : null);
 
@@ -996,6 +1048,12 @@ function initProjectModals() {
         if (dest) {
           window.location.href = dest;
         }
+        return;
+      }
+
+      openModal(id, targetUrl, card);
+    });
+  });
         return;
       }
 

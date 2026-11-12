@@ -14,14 +14,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $featuredProjects = Project::with('category')
+        $featuredProjects = Project::with(['category', 'images'])
             ->where('status', 'published')
             ->where('is_featured', true)
             ->orderBy('sort_order')
             ->take(8)
             ->get();
 
-        $allProjects = Project::with('category')
+        $allProjects = Project::with(['category', 'images'])
             ->where('status', 'published')
             ->orderBy('sort_order')
             ->take(18)

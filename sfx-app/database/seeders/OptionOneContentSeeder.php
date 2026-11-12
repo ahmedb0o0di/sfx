@@ -29,6 +29,7 @@ class OptionOneContentSeeder extends Seeder
             // Dubai Regional Hub
             'dubai_office_title' => 'Dubai Regional Headquarters (UAE)',
             'dubai_address' => 'Office 103, Makateb Building, Port Saeed, Deira, P.O. Box 92837, Dubai, United Arab Emirates',
+            'dubai_po_box' => 'P. O BOX: 98447',
             'dubai_phone' => '+971 4 295 9942',
             'dubai_email' => 'dubai@structurflex.ae',
             

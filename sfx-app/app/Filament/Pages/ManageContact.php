@@ -44,6 +44,7 @@ class ManageContact extends Page implements HasForms
             // Dubai HQ
             'dubai_office_title' => Setting::get('dubai_office_title', 'Dubai Regional Headquarters'),
             'dubai_address' => Setting::get('dubai_address', "Shed 01 (S-464), Al Ttay Area,\nAl Khawaneej 2 Industrial Area,\nDubai, United Arab Emirates"),
+            'dubai_po_box' => Setting::get('dubai_po_box', 'P. O BOX: 98447'),
             'dubai_phone' => Setting::get('dubai_phone', '+971 4 238 8455'),
             'dubai_email' => Setting::get('dubai_email', 'dubai@structurflex.ae'),
             'general_email' => Setting::get('general_email', 'info@structurflex.ae'),
@@ -119,7 +120,12 @@ class ManageContact extends Page implements HasForms
                                 ->label('Full Street / Facility Address')
                                 ->rows(3)
                                 ->required()
-                                ->columnSpan(12),
+                                ->columnSpan(8),
+
+                            TextInput::make('dubai_po_box')
+                                ->label('Post Office (P.O. Box)')
+                                ->placeholder('P. O BOX: 98447')
+                                ->columnSpan(4),
 
                             TextInput::make('dubai_phone')
                                 ->label('Telephone')

@@ -111,6 +111,14 @@
             {{ \App\Models\Setting::get('dubai_address', 'Al Quoz Industrial Area 3, Dubai, United Arab Emirates') }}
           </p>
           <div style="font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.65rem; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+            @if(\App\Models\Setting::get('dubai_po_box', 'P. O BOX: 98447'))
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.25rem;">
+              <span style="color: #64748b;">Post Office:</span>
+              <span style="font-weight: 700; color: var(--navy-primary);">
+                📮 {{ \App\Models\Setting::get('dubai_po_box', 'P. O BOX: 98447') }}
+              </span>
+            </div>
+            @endif
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.25rem;">
               <span style="color: #64748b;">Telephone:</span>
               <a href="tel:{{ preg_replace('/[^0-9+]/', '', \App\Models\Setting::get('dubai_phone', '+97142388455')) }}" class="contact-hub-link">

@@ -774,7 +774,8 @@
             <strong>Structurflex Middle East Contracting LLC</strong><br>
             Shed 01 (S-464), Al Ttay Area,<br>
             Al Khawaneej 2 Industrial Area,<br>
-            Dubai, United Arab Emirates
+            Dubai, United Arab Emirates<br>
+            <strong style="color: var(--navy-primary);">{{ \App\Models\Setting::get('dubai_po_box', 'P. O BOX: 98447') }}</strong>
           </p>
 
           <div

@@ -67,7 +67,7 @@ class MediaRelationManager extends RelationManager
                 // File Upload (for Local Video Files)
                 Forms\Components\FileUpload::make('video_file')
                     ->label(fn ($record) => $record && $record->file_path && $record->is_video ? 'Replace Video File' : 'Upload Local Video File (MP4, WebM, MOV)')
-                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/quicktime', 'video/ogg'])
+                    ->acceptedFileTypes(['video/*', 'video/mp4', 'video/webm', 'video/quicktime', 'video/ogg', 'video/x-m4v', 'video/x-matroska', 'video/avi'])
                     ->maxSize(102400) // 100MB
                     ->directory('services/videos')
                     ->visibility('public')
@@ -78,7 +78,7 @@ class MediaRelationManager extends RelationManager
                             $component->state($record->file_path);
                         }
                     })
-                    ->helperText('Upload an MP4 or WebM video file (Max 100MB).')
+                    ->helperText('Upload an MP4, WebM, or MOV video file (Max 100MB).')
                     ->columnSpanFull(),
 
                 // External Video URL (for YouTube, Vimeo, or direct CDN links)
@@ -214,12 +214,12 @@ class MediaRelationManager extends RelationManager
                         Forms\Components\FileUpload::make('videos')
                             ->label('Select Video Files')
                             ->multiple()
-                            ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/quicktime', 'video/ogg'])
+                            ->acceptedFileTypes(['video/*', 'video/mp4', 'video/webm', 'video/quicktime', 'video/ogg', 'video/x-m4v', 'video/x-matroska', 'video/avi'])
                             ->maxSize(102400)
                             ->directory('services/videos')
                             ->visibility('public')
                             ->required()
-                            ->helperText('Upload MP4 or WebM video reels / construction timelapses.'),
+                            ->helperText('Upload MP4, WebM, or MOV video reels (Max 100MB per file).'),
                     ])
                     ->action(function (array $data): void {
                         $service = $this->getOwnerRecord();
@@ -265,3 +265,4 @@ class MediaRelationManager extends RelationManager
             ]);
     }
 }
+

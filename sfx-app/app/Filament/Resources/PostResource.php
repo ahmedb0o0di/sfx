@@ -69,7 +69,7 @@ class PostResource extends Resource
 
                 Forms\Components\FileUpload::make('video_path')
                     ->label(fn ($record) => $record && $record->video_path ? 'Replace Video (Optional)' : 'Video (Optional)')
-                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'])
+                    ->acceptedFileTypes(['video/*', 'video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'])
                     ->maxSize(102400) // 100MB
                     ->directory('posts/videos')
                     ->visibility('public')
